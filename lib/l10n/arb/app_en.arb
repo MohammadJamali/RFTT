@@ -1,7 +1,7 @@
 {
     "@@locale": "en",
-    "counterAppBarTitle": "Time Tracker",
-    "@counterAppBarTitle": {
+    "appTitle": "Time Tracker",
+    "@appTitle": {
         "description": "Text shown in the AppBar of the Counter Page"
     }
 }

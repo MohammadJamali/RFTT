@@ -8,6 +8,7 @@ import 'package:timetracker/l10n/l10n.dart';
 import 'package:blobs/blobs.dart';
 import 'package:timetracker/timer/widgets/motivational_text.dart';
 import 'package:timetracker/timer/widgets/ticker.dart';
+import 'package:timetracker/utils/time.dart';
 
 class TimerPage extends StatelessWidget {
   const TimerPage({
@@ -136,12 +137,9 @@ class TimerDisplay extends StatelessWidget {
         ),
         child: BlocBuilder<TimerBloc, TimerState>(builder: (context, state) {
           final time = state is TimerRunning ? state.secondsElapsed : 0;
-          final minutes = (time ~/ 60).toString().padLeft(2, '0');
-          final seconds = (time % 60).toString().padLeft(2, '0');
-
           return Center(
             child: Text(
-              '$minutes:$seconds',
+              secondToMinutes(time),
               style: theme.textTheme.displayLarge?.copyWith(
                 fontWeight: FontWeight.bold,
                 color: Colors.white,
