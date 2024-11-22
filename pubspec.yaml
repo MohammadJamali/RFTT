@@ -1,0 +1,43 @@
+name: timetracker
+description: Request Finance Time Tracker is a free, open-source time tracking tool designed for freelancers, agencies, and businesses. It's easy to use and supports creating invoices in cryptocurrency.
+version: 1.0.0+1
+publish_to: none
+
+environment:
+  sdk: ^3.5.0
+
+dependencies:
+  # lib/timer
+  blobs: ^2.0.0
+
+  bloc: ^8.1.4
+  freezed: ^2.5.7
+
+  json_annotation: ^4.9.0
+  freezed_annotation: ^2.4.4
+
+  flutter:
+    sdk: flutter
+  flutter_bloc: ^8.1.6
+  flutter_localizations:
+    sdk: flutter
+  intl: ^0.19.0
+
+dev_dependencies:
+  bloc_test: ^9.1.7
+  flutter_test:
+    sdk: flutter
+  mocktail: ^1.0.4
+  build_runner: ^2.4.13
+  flutter_lints: ^4.0.0
+  json_serializable: ^6.9.0
+  very_good_analysis: ^6.0.0
+
+flutter:
+  uses-material-design: true
+  generate: true
+
+  fonts:
+  - family: NotoColorEmoji
+    fonts:
+      - asset: assets/fonts/NotoColorEmoji-Regular.ttf
