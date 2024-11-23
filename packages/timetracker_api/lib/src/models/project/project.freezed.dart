@@ -23,6 +23,7 @@ mixin _$Project {
   String get id => throw _privateConstructorUsedError;
   String get title => throw _privateConstructorUsedError;
   DateTime get created => throw _privateConstructorUsedError;
+  String? get description => throw _privateConstructorUsedError;
   int get duration => throw _privateConstructorUsedError;
   int get finishedTasks => throw _privateConstructorUsedError;
   int get totalTasks => throw _privateConstructorUsedError;
@@ -46,6 +47,7 @@ abstract class $ProjectCopyWith<$Res> {
       {String id,
       String title,
       DateTime created,
+      String? description,
       int duration,
       int finishedTasks,
       int totalTasks,
@@ -70,6 +72,7 @@ class _$ProjectCopyWithImpl<$Res, $Val extends Project>
     Object? id = null,
     Object? title = null,
     Object? created = null,
+    Object? description = freezed,
     Object? duration = null,
     Object? finishedTasks = null,
     Object? totalTasks = null,
@@ -88,6 +91,10 @@ class _$ProjectCopyWithImpl<$Res, $Val extends Project>
           ? _value.created
           : created // ignore: cast_nullable_to_non_nullable
               as DateTime,
+      description: freezed == description
+          ? _value.description
+          : description // ignore: cast_nullable_to_non_nullable
+              as String?,
       duration: null == duration
           ? _value.duration
           : duration // ignore: cast_nullable_to_non_nullable
@@ -119,6 +126,7 @@ abstract class _$$ProjectImplCopyWith<$Res> implements $ProjectCopyWith<$Res> {
       {String id,
       String title,
       DateTime created,
+      String? description,
       int duration,
       int finishedTasks,
       int totalTasks,
@@ -141,6 +149,7 @@ class __$$ProjectImplCopyWithImpl<$Res>
     Object? id = null,
     Object? title = null,
     Object? created = null,
+    Object? description = freezed,
     Object? duration = null,
     Object? finishedTasks = null,
     Object? totalTasks = null,
@@ -159,6 +168,10 @@ class __$$ProjectImplCopyWithImpl<$Res>
           ? _value.created
           : created // ignore: cast_nullable_to_non_nullable
               as DateTime,
+      description: freezed == description
+          ? _value.description
+          : description // ignore: cast_nullable_to_non_nullable
+              as String?,
       duration: null == duration
           ? _value.duration
           : duration // ignore: cast_nullable_to_non_nullable
@@ -186,6 +199,7 @@ class _$ProjectImpl implements _Project {
       {required this.id,
       required this.title,
       required this.created,
+      this.description,
       this.duration = 0,
       this.finishedTasks = 0,
       this.totalTasks = 0,
@@ -201,6 +215,8 @@ class _$ProjectImpl implements _Project {
   @override
   final DateTime created;
   @override
+  final String? description;
+  @override
   @JsonKey()
   final int duration;
   @override
@@ -214,7 +230,7 @@ class _$ProjectImpl implements _Project {
 
   @override
   String toString() {
-    return 'Project(id: $id, title: $title, created: $created, duration: $duration, finishedTasks: $finishedTasks, totalTasks: $totalTasks, deadline: $deadline)';
+    return 'Project(id: $id, title: $title, created: $created, description: $description, duration: $duration, finishedTasks: $finishedTasks, totalTasks: $totalTasks, deadline: $deadline)';
   }
 
   @override
@@ -225,6 +241,8 @@ class _$ProjectImpl implements _Project {
             (identical(other.id, id) || other.id == id) &&
             (identical(other.title, title) || other.title == title) &&
             (identical(other.created, created) || other.created == created) &&
+            (identical(other.description, description) ||
+                other.description == description) &&
             (identical(other.duration, duration) ||
                 other.duration == duration) &&
             (identical(other.finishedTasks, finishedTasks) ||
@@ -237,8 +255,8 @@ class _$ProjectImpl implements _Project {
 
   @JsonKey(includeFromJson: false, includeToJson: false)
   @override
-  int get hashCode => Object.hash(runtimeType, id, title, created, duration,
-      finishedTasks, totalTasks, deadline);
+  int get hashCode => Object.hash(runtimeType, id, title, created, description,
+      duration, finishedTasks, totalTasks, deadline);
 
   /// Create a copy of Project
   /// with the given fields replaced by the non-null parameter values.
@@ -261,6 +279,7 @@ abstract class _Project implements Project {
       {required final String id,
       required final String title,
       required final DateTime created,
+      final String? description,
       final int duration,
       final int finishedTasks,
       final int totalTasks,
@@ -274,6 +293,8 @@ abstract class _Project implements Project {
   String get title;
   @override
   DateTime get created;
+  @override
+  String? get description;
   @override
   int get duration;
   @override

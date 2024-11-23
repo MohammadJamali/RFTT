@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:timetracker/projects/widgets/custom_card/custom_card.dart';
+import 'package:timetracker/utils/shimmer.dart';
 
 class EmptyProjectCard extends CustomCard {
   const EmptyProjectCard({
@@ -7,14 +8,6 @@ class EmptyProjectCard extends CustomCard {
     super.key,
   });
 
-  Widget _solidContainer(Color color, double width, double height) => Container(
-        height: height,
-        width: width,
-        decoration: BoxDecoration(
-          borderRadius: BorderRadius.circular(20),
-          color: color,
-        ),
-      );
 
   @override
   Widget build(BuildContext context) {
@@ -60,15 +53,15 @@ class EmptyProjectCard extends CustomCard {
               ),
             ),
             const SizedBox(height: 18),
-            _solidContainer(color38, 64, 24),
+            solidContainer(color38, 64, 24),
             const SizedBox(height: 8),
-            _solidContainer(color38, 128, 24),
+            solidContainer(color38, 128, 24),
             const Spacer(),
             Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
-                _solidContainer(color16, 64, 16),
-                _solidContainer(color16, 32, 16),
+                solidContainer(color16, 64, 16),
+                solidContainer(color16, 32, 16),
               ],
             ),
           ],

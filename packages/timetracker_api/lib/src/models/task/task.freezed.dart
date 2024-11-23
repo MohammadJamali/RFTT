@@ -27,6 +27,7 @@ mixin _$Task {
   int get duration => throw _privateConstructorUsedError;
   String? get description => throw _privateConstructorUsedError;
   DateTime? get deadline => throw _privateConstructorUsedError;
+  List<String> get tags => throw _privateConstructorUsedError;
 
   /// Serializes this Task to a JSON map.
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
@@ -49,7 +50,8 @@ abstract class $TaskCopyWith<$Res> {
       DateTime created,
       int duration,
       String? description,
-      DateTime? deadline});
+      DateTime? deadline,
+      List<String> tags});
 }
 
 /// @nodoc
@@ -74,6 +76,7 @@ class _$TaskCopyWithImpl<$Res, $Val extends Task>
     Object? duration = null,
     Object? description = freezed,
     Object? deadline = freezed,
+    Object? tags = null,
   }) {
     return _then(_value.copyWith(
       id: null == id
@@ -104,6 +107,10 @@ class _$TaskCopyWithImpl<$Res, $Val extends Task>
           ? _value.deadline
           : deadline // ignore: cast_nullable_to_non_nullable
               as DateTime?,
+      tags: null == tags
+          ? _value.tags
+          : tags // ignore: cast_nullable_to_non_nullable
+              as List<String>,
     ) as $Val);
   }
 }
@@ -122,7 +129,8 @@ abstract class _$$TaskImplCopyWith<$Res> implements $TaskCopyWith<$Res> {
       DateTime created,
       int duration,
       String? description,
-      DateTime? deadline});
+      DateTime? deadline,
+      List<String> tags});
 }
 
 /// @nodoc
@@ -144,6 +152,7 @@ class __$$TaskImplCopyWithImpl<$Res>
     Object? duration = null,
     Object? description = freezed,
     Object? deadline = freezed,
+    Object? tags = null,
   }) {
     return _then(_$TaskImpl(
       id: null == id
@@ -174,6 +183,10 @@ class __$$TaskImplCopyWithImpl<$Res>
           ? _value.deadline
           : deadline // ignore: cast_nullable_to_non_nullable
               as DateTime?,
+      tags: null == tags
+          ? _value._tags
+          : tags // ignore: cast_nullable_to_non_nullable
+              as List<String>,
     ));
   }
 }
@@ -188,7 +201,9 @@ class _$TaskImpl implements _Task {
       required this.created,
       this.duration = 0,
       this.description,
-      this.deadline});
+      this.deadline,
+      final List<String> tags = const <String>[]})
+      : _tags = tags;
 
   factory _$TaskImpl.fromJson(Map<String, dynamic> json) =>
       _$$TaskImplFromJson(json);
@@ -208,10 +223,18 @@ class _$TaskImpl implements _Task {
   final String? description;
   @override
   final DateTime? deadline;
+  final List<String> _tags;
+  @override
+  @JsonKey()
+  List<String> get tags {
+    if (_tags is EqualUnmodifiableListView) return _tags;
+    // ignore: implicit_dynamic_type
+    return EqualUnmodifiableListView(_tags);
+  }
 
   @override
   String toString() {
-    return 'Task(id: $id, projectId: $projectId, title: $title, created: $created, duration: $duration, description: $description, deadline: $deadline)';
+    return 'Task(id: $id, projectId: $projectId, title: $title, created: $created, duration: $duration, description: $description, deadline: $deadline, tags: $tags)';
   }
 
   @override
@@ -229,13 +252,22 @@ class _$TaskImpl implements _Task {
             (identical(other.description, description) ||
                 other.description == description) &&
             (identical(other.deadline, deadline) ||
-                other.deadline == deadline));
+                other.deadline == deadline) &&
+            const DeepCollectionEquality().equals(other._tags, _tags));
   }
 
   @JsonKey(includeFromJson: false, includeToJson: false)
   @override
-  int get hashCode => Object.hash(runtimeType, id, projectId, title, created,
-      duration, description, deadline);
+  int get hashCode => Object.hash(
+      runtimeType,
+      id,
+      projectId,
+      title,
+      created,
+      duration,
+      description,
+      deadline,
+      const DeepCollectionEquality().hash(_tags));
 
   /// Create a copy of Task
   /// with the given fields replaced by the non-null parameter values.
@@ -261,7 +293,8 @@ abstract class _Task implements Task {
       required final DateTime created,
       final int duration,
       final String? description,
-      final DateTime? deadline}) = _$TaskImpl;
+      final DateTime? deadline,
+      final List<String> tags}) = _$TaskImpl;
 
   factory _Task.fromJson(Map<String, dynamic> json) = _$TaskImpl.fromJson;
 
@@ -279,6 +312,8 @@ abstract class _Task implements Task {
   String? get description;
   @override
   DateTime? get deadline;
+  @override
+  List<String> get tags;
 
   /// Create a copy of Task
   /// with the given fields replaced by the non-null parameter values.

@@ -3,6 +3,7 @@ import 'package:freezed_annotation/freezed_annotation.dart';
 part 'task.freezed.dart';
 part 'task.g.dart';
 
+@immutable
 @freezed
 class Task with _$Task {
   const factory Task({
@@ -13,6 +14,7 @@ class Task with _$Task {
     @Default(0) int duration,
     String? description,
     DateTime? deadline,
+    @Default(<String>[]) List<String> tags,
   }) = _Task;
 
   factory Task.fromJson(Map<String, Object?> json) =>

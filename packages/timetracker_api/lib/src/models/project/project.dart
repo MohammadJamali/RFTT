@@ -9,6 +9,7 @@ class Project with _$Project {
     required String id,
     required String title,
     required DateTime created,
+    String? description,
     @Default(0) int duration,
     @Default(0) int finishedTasks,
     @Default(0) int totalTasks,

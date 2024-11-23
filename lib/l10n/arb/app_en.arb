@@ -1,7 +1,11 @@
 {
-    "@@locale": "en",
-    "appTitle": "Time Tracker",
-    "@appTitle": {
-        "description": "Text shown in the AppBar of the Counter Page"
-    }
+  "@@locale": "en",
+  "appTitle": "Time Tracker",
+  "@appTitle": {
+    "description": "Text shown in the AppBar of the Counter Page"
+  },
+  "tasks": "Tasks",
+  "@tasks": {
+    "description": "Title of the tasks screen"
+  }
 }

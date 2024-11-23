@@ -52,9 +52,9 @@ class _TimerView extends StatelessWidget {
 }
 
 class _Header extends StatelessWidget {
-  final String title;
 
   const _Header({required this.title});
+  final String title;
 
   @override
   Widget build(BuildContext context) {
@@ -146,7 +146,7 @@ class TimerDisplay extends StatelessWidget {
               ),
             ),
           );
-        }),
+        },),
       ),
     );
   }

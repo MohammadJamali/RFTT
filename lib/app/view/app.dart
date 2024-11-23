@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:timetracker/projects/view/projects_page.dart';
+import 'package:timetracker/tasks/tasks_page.dart';
 import 'package:timetracker/timer/timer.dart';
 import 'package:timetracker/l10n/l10n.dart';
 
@@ -20,7 +21,7 @@ class App extends StatelessWidget {
       debugShowCheckedModeBanner: false,
       localizationsDelegates: AppLocalizations.localizationsDelegates,
       supportedLocales: AppLocalizations.supportedLocales,
-      home: ProjectsPage(),
+      home: const TasksView(),
     );
   }
 }

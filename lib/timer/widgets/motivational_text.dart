@@ -11,14 +11,14 @@ class MotivationalText extends StatelessWidget {
     return Column(
       children: [
         Text(
-          "Focus on your task",
+          'Focus on your task',
           textAlign: TextAlign.center,
           style: theme.textTheme.headlineSmall?.copyWith(
             fontWeight: FontWeight.bold,
           ),
         ),
         Text(
-          "Mohammad!",
+          'Mohammad!',
           textAlign: TextAlign.center,
           style: theme.textTheme.headlineSmall?.copyWith(
             fontWeight: FontWeight.bold,
