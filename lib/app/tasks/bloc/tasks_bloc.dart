@@ -29,7 +29,7 @@ class TasksBloc extends Bloc<TasksEvent, TasksState> {
   }
 
   late StreamSubscription<List<Task>> subscription;
-  final TasksRepository repository;
+  final TaskRepository repository;
 
   Future<void> _onTasksUpdated(
     _TasksUpdated event,

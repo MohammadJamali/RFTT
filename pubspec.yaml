@@ -48,7 +48,6 @@ flutter:
   assets:
     - assets/images/icon.png
     - assets/images/profile-picture.png
-    - assets/images/profile-picture.png
     - assets/images/tokens/eth.png
     - assets/images/tokens/btc.png
     - assets/images/tokens/bnb.png

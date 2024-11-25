@@ -29,6 +29,8 @@ mixin _$Invoice {
   String get paymentRecipient => throw _privateConstructorUsedError;
   ContentData get contentData => throw _privateConstructorUsedError;
   PaymentNetwork get paymentNetwork => throw _privateConstructorUsedError;
+  double get amount => throw _privateConstructorUsedError;
+  InvoiceStatus get status => throw _privateConstructorUsedError;
   String get feeRecipient => throw _privateConstructorUsedError;
 
   /// Serializes this Invoice to a JSON map.
@@ -55,6 +57,8 @@ abstract class $InvoiceCopyWith<$Res> {
       String paymentRecipient,
       ContentData contentData,
       PaymentNetwork paymentNetwork,
+      double amount,
+      InvoiceStatus status,
       String feeRecipient});
 
   $CurrencyCopyWith<$Res> get currency;
@@ -88,6 +92,8 @@ class _$InvoiceCopyWithImpl<$Res, $Val extends Invoice>
     Object? paymentRecipient = null,
     Object? contentData = null,
     Object? paymentNetwork = null,
+    Object? amount = null,
+    Object? status = null,
     Object? feeRecipient = null,
   }) {
     return _then(_value.copyWith(
@@ -127,6 +133,14 @@ class _$InvoiceCopyWithImpl<$Res, $Val extends Invoice>
           ? _value.paymentNetwork
           : paymentNetwork // ignore: cast_nullable_to_non_nullable
               as PaymentNetwork,
+      amount: null == amount
+          ? _value.amount
+          : amount // ignore: cast_nullable_to_non_nullable
+              as double,
+      status: null == status
+          ? _value.status
+          : status // ignore: cast_nullable_to_non_nullable
+              as InvoiceStatus,
       feeRecipient: null == feeRecipient
           ? _value.feeRecipient
           : feeRecipient // ignore: cast_nullable_to_non_nullable
@@ -202,6 +216,8 @@ abstract class _$$InvoiceImplCopyWith<$Res> implements $InvoiceCopyWith<$Res> {
       String paymentRecipient,
       ContentData contentData,
       PaymentNetwork paymentNetwork,
+      double amount,
+      InvoiceStatus status,
       String feeRecipient});
 
   @override
@@ -238,6 +254,8 @@ class __$$InvoiceImplCopyWithImpl<$Res>
     Object? paymentRecipient = null,
     Object? contentData = null,
     Object? paymentNetwork = null,
+    Object? amount = null,
+    Object? status = null,
     Object? feeRecipient = null,
   }) {
     return _then(_$InvoiceImpl(
@@ -277,6 +295,14 @@ class __$$InvoiceImplCopyWithImpl<$Res>
           ? _value.paymentNetwork
           : paymentNetwork // ignore: cast_nullable_to_non_nullable
               as PaymentNetwork,
+      amount: null == amount
+          ? _value.amount
+          : amount // ignore: cast_nullable_to_non_nullable
+              as double,
+      status: null == status
+          ? _value.status
+          : status // ignore: cast_nullable_to_non_nullable
+              as InvoiceStatus,
       feeRecipient: null == feeRecipient
           ? _value.feeRecipient
           : feeRecipient // ignore: cast_nullable_to_non_nullable
@@ -298,6 +324,8 @@ class _$InvoiceImpl implements _Invoice {
       required this.paymentRecipient,
       required this.contentData,
       required this.paymentNetwork,
+      required this.amount,
+      this.status = InvoiceStatus.Unpaid,
       this.feeRecipient = '0x0000000000000000000000000000000000000000'});
 
   factory _$InvoiceImpl.fromJson(Map<String, dynamic> json) =>
@@ -322,12 +350,17 @@ class _$InvoiceImpl implements _Invoice {
   @override
   final PaymentNetwork paymentNetwork;
   @override
+  final double amount;
+  @override
+  @JsonKey()
+  final InvoiceStatus status;
+  @override
   @JsonKey()
   final String feeRecipient;
 
   @override
   String toString() {
-    return 'Invoice(id: $id, projectId: $projectId, timestamp: $timestamp, currency: $currency, payee: $payee, payer: $payer, paymentRecipient: $paymentRecipient, contentData: $contentData, paymentNetwork: $paymentNetwork, feeRecipient: $feeRecipient)';
+    return 'Invoice(id: $id, projectId: $projectId, timestamp: $timestamp, currency: $currency, payee: $payee, payer: $payer, paymentRecipient: $paymentRecipient, contentData: $contentData, paymentNetwork: $paymentNetwork, amount: $amount, status: $status, feeRecipient: $feeRecipient)';
   }
 
   @override
@@ -350,6 +383,8 @@ class _$InvoiceImpl implements _Invoice {
                 other.contentData == contentData) &&
             (identical(other.paymentNetwork, paymentNetwork) ||
                 other.paymentNetwork == paymentNetwork) &&
+            (identical(other.amount, amount) || other.amount == amount) &&
+            (identical(other.status, status) || other.status == status) &&
             (identical(other.feeRecipient, feeRecipient) ||
                 other.feeRecipient == feeRecipient));
   }
@@ -367,6 +402,8 @@ class _$InvoiceImpl implements _Invoice {
       paymentRecipient,
       contentData,
       paymentNetwork,
+      amount,
+      status,
       feeRecipient);
 
   /// Create a copy of Invoice
@@ -396,6 +433,8 @@ abstract class _Invoice implements Invoice {
       required final String paymentRecipient,
       required final ContentData contentData,
       required final PaymentNetwork paymentNetwork,
+      required final double amount,
+      final InvoiceStatus status,
       final String feeRecipient}) = _$InvoiceImpl;
 
   factory _Invoice.fromJson(Map<String, dynamic> json) = _$InvoiceImpl.fromJson;
@@ -418,6 +457,10 @@ abstract class _Invoice implements Invoice {
   ContentData get contentData;
   @override
   PaymentNetwork get paymentNetwork;
+  @override
+  double get amount;
+  @override
+  InvoiceStatus get status;
   @override
   String get feeRecipient;
 

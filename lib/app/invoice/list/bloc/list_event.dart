@@ -1,6 +1,7 @@
 part of 'list_bloc.dart';
 
 @freezed
-class InvoiceEvent with _$InvoiceEvent {
-  const factory InvoiceEvent.started() = _Started;
+class InvoiceListEvent with _$InvoiceListEvent {
+  const factory InvoiceListEvent.fetchInvoiceList() = _FetchInvoices;
+  const factory InvoiceListEvent.search(String query) = _InvoiceSearch;
 }

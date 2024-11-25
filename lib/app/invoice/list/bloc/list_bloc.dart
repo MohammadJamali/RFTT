@@ -1,14 +1,43 @@
+import 'dart:async';
+
 import 'package:bloc/bloc.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
+import 'package:timetracker_api/timetracker_api.dart';
+import 'package:timetracker_repository/timetracker_repository.dart';
 
 part 'list_event.dart';
 part 'list_state.dart';
 part 'list_bloc.freezed.dart';
 
-class InvoiceBloc extends Bloc<InvoiceEvent, InvoiceState> {
-  InvoiceBloc() : super(_Initial()) {
-    on<InvoiceEvent>((event, emit) {
-      // TODO: implement event handler
-    });
+class InvoiceListBloc extends Bloc<InvoiceListEvent, InvoiceListState> {
+  InvoiceListBloc(this.repository) : super(const InvoiceListState.initial()) {
+    on<_InvoiceSearch>(_onSearch);
+    on<_InvoiceSearch>(_onfetchInvoiceList);
+  }
+  final InvoiceRepository repository;
+
+  FutureOr<void> _onSearch(
+    _InvoiceSearch event,
+    Emitter<InvoiceListState> emit,
+  ) async {
+    final invoices = await repository.fetchInvoiceList();
+
+    invoices
+        .where(
+          (invoice) => invoice.payee.displayName.toLowerCase().contains(
+                event.query.toLowerCase(),
+              ),
+        )
+        .toList();
+
+    emit(InvoiceListState.loaded(invoices));
+  }
+
+  FutureOr<void> _onfetchInvoiceList(
+    _InvoiceSearch event,
+    Emitter<InvoiceListState> emit,
+  ) async {
+    final invoices = await repository.fetchInvoiceList();
+    emit(InvoiceListState.loaded(invoices));
   }
 }

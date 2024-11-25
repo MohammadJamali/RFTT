@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:timetracker/app/tasks/tasks_page.dart';
 import 'package:timetracker/l10n/l10n.dart';
 
 class LandingPage extends StatelessWidget {

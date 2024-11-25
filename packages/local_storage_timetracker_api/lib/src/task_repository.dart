@@ -2,7 +2,7 @@ import 'package:local_storage_timetracker_api/local_storage_timetracker_api.dart
 import 'package:rxdart/subjects.dart';
 import 'package:timetracker_api/timetracker_api.dart';
 
-class LocalStorageTaskApi extends TasksApi {
+class LocalStorageTaskApi extends TaskApi {
   LocalStorageTaskApi()
       : _dbHelper = DBHelper(),
         _taskStream = BehaviorSubject<List<Task>>.seeded(const []);

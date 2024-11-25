@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:local_storage_timetracker_api/local_storage_timetracker_api.dart';
+import 'package:timetracker/app/invoice/list/view/list.dart';
 import 'package:timetracker/app/landing/landing.dart';
 import 'package:timetracker/app/tasks/tasks_page.dart';
 import 'package:timetracker/l10n/l10n.dart';
@@ -21,17 +22,22 @@ class App extends StatelessWidget {
       home: MultiRepositoryProvider(
         providers: [
           RepositoryProvider(
+            create: (_) => InvoiceRepository(
+              invoiceApi: LocalStorageInvoiceApi(),
+            ),
+          ),
+          RepositoryProvider(
             create: (_) => ProjectRepository(
               projectsApi: LocalStorageProjectApi(),
             ),
           ),
           RepositoryProvider(
-            create: (_) => TasksRepository(
+            create: (_) => TaskRepository(
               tasksApi: LocalStorageTaskApi(),
             ),
           ),
         ],
-        child: const LandingPage(),
+        child: const InvoiceListPage(),
       ),
     );
   }

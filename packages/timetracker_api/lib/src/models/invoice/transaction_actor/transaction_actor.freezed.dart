@@ -21,6 +21,7 @@ TransactionActor _$TransactionActorFromJson(Map<String, dynamic> json) {
 /// @nodoc
 mixin _$TransactionActor {
 // Types.Identity.TYPE.ETHEREUM_ADDRESS,
+  String get displayName => throw _privateConstructorUsedError;
   String get type => throw _privateConstructorUsedError;
   String get value => throw _privateConstructorUsedError;
 
@@ -40,7 +41,7 @@ abstract class $TransactionActorCopyWith<$Res> {
           TransactionActor value, $Res Function(TransactionActor) then) =
       _$TransactionActorCopyWithImpl<$Res, TransactionActor>;
   @useResult
-  $Res call({String type, String value});
+  $Res call({String displayName, String type, String value});
 }
 
 /// @nodoc
@@ -58,10 +59,15 @@ class _$TransactionActorCopyWithImpl<$Res, $Val extends TransactionActor>
   @pragma('vm:prefer-inline')
   @override
   $Res call({
+    Object? displayName = null,
     Object? type = null,
     Object? value = null,
   }) {
     return _then(_value.copyWith(
+      displayName: null == displayName
+          ? _value.displayName
+          : displayName // ignore: cast_nullable_to_non_nullable
+              as String,
       type: null == type
           ? _value.type
           : type // ignore: cast_nullable_to_non_nullable
@@ -82,7 +88,7 @@ abstract class _$$TransactionActorImplCopyWith<$Res>
       __$$TransactionActorImplCopyWithImpl<$Res>;
   @override
   @useResult
-  $Res call({String type, String value});
+  $Res call({String displayName, String type, String value});
 }
 
 /// @nodoc
@@ -98,10 +104,15 @@ class __$$TransactionActorImplCopyWithImpl<$Res>
   @pragma('vm:prefer-inline')
   @override
   $Res call({
+    Object? displayName = null,
     Object? type = null,
     Object? value = null,
   }) {
     return _then(_$TransactionActorImpl(
+      displayName: null == displayName
+          ? _value.displayName
+          : displayName // ignore: cast_nullable_to_non_nullable
+              as String,
       type: null == type
           ? _value.type
           : type // ignore: cast_nullable_to_non_nullable
@@ -117,12 +128,15 @@ class __$$TransactionActorImplCopyWithImpl<$Res>
 /// @nodoc
 @JsonSerializable()
 class _$TransactionActorImpl implements _TransactionActor {
-  const _$TransactionActorImpl({required this.type, required this.value});
+  const _$TransactionActorImpl(
+      {required this.displayName, required this.type, required this.value});
 
   factory _$TransactionActorImpl.fromJson(Map<String, dynamic> json) =>
       _$$TransactionActorImplFromJson(json);
 
 // Types.Identity.TYPE.ETHEREUM_ADDRESS,
+  @override
+  final String displayName;
   @override
   final String type;
   @override
@@ -130,7 +144,7 @@ class _$TransactionActorImpl implements _TransactionActor {
 
   @override
   String toString() {
-    return 'TransactionActor(type: $type, value: $value)';
+    return 'TransactionActor(displayName: $displayName, type: $type, value: $value)';
   }
 
   @override
@@ -138,13 +152,15 @@ class _$TransactionActorImpl implements _TransactionActor {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
             other is _$TransactionActorImpl &&
+            (identical(other.displayName, displayName) ||
+                other.displayName == displayName) &&
             (identical(other.type, type) || other.type == type) &&
             (identical(other.value, value) || other.value == value));
   }
 
   @JsonKey(includeFromJson: false, includeToJson: false)
   @override
-  int get hashCode => Object.hash(runtimeType, type, value);
+  int get hashCode => Object.hash(runtimeType, displayName, type, value);
 
   /// Create a copy of TransactionActor
   /// with the given fields replaced by the non-null parameter values.
@@ -165,13 +181,16 @@ class _$TransactionActorImpl implements _TransactionActor {
 
 abstract class _TransactionActor implements TransactionActor {
   const factory _TransactionActor(
-      {required final String type,
+      {required final String displayName,
+      required final String type,
       required final String value}) = _$TransactionActorImpl;
 
   factory _TransactionActor.fromJson(Map<String, dynamic> json) =
       _$TransactionActorImpl.fromJson;
 
 // Types.Identity.TYPE.ETHEREUM_ADDRESS,
+  @override
+  String get displayName;
   @override
   String get type;
   @override

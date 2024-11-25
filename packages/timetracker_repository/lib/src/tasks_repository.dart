@@ -1,15 +1,15 @@
 import 'package:timetracker_api/timetracker_api.dart';
 
-/// {@template tasks_repository}
+/// {@template task_repository}
 /// A repository that handles `task` related requests.
 /// {@endtemplate}
-class TasksRepository {
-  /// {@macro tasks_repository}
-  const TasksRepository({
-    required TasksApi tasksApi,
+class TaskRepository {
+  /// {@macro task_repository}
+  const TaskRepository({
+    required TaskApi tasksApi,
   }) : _tasksApi = tasksApi;
 
-  final TasksApi _tasksApi;
+  final TaskApi _tasksApi;
 
   /// Provides a [Stream] of all tasks.
   Future<List<Task>> fetchTasks() => _tasksApi.fetchTasks();

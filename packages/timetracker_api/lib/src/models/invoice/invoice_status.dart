@@ -1,0 +1,4 @@
+enum InvoiceStatus {
+  Paid,
+  Unpaid,
+}

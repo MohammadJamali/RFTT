@@ -1,6 +1,7 @@
 import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:timetracker_api/src/models/invoice/content_data/content_data.dart';
 import 'package:timetracker_api/src/models/invoice/currency/currency.dart';
+import 'package:timetracker_api/src/models/invoice/invoice_status.dart';
 import 'package:timetracker_api/src/models/invoice/payment_network/payment_network.dart';
 import 'package:timetracker_api/src/models/invoice/transaction_actor/transaction_actor.dart';
 
@@ -19,6 +20,8 @@ class Invoice with _$Invoice {
     required String paymentRecipient,
     required ContentData contentData,
     required PaymentNetwork paymentNetwork,
+    required double amount,
+    @Default(InvoiceStatus.Unpaid) InvoiceStatus status,
     @Default('0x0000000000000000000000000000000000000000') String feeRecipient,
   }) = _Invoice;
 

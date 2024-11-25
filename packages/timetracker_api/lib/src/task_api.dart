@@ -3,9 +3,9 @@ import 'package:timetracker_api/timetracker_api.dart';
 /// {@template task_api}
 /// The interface for an API that provides access to a list of tasks.
 /// {@endtemplate}
-abstract class TasksApi {
+abstract class TaskApi {
   /// {@macro task_api}
-  const TasksApi();
+  const TaskApi();
 
   /// Featch a list of [Task]
   Future<List<Task>> fetchTasks();

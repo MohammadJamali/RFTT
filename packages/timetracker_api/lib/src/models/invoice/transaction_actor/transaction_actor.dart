@@ -7,6 +7,7 @@ part 'transaction_actor.g.dart';
 class TransactionActor with _$TransactionActor {
   const factory TransactionActor({
     // Types.Identity.TYPE.ETHEREUM_ADDRESS,
+    required String displayName,
     required String type,
     required String value,
   }) = _TransactionActor;
