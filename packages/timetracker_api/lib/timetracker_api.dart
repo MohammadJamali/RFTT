@@ -2,4 +2,5 @@
 library;
 
 export 'src/models/models.dart';
-export 'src/timetracker_api.dart';
+export 'src/projects_api.dart';
+export 'src/tasks_api.dart';

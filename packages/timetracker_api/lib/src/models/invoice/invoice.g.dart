@@ -18,7 +18,7 @@ _$InvoiceImpl _$$InvoiceImplFromJson(Map<String, dynamic> json) =>
       contentData:
           ContentData.fromJson(json['contentData'] as Map<String, dynamic>),
       paymentNetwork: PaymentNetwork.fromJson(
-          json['paymentNetwork'] as Map<String, dynamic>),
+          json['paymentNetwork'] as Map<String, dynamic>,),
       feeRecipient: json['feeRecipient'] as String? ??
           '0x0000000000000000000000000000000000000000',
     );

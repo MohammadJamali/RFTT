@@ -1,8 +1,8 @@
 import 'package:freezed_annotation/freezed_annotation.dart';
-import 'content_data/content_data.dart';
-import 'currency/currency.dart';
-import 'payment_network/payment_network.dart';
-import 'transaction_actor/transaction_actor.dart';
+import 'package:timetracker_api/src/models/invoice/content_data/content_data.dart';
+import 'package:timetracker_api/src/models/invoice/currency/currency.dart';
+import 'package:timetracker_api/src/models/invoice/payment_network/payment_network.dart';
+import 'package:timetracker_api/src/models/invoice/transaction_actor/transaction_actor.dart';
 
 part 'invoice.freezed.dart';
 part 'invoice.g.dart';

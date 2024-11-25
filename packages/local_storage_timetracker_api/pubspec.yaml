@@ -8,6 +8,8 @@ environment:
 
 dependencies: 
   sqflite: ^2.4.1
+  meta: ^1.7.0
+  rxdart: ^0.27.5
   timetracker_api:
     path: ../timetracker_api
 

@@ -22,6 +22,8 @@ dependencies:
 
   timetracker_api:
     path: packages/timetracker_api
+  local_storage_timetracker_api:
+    path: packages/local_storage_timetracker_api
   timetracker_repository:
     path: packages/timetracker_repository
   draggable_carousel_slider:
@@ -46,6 +48,13 @@ flutter:
   assets:
     - assets/images/icon.png
     - assets/images/profile-picture.png
+    - assets/images/profile-picture.png
+    - assets/images/tokens/eth.png
+    - assets/images/tokens/btc.png
+    - assets/images/tokens/bnb.png
+    - assets/images/landing/landing_1.png
+    - assets/images/landing/landing_2.png
+    - assets/images/landing/landing_3.png
 
   fonts:
     - family: NotoColorEmoji

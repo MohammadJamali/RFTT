@@ -1,10 +1,10 @@
 import 'package:sqflite/sqflite.dart';
 
 class DBHelper {
-  static const String dbName = "timetracker.db";
-  static const String invoicesTasks = "invoices";
-  static const String projectsTasks = "projects";
-  static const String tableTasks = "tasks";
+  static const String dbName = 'timetracker.db';
+  static const String tableInvoices = 'invoices';
+  static const String tableProjects = 'projects';
+  static const String tableTasks = 'tasks';
 
   Future<Database> initDB() async {
     return openDatabase(
@@ -12,7 +12,7 @@ class DBHelper {
       version: 1,
       onCreate: (db, version) {
         db.execute('''
-          CREATE TABLE $invoicesTasks (
+          CREATE TABLE $tableInvoices (
             id INTEGER PRIMARY KEY AUTOINCREMENT,
             projectId INTEGER,
             timestamp TEXT,
@@ -32,7 +32,7 @@ class DBHelper {
             feeRecipient TEXT
           );
 
-          CREATE TABLE $projectsTasks (
+          CREATE TABLE $tableProjects (
             id INTEGER PRIMARY KEY AUTOINCREMENT,
             title TEXT,
             description TEXT,
