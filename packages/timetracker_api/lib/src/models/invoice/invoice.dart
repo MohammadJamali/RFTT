@@ -21,7 +21,7 @@ class Invoice with _$Invoice {
     required ContentData contentData,
     required PaymentNetwork paymentNetwork,
     required double amount,
-    @Default(InvoiceStatus.Unpaid) InvoiceStatus status,
+    @Default(InvoiceStatusList.Unpaid) InvoiceStatusList status,
     @Default('0x0000000000000000000000000000000000000000') String feeRecipient,
   }) = _Invoice;
 

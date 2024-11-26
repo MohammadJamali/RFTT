@@ -30,7 +30,7 @@ mixin _$Invoice {
   ContentData get contentData => throw _privateConstructorUsedError;
   PaymentNetwork get paymentNetwork => throw _privateConstructorUsedError;
   double get amount => throw _privateConstructorUsedError;
-  InvoiceStatus get status => throw _privateConstructorUsedError;
+  InvoiceStatusList get status => throw _privateConstructorUsedError;
   String get feeRecipient => throw _privateConstructorUsedError;
 
   /// Serializes this Invoice to a JSON map.
@@ -58,7 +58,7 @@ abstract class $InvoiceCopyWith<$Res> {
       ContentData contentData,
       PaymentNetwork paymentNetwork,
       double amount,
-      InvoiceStatus status,
+      InvoiceStatusList status,
       String feeRecipient});
 
   $CurrencyCopyWith<$Res> get currency;
@@ -140,7 +140,7 @@ class _$InvoiceCopyWithImpl<$Res, $Val extends Invoice>
       status: null == status
           ? _value.status
           : status // ignore: cast_nullable_to_non_nullable
-              as InvoiceStatus,
+              as InvoiceStatusList,
       feeRecipient: null == feeRecipient
           ? _value.feeRecipient
           : feeRecipient // ignore: cast_nullable_to_non_nullable
@@ -217,7 +217,7 @@ abstract class _$$InvoiceImplCopyWith<$Res> implements $InvoiceCopyWith<$Res> {
       ContentData contentData,
       PaymentNetwork paymentNetwork,
       double amount,
-      InvoiceStatus status,
+      InvoiceStatusList status,
       String feeRecipient});
 
   @override
@@ -302,7 +302,7 @@ class __$$InvoiceImplCopyWithImpl<$Res>
       status: null == status
           ? _value.status
           : status // ignore: cast_nullable_to_non_nullable
-              as InvoiceStatus,
+              as InvoiceStatusList,
       feeRecipient: null == feeRecipient
           ? _value.feeRecipient
           : feeRecipient // ignore: cast_nullable_to_non_nullable
@@ -325,7 +325,7 @@ class _$InvoiceImpl implements _Invoice {
       required this.contentData,
       required this.paymentNetwork,
       required this.amount,
-      this.status = InvoiceStatus.Unpaid,
+      this.status = InvoiceStatusList.Unpaid,
       this.feeRecipient = '0x0000000000000000000000000000000000000000'});
 
   factory _$InvoiceImpl.fromJson(Map<String, dynamic> json) =>
@@ -353,7 +353,7 @@ class _$InvoiceImpl implements _Invoice {
   final double amount;
   @override
   @JsonKey()
-  final InvoiceStatus status;
+  final InvoiceStatusList status;
   @override
   @JsonKey()
   final String feeRecipient;
@@ -434,7 +434,7 @@ abstract class _Invoice implements Invoice {
       required final ContentData contentData,
       required final PaymentNetwork paymentNetwork,
       required final double amount,
-      final InvoiceStatus status,
+      final InvoiceStatusList status,
       final String feeRecipient}) = _$InvoiceImpl;
 
   factory _Invoice.fromJson(Map<String, dynamic> json) = _$InvoiceImpl.fromJson;
@@ -460,7 +460,7 @@ abstract class _Invoice implements Invoice {
   @override
   double get amount;
   @override
-  InvoiceStatus get status;
+  InvoiceStatusList get status;
   @override
   String get feeRecipient;
 

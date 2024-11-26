@@ -8,7 +8,7 @@ class InvoiceStatistics extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final bloc = context.read<InvoiceListBloc>();
+    // final bloc = context.read<InvoiceListBloc>();
 
     return Container(
       alignment: Alignment.center,

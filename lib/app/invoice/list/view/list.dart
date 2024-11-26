@@ -16,37 +16,46 @@ class InvoiceListPage extends StatelessWidget {
         ..add(
           const InvoiceListEvent.fetchInvoiceList(),
         ),
-      child: Scaffold(
-        body: SafeArea(
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              const InvoiceStatistics(),
-              const Padding(
-                padding: EdgeInsets.only(top: 16),
-                child: SearchWidget(),
-              ),
-              BlocBuilder<InvoiceListBloc, InvoiceListState>(
-                builder: (context, state) {
-                  return state.when(
-                    initial: () => const Center(
-                      child: CircularProgressIndicator(),
+      child: const InvoiceListView(),
+    );
+  }
+}
+
+class InvoiceListView extends StatelessWidget {
+  const InvoiceListView({super.key});
+
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      body: SafeArea(
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            const InvoiceStatistics(),
+            const Padding(
+              padding: EdgeInsets.only(top: 16),
+              child: SearchWidget(),
+            ),
+            BlocBuilder<InvoiceListBloc, InvoiceListState>(
+              builder: (context, state) {
+                return state.when(
+                  initial: () => const Center(
+                    child: CircularProgressIndicator(),
+                  ),
+                  loaded: (invoices) => Expanded(
+                    child: ListView.builder(
+                      itemCount: invoices.length,
+                      itemBuilder: (context, index) {
+                        final invoice = invoices[index];
+                        return InvoiceCard(invoice: invoice);
+                      },
                     ),
-                    loaded: (invoices) => Expanded(
-                      child: ListView.builder(
-                        itemCount: invoices.length,
-                        itemBuilder: (context, index) {
-                          final invoice = invoices[index];
-                          return InvoiceCard(invoice: invoice);
-                        },
-                      ),
-                    ),
-                    error: (message) => Center(child: Text(message)),
-                  );
-                },
-              ),
-            ],
-          ),
+                  ),
+                  error: (message) => Center(child: Text(message)),
+                );
+              },
+            ),
+          ],
         ),
       ),
     );

@@ -21,7 +21,7 @@ _$InvoiceImpl _$$InvoiceImplFromJson(Map<String, dynamic> json) =>
           json['paymentNetwork'] as Map<String, dynamic>),
       amount: (json['amount'] as num).toDouble(),
       status: $enumDecodeNullable(_$InvoiceStatusEnumMap, json['status']) ??
-          InvoiceStatus.Unpaid,
+          InvoiceStatusList.Unpaid,
       feeRecipient: json['feeRecipient'] as String? ??
           '0x0000000000000000000000000000000000000000',
     );
@@ -43,6 +43,6 @@ Map<String, dynamic> _$$InvoiceImplToJson(_$InvoiceImpl instance) =>
     };
 
 const _$InvoiceStatusEnumMap = {
-  InvoiceStatus.Paid: 'Paid',
-  InvoiceStatus.Unpaid: 'Unpaid',
+  InvoiceStatusList.Paid: 'Paid',
+  InvoiceStatusList.Unpaid: 'Unpaid',
 };

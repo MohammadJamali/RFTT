@@ -1,0 +1,2 @@
+
+export 'view/details.dart';

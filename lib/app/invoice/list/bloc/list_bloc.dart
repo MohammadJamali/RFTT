@@ -12,7 +12,7 @@ part 'list_bloc.freezed.dart';
 class InvoiceListBloc extends Bloc<InvoiceListEvent, InvoiceListState> {
   InvoiceListBloc(this.repository) : super(const InvoiceListState.initial()) {
     on<_InvoiceSearch>(_onSearch);
-    on<_InvoiceSearch>(_onfetchInvoiceList);
+    on<_FetchInvoices>(_onfetchInvoiceList);
   }
   final InvoiceRepository repository;
 
@@ -34,7 +34,7 @@ class InvoiceListBloc extends Bloc<InvoiceListEvent, InvoiceListState> {
   }
 
   FutureOr<void> _onfetchInvoiceList(
-    _InvoiceSearch event,
+    _FetchInvoices event,
     Emitter<InvoiceListState> emit,
   ) async {
     final invoices = await repository.fetchInvoiceList();

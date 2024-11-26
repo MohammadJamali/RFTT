@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:local_storage_timetracker_api/local_storage_timetracker_api.dart';
+import 'package:timetracker/app/invoice/details/view/details.dart';
 import 'package:timetracker/app/invoice/list/view/list.dart';
 import 'package:timetracker/app/landing/landing.dart';
 import 'package:timetracker/app/tasks/tasks_page.dart';
@@ -37,7 +38,7 @@ class App extends StatelessWidget {
             ),
           ),
         ],
-        child: const InvoiceListPage(),
+        child: const InvoiceDetailsPage(),
       ),
     );
   }
