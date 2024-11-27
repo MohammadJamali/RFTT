@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
-import 'package:timetracker/widgets/label.dart';
 import 'package:timetracker/app/invoice/widgets/invoice_status.dart';
+import 'package:timetracker/widgets/label.dart';
 import 'package:timetracker/widgets/profile_list_item.dart';
 import 'package:timetracker_api/timetracker_api.dart';
 
@@ -26,7 +26,7 @@ class InvoiceCard extends StatelessWidget {
               Row(
                 children: [
                   ProfileListItem(
-                    title: invoice.payer.displayName,
+                    title: invoice.payer.name ?? 'Payer',
                     description: invoice.payer.value,
                   ),
                   const Spacer(),

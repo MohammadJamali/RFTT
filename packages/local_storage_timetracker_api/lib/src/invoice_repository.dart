@@ -10,6 +10,7 @@ class LocalStorageInvoiceApi extends InvoiceApi {
   final DBHelper _dbHelper;
   final BehaviorSubject<List<Invoice>> _invoiceStream;
 
+  @override
   Future<List<Invoice>> fetchInvoiceList() async {
     final db = await _dbHelper.initDB();
     final cursor = await db.query(DBHelper.tableProjects);

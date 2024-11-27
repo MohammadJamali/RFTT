@@ -10,6 +10,7 @@ class LocalStorageTaskApi extends TaskApi {
   final DBHelper _dbHelper;
   final BehaviorSubject<List<Task>> _taskStream;
 
+  @override
   Future<List<Task>> fetchTasks() async {
     final db = await _dbHelper.initDB();
     final cursor = await db.query(DBHelper.tableProjects);

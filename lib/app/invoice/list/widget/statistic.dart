@@ -16,7 +16,7 @@ class InvoiceStatistics extends StatelessWidget {
         borderRadius: BorderRadius.circular(16),
         color: const Color(0xFFf35026),
       ),
-      child: Center(
+      child: const Center(
         child: Row(
           mainAxisAlignment: MainAxisAlignment.center,
           mainAxisSize: MainAxisSize.min,

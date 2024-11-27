@@ -10,38 +10,35 @@ import 'package:timetracker/utils/time.dart';
 
 class TimerPage extends StatelessWidget {
   const TimerPage({
-    required this.title,
-    this.startSeconds = 0,
     super.key,
   });
 
-  final String title;
-  final int startSeconds;
+  static String route = '/timer';
 
   @override
   Widget build(BuildContext context) {
     return BlocProvider(
-      create: (_) =>
-          TimerBloc(ticker: Ticker.countUp())..add(const TimerEvent.started()),
-      child: _TimerView(title: title),
+      create: (_) => TimerBloc(ticker: Ticker.countUp())
+        ..add(
+          const TimerEvent.started(),
+        ),
+      child: const _TimerView(),
     );
   }
 }
 
 class _TimerView extends StatelessWidget {
-  const _TimerView({required this.title});
-
-  final String title;
+  const _TimerView();
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
+    return const Scaffold(
       body: SafeArea(
         child: Column(
           children: [
-            _Header(title: title),
-            const TimerDisplay(),
-            const MotivationalText(),
+            _Header(title: 'title'),
+            TimerDisplay(),
+            MotivationalText(),
           ],
         ),
       ),
@@ -50,7 +47,6 @@ class _TimerView extends StatelessWidget {
 }
 
 class _Header extends StatelessWidget {
-
   const _Header({required this.title});
   final String title;
 
@@ -133,18 +129,20 @@ class TimerDisplay extends StatelessWidget {
           color: Colors.red.shade500,
           fillType: BlobFillType.fill,
         ),
-        child: BlocBuilder<TimerBloc, TimerState>(builder: (context, state) {
-          final time = state is TimerRunning ? state.secondsElapsed : 0;
-          return Center(
-            child: Text(
-              secondToMinutes(time),
-              style: theme.textTheme.displayLarge?.copyWith(
-                fontWeight: FontWeight.bold,
-                color: Colors.white,
+        child: BlocBuilder<TimerBloc, TimerState>(
+          builder: (context, state) {
+            final time = state is TimerRunning ? state.secondsElapsed : 0;
+            return Center(
+              child: Text(
+                secondToMinutes(time),
+                style: theme.textTheme.displayLarge?.copyWith(
+                  fontWeight: FontWeight.bold,
+                  color: Colors.white,
+                ),
               ),
-            ),
-          );
-        },),
+            );
+          },
+        ),
       ),
     );
   }

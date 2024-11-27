@@ -1,10 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:local_storage_timetracker_api/local_storage_timetracker_api.dart';
-import 'package:timetracker/app/invoice/details/view/details.dart';
-import 'package:timetracker/app/invoice/list/view/list.dart';
 import 'package:timetracker/app/landing/landing.dart';
+import 'package:timetracker/app/projects/view/projects_page.dart';
+import 'package:timetracker/app/settings/bloc/settings_bloc.dart';
+import 'package:timetracker/app/settings/view/settings.dart';
 import 'package:timetracker/app/tasks/tasks_page.dart';
+import 'package:timetracker/app/timer/view/timer_page.dart';
 import 'package:timetracker/l10n/l10n.dart';
 import 'package:timetracker/theme/theme.dart';
 import 'package:timetracker_repository/timetracker_repository.dart';
@@ -20,6 +22,13 @@ class App extends StatelessWidget {
       debugShowCheckedModeBanner: false,
       localizationsDelegates: AppLocalizations.localizationsDelegates,
       supportedLocales: AppLocalizations.supportedLocales,
+      routes: {
+        LandingPage.route: (_) => const LandingPage(),
+        ProjectsPage.route: (_) => const ProjectsPage(),
+        TasksPage.route: (_) => const TasksPage(),
+        TimerPage.route: (_) => const TimerPage(),
+        SettingsPage.route: (_) => const SettingsPage(),
+      },
       home: MultiRepositoryProvider(
         providers: [
           RepositoryProvider(
@@ -38,7 +47,10 @@ class App extends StatelessWidget {
             ),
           ),
         ],
-        child: const InvoiceDetailsPage(),
+        child: BlocProvider(
+          create: (_) => SettingsBloc(),
+          child: const LandingPage(),
+        ),
       ),
     );
   }

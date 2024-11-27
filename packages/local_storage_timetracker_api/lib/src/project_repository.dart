@@ -10,6 +10,7 @@ class LocalStorageProjectApi extends ProjectsApi {
   final DBHelper _dbHelper;
   final BehaviorSubject<List<Project>> _projectStream;
 
+  @override
   Future<List<Project>> fetchProjects() async {
     final db = await _dbHelper.initDB();
     final cursor = await db.query(DBHelper.tableProjects);

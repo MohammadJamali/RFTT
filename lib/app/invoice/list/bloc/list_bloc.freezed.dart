@@ -18,38 +18,38 @@ final _privateConstructorUsedError = UnsupportedError(
 mixin _$InvoiceListEvent {
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
-    required TResult Function() fetchInvoices,
+    required TResult Function() fetchInvoiceList,
     required TResult Function(String query) search,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
-    TResult? Function()? fetchInvoices,
+    TResult? Function()? fetchInvoiceList,
     TResult? Function(String query)? search,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
-    TResult Function()? fetchInvoices,
+    TResult Function()? fetchInvoiceList,
     TResult Function(String query)? search,
     required TResult orElse(),
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult map<TResult extends Object?>({
-    required TResult Function(_FetchInvoices value) fetchInvoices,
+    required TResult Function(_FetchInvoices value) fetchInvoiceList,
     required TResult Function(_InvoiceSearch value) search,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
-    TResult? Function(_FetchInvoices value)? fetchInvoices,
+    TResult? Function(_FetchInvoices value)? fetchInvoiceList,
     TResult? Function(_InvoiceSearch value)? search,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
-    TResult Function(_FetchInvoices value)? fetchInvoices,
+    TResult Function(_FetchInvoices value)? fetchInvoiceList,
     TResult Function(_InvoiceSearch value)? search,
     required TResult orElse(),
   }) =>
@@ -103,7 +103,7 @@ class _$FetchInvoicesImpl implements _FetchInvoices {
 
   @override
   String toString() {
-    return 'InvoiceListEvent.fetchInvoices()';
+    return 'InvoiceListEvent.fetchInvoiceList()';
   }
 
   @override
@@ -118,30 +118,30 @@ class _$FetchInvoicesImpl implements _FetchInvoices {
   @override
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
-    required TResult Function() fetchInvoices,
+    required TResult Function() fetchInvoiceList,
     required TResult Function(String query) search,
   }) {
-    return fetchInvoices();
+    return fetchInvoiceList();
   }
 
   @override
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
-    TResult? Function()? fetchInvoices,
+    TResult? Function()? fetchInvoiceList,
     TResult? Function(String query)? search,
   }) {
-    return fetchInvoices?.call();
+    return fetchInvoiceList?.call();
   }
 
   @override
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
-    TResult Function()? fetchInvoices,
+    TResult Function()? fetchInvoiceList,
     TResult Function(String query)? search,
     required TResult orElse(),
   }) {
-    if (fetchInvoices != null) {
-      return fetchInvoices();
+    if (fetchInvoiceList != null) {
+      return fetchInvoiceList();
     }
     return orElse();
   }
@@ -149,30 +149,30 @@ class _$FetchInvoicesImpl implements _FetchInvoices {
   @override
   @optionalTypeArgs
   TResult map<TResult extends Object?>({
-    required TResult Function(_FetchInvoices value) fetchInvoices,
+    required TResult Function(_FetchInvoices value) fetchInvoiceList,
     required TResult Function(_InvoiceSearch value) search,
   }) {
-    return fetchInvoices(this);
+    return fetchInvoiceList(this);
   }
 
   @override
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
-    TResult? Function(_FetchInvoices value)? fetchInvoices,
+    TResult? Function(_FetchInvoices value)? fetchInvoiceList,
     TResult? Function(_InvoiceSearch value)? search,
   }) {
-    return fetchInvoices?.call(this);
+    return fetchInvoiceList?.call(this);
   }
 
   @override
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
-    TResult Function(_FetchInvoices value)? fetchInvoices,
+    TResult Function(_FetchInvoices value)? fetchInvoiceList,
     TResult Function(_InvoiceSearch value)? search,
     required TResult orElse(),
   }) {
-    if (fetchInvoices != null) {
-      return fetchInvoices(this);
+    if (fetchInvoiceList != null) {
+      return fetchInvoiceList(this);
     }
     return orElse();
   }
@@ -250,7 +250,7 @@ class _$InvoiceSearchImpl implements _InvoiceSearch {
   @override
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
-    required TResult Function() fetchInvoices,
+    required TResult Function() fetchInvoiceList,
     required TResult Function(String query) search,
   }) {
     return search(query);
@@ -259,7 +259,7 @@ class _$InvoiceSearchImpl implements _InvoiceSearch {
   @override
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
-    TResult? Function()? fetchInvoices,
+    TResult? Function()? fetchInvoiceList,
     TResult? Function(String query)? search,
   }) {
     return search?.call(query);
@@ -268,7 +268,7 @@ class _$InvoiceSearchImpl implements _InvoiceSearch {
   @override
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
-    TResult Function()? fetchInvoices,
+    TResult Function()? fetchInvoiceList,
     TResult Function(String query)? search,
     required TResult orElse(),
   }) {
@@ -281,7 +281,7 @@ class _$InvoiceSearchImpl implements _InvoiceSearch {
   @override
   @optionalTypeArgs
   TResult map<TResult extends Object?>({
-    required TResult Function(_FetchInvoices value) fetchInvoices,
+    required TResult Function(_FetchInvoices value) fetchInvoiceList,
     required TResult Function(_InvoiceSearch value) search,
   }) {
     return search(this);
@@ -290,7 +290,7 @@ class _$InvoiceSearchImpl implements _InvoiceSearch {
   @override
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
-    TResult? Function(_FetchInvoices value)? fetchInvoices,
+    TResult? Function(_FetchInvoices value)? fetchInvoiceList,
     TResult? Function(_InvoiceSearch value)? search,
   }) {
     return search?.call(this);
@@ -299,7 +299,7 @@ class _$InvoiceSearchImpl implements _InvoiceSearch {
   @override
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
-    TResult Function(_FetchInvoices value)? fetchInvoices,
+    TResult Function(_FetchInvoices value)? fetchInvoiceList,
     TResult Function(_InvoiceSearch value)? search,
     required TResult orElse(),
   }) {

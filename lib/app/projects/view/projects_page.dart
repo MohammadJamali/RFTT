@@ -1,12 +1,14 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:timetracker/l10n/l10n.dart';
 import 'package:timetracker/app/projects/bloc/projects_bloc.dart';
 import 'package:timetracker/app/projects/widgets/add_edit_project_dialog.dart';
 import 'package:timetracker/app/projects/widgets/projects_list.dart';
+import 'package:timetracker/l10n/l10n.dart';
 
 class ProjectsPage extends StatelessWidget {
   const ProjectsPage({super.key});
+
+  static String route = '/projects';
 
   @override
   Widget build(BuildContext context) {

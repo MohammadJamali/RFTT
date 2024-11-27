@@ -1,8 +1,11 @@
 import 'package:flutter/material.dart';
+import 'package:timetracker/app/authentication/authentication.dart';
 import 'package:timetracker/l10n/l10n.dart';
 
 class LandingPage extends StatelessWidget {
   const LandingPage({super.key});
+
+  static String route = '/welcome';
 
   List<Map<String, dynamic>> get thumbnails => [
         {
@@ -70,65 +73,84 @@ class LandingPage extends StatelessWidget {
     final l10n = context.l10n;
     final theme = Theme.of(context);
 
+    final viewSize = MediaQuery.of(context).size;
+
     return Scaffold(
       body: Center(
-        child: Container(
-          width: 500,
-          alignment: Alignment.center,
-          padding: const EdgeInsets.symmetric(vertical: 24, horizontal: 24),
-          child: Column(
-            children: [
-              SizedBox(
-                height: 500,
-                child: Stack(
+        child: SingleChildScrollView(
+          clipBehavior: Clip.none,
+          child: Container(
+            width: 500,
+            constraints: BoxConstraints(
+              maxWidth: 500,
+              minHeight: viewSize.height,
+            ),
+            padding: const EdgeInsets.all(24),
+            child: Column(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: [
+                SizedBox(
+                  height: 500,
+                  child: Stack(
+                    children: [
+                      Align(
+                        alignment: Alignment.topRight,
+                        child: _thumbnail(thumbnails[1]),
+                      ),
+                      Align(
+                        alignment: Alignment.centerLeft,
+                        child: _thumbnail(thumbnails[0]),
+                      ),
+                      Align(
+                        alignment: Alignment.bottomRight,
+                        child: _thumbnail(thumbnails[2]),
+                      ),
+                    ],
+                  ),
+                ),
+                Column(
+                  mainAxisSize: MainAxisSize.min,
                   children: [
-                    Align(
-                      alignment: Alignment.topRight,
-                      child: _thumbnail(thumbnails[1]),
+                    Text(
+                      l10n.landing,
+                      textAlign: TextAlign.center,
+                      style: theme.textTheme.headlineMedium?.copyWith(
+                        fontWeight: FontWeight.bold,
+                      ),
                     ),
-                    Align(
-                      alignment: Alignment.centerLeft,
-                      child: _thumbnail(thumbnails[0]),
-                    ),
-                    Align(
-                      alignment: Alignment.bottomRight,
-                      child: _thumbnail(thumbnails[2]),
+                    const SizedBox(height: 10),
+                    Text(
+                      l10n.slogan,
+                      textAlign: TextAlign.center,
+                      style: theme.textTheme.bodyMedium,
                     ),
                   ],
                 ),
-              ),
-              const Spacer(),
-              Text(
-                l10n.landing,
-                textAlign: TextAlign.center,
-                style: theme.textTheme.headlineMedium?.copyWith(
-                  fontWeight: FontWeight.bold,
+                Padding(
+                  padding: const EdgeInsets.symmetric(vertical: 16),
+                  child: ElevatedButton(
+                    onPressed: () => onStartButtonPressed(context),
+                    style: ElevatedButton.styleFrom(
+                      padding: EdgeInsets.zero,
+                      fixedSize: const Size.square(94),
+                      shape: const OvalBorder(),
+                      backgroundColor: Colors.orange,
+                    ),
+                    child: const Icon(
+                      Icons.arrow_forward_ios_rounded,
+                      color: Colors.white,
+                    ),
+                  ),
                 ),
-              ),
-              const SizedBox(height: 10),
-              Text(
-                l10n.slogan,
-                textAlign: TextAlign.center,
-                style: theme.textTheme.bodyMedium,
-              ),
-              const SizedBox.square(dimension: 16),
-              ElevatedButton(
-                onPressed: () {},
-                style: ElevatedButton.styleFrom(
-                  padding: EdgeInsets.zero,
-                  fixedSize: const Size.square(94),
-                  shape: const OvalBorder(),
-                  backgroundColor: Colors.orange,
-                ),
-                child: const Icon(
-                  Icons.arrow_forward_ios_rounded,
-                  color: Colors.white,
-                ),
-              ),
-            ],
+              ],
+            ),
           ),
         ),
       ),
     );
+  }
+
+  void onStartButtonPressed(BuildContext context) {
+    Navigator.of(context).popAndPushNamed(AuthenticationPage.route);
   }
 }

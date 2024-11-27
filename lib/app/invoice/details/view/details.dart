@@ -15,7 +15,7 @@ class InvoiceDetailsPage extends StatelessWidget {
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            _SectionHeader(label: 'Invoice #0013'),
+            const _SectionHeader(label: 'Invoice #0013'),
             const SizedBox(height: 16),
             _BillingSection(),
             const SizedBox(height: 24),
@@ -36,10 +36,10 @@ class InvoiceDetailsPage extends StatelessWidget {
             const Spacer(),
             ElevatedButton(
               onPressed: () {},
-              child: const Text('Issue Invoice'),
               style: ElevatedButton.styleFrom(
                 minimumSize: const Size.fromHeight(48),
               ),
+              child: const Text('Issue Invoice'),
             ),
           ],
         ),
@@ -49,9 +49,9 @@ class InvoiceDetailsPage extends StatelessWidget {
 }
 
 class _SectionHeader extends StatelessWidget {
-  final String label;
 
   const _SectionHeader({required this.label});
+  final String label;
 
   @override
   Widget build(BuildContext context) {
@@ -77,22 +77,22 @@ class _BillingSection extends StatelessWidget {
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          Row(
+          const Row(
             children: [
-              const Text('Billing'),
-              const Spacer(),
+              Text('Billing'),
+              Spacer(),
               InvoiceStatus(
                 status: InvoiceStatusList.Unpaid,
               ),
             ],
           ),
           const SizedBox(height: 16),
-          ProfileListItem(),
+          const ProfileListItem(),
           const SizedBox(height: 16),
           Container(
             decoration: BoxDecoration(
               borderRadius: BorderRadius.circular(12),
-              color: Color(0xfff3f7f8),
+              color: const Color(0xfff3f7f8),
             ),
             padding: const EdgeInsets.all(16),
             child: Label.row({
@@ -122,28 +122,28 @@ class _ItemTable extends StatelessWidget {
             ),
             Text('Qty', style: theme.textTheme.bodyMedium),
             const SizedBox(width: 16),
-            Text('Price'),
+            const Text('Price'),
           ],
         ),
         const SizedBox(height: 16),
-        _ItemRow(label: 'UIX Re-Design', quantity: '1', price: '€ 5.200'),
+        const _ItemRow(label: 'UIX Re-Design', quantity: '1', price: '€ 5.200'),
         const SizedBox(height: 8),
-        _ItemRow(label: 'Custom Illustration', quantity: '5', price: '€ 1.150'),
+        const _ItemRow(label: 'Custom Illustration', quantity: '5', price: '€ 1.150'),
       ],
     );
   }
 }
 
 class _ItemRow extends StatelessWidget {
-  final String label;
-  final String quantity;
-  final String price;
 
   const _ItemRow({
     required this.label,
     required this.quantity,
     required this.price,
   });
+  final String label;
+  final String quantity;
+  final String price;
 
   @override
   Widget build(BuildContext context) {
@@ -160,7 +160,7 @@ class _ItemRow extends StatelessWidget {
           ),
         ),
         Text(
-          '$quantity',
+          quantity,
           style: theme.textTheme.bodyMedium?.copyWith(
             fontWeight: FontWeight.bold,
           ),
@@ -185,18 +185,18 @@ class _TotalSection extends StatelessWidget {
     return Container(
       decoration: BoxDecoration(
         borderRadius: BorderRadius.circular(12),
-        color: Color(0xfff3f7f8),
+        color: const Color(0xfff3f7f8),
       ),
       padding: const EdgeInsets.all(16),
       child: Column(
         children: [
-          _LabelValue(label: 'Total', value: '€ 6.350'),
-          _LabelValue(label: 'Tax 10%', value: '€ 6.3'),
+          const _LabelValue(label: 'Total', value: '€ 6.350'),
+          const _LabelValue(label: 'Tax 10%', value: '€ 6.3'),
           const SizedBox(height: 16),
           Container(
             decoration: BoxDecoration(
               borderRadius: BorderRadius.circular(12),
-              color: Color(0xff0a3b40),
+              color: const Color(0xff0a3b40),
             ),
             padding: const EdgeInsets.all(16),
             child: Row(
@@ -224,10 +224,10 @@ class _TotalSection extends StatelessWidget {
 }
 
 class _LabelValue extends StatelessWidget {
-  final String label;
-  final String value;
 
   const _LabelValue({required this.label, required this.value});
+  final String label;
+  final String value;
 
   @override
   Widget build(BuildContext context) {

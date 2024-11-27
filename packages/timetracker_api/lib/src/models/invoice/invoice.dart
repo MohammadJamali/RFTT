@@ -3,7 +3,7 @@ import 'package:timetracker_api/src/models/invoice/content_data/content_data.dar
 import 'package:timetracker_api/src/models/invoice/currency/currency.dart';
 import 'package:timetracker_api/src/models/invoice/invoice_status.dart';
 import 'package:timetracker_api/src/models/invoice/payment_network/payment_network.dart';
-import 'package:timetracker_api/src/models/invoice/transaction_actor/transaction_actor.dart';
+import 'package:timetracker_api/src/models/transaction_actor/transaction_actor.dart';
 
 part 'invoice.freezed.dart';
 part 'invoice.g.dart';

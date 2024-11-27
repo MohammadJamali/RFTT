@@ -24,9 +24,9 @@ class InvoiceListBloc extends Bloc<InvoiceListEvent, InvoiceListState> {
 
     invoices
         .where(
-          (invoice) => invoice.payee.displayName.toLowerCase().contains(
+          (invoice) => invoice.payee.name?.toLowerCase().contains(
                 event.query.toLowerCase(),
-              ),
+              ) ?? false,
         )
         .toList();
 

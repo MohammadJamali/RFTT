@@ -2,6 +2,17 @@ import 'package:flutter/material.dart';
 import 'package:timetracker/l10n/l10n.dart';
 import 'package:timetracker/utils/shimmer.dart' as shimmerHelper;
 
+class TasksPage extends StatelessWidget {
+  const TasksPage({super.key});
+
+  static String route = '/tasks';
+
+  @override
+  Widget build(BuildContext context) {
+    return const TasksView();
+  }
+}
+
 class TasksView extends StatefulWidget {
   const TasksView({super.key});
 

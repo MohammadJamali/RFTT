@@ -7,9 +7,13 @@ part 'transaction_actor.g.dart';
 class TransactionActor with _$TransactionActor {
   const factory TransactionActor({
     // Types.Identity.TYPE.ETHEREUM_ADDRESS,
-    required String displayName,
     required String type,
     required String value,
+
+    String? name,
+    String? taxId,
+    String? profilePic,
+    String? email,
   }) = _TransactionActor;
 
   factory TransactionActor.fromJson(Map<String, Object?> json) =>
