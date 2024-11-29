@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:local_storage_timetracker_api/local_storage_timetracker_api.dart';
+import 'package:timetracker/app/authentication/view/authentication.dart';
 import 'package:timetracker/app/landing/landing.dart';
 import 'package:timetracker/app/projects/view/projects_page.dart';
 import 'package:timetracker/app/settings/bloc/settings_bloc.dart';
@@ -24,6 +25,7 @@ class App extends StatelessWidget {
       supportedLocales: AppLocalizations.supportedLocales,
       routes: {
         LandingPage.route: (_) => const LandingPage(),
+        AuthenticationPage.route: (_) => const AuthenticationPage(),
         ProjectsPage.route: (_) => const ProjectsPage(),
         TasksPage.route: (_) => const TasksPage(),
         TimerPage.route: (_) => const TimerPage(),
@@ -50,6 +52,7 @@ class App extends StatelessWidget {
         child: BlocProvider(
           create: (_) => SettingsBloc(),
           child: const LandingPage(),
+          // child: const AuthenticationPage(),
         ),
       ),
     );

@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:reown_appkit/reown_appkit.dart';
 import 'package:timetracker/app/authentication/authentication.dart';
 import 'package:timetracker/l10n/l10n.dart';
 
@@ -150,7 +151,25 @@ class LandingPage extends StatelessWidget {
     );
   }
 
-  void onStartButtonPressed(BuildContext context) {
-    Navigator.of(context).popAndPushNamed(AuthenticationPage.route);
+  Future<void> onStartButtonPressed(BuildContext context) async {
+    // Navigator.of(context).popAndPushNamed(AuthenticationPage.route);
+    final appKitModal = ReownAppKitModal(
+      context: context,
+      projectId: '99d47b5d1a6c90d04c710ce5cc5b6ee0',
+      metadata: const PairingMetadata(
+        name: 'Request Finance Time Tracker',
+        description: 'Monitize your time using cryptocurrency',
+        url: 'https://none.none',
+        icons: ['https://picsum.photos/200'],
+      ),
+    );
+    ReownAppKitModalNetworks.removeSupportedNetworks('solana');
+
+    try {
+      await appKitModal.init();
+    } catch (e) {
+      print(e);
+    }
+    await appKitModal.openModalView(const ReownAppKitModalQRCodePage());
   }
 }
