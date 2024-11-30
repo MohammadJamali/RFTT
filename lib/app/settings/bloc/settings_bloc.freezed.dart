@@ -20,7 +20,7 @@ mixin _$SettingsEvent {
   TResult when<TResult extends Object?>({
     required TResult Function() started,
     required TResult Function(AppBrightness brightness) brightnessChanged,
-    required TResult Function(TransactionActor actor) login,
+    required TResult Function(String walletAddress) login,
     required TResult Function() logout,
   }) =>
       throw _privateConstructorUsedError;
@@ -28,7 +28,7 @@ mixin _$SettingsEvent {
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? started,
     TResult? Function(AppBrightness brightness)? brightnessChanged,
-    TResult? Function(TransactionActor actor)? login,
+    TResult? Function(String walletAddress)? login,
     TResult? Function()? logout,
   }) =>
       throw _privateConstructorUsedError;
@@ -36,7 +36,7 @@ mixin _$SettingsEvent {
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? started,
     TResult Function(AppBrightness brightness)? brightnessChanged,
-    TResult Function(TransactionActor actor)? login,
+    TResult Function(String walletAddress)? login,
     TResult Function()? logout,
     required TResult orElse(),
   }) =>
@@ -132,7 +132,7 @@ class _$StartedImpl implements _Started {
   TResult when<TResult extends Object?>({
     required TResult Function() started,
     required TResult Function(AppBrightness brightness) brightnessChanged,
-    required TResult Function(TransactionActor actor) login,
+    required TResult Function(String walletAddress) login,
     required TResult Function() logout,
   }) {
     return started();
@@ -143,7 +143,7 @@ class _$StartedImpl implements _Started {
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? started,
     TResult? Function(AppBrightness brightness)? brightnessChanged,
-    TResult? Function(TransactionActor actor)? login,
+    TResult? Function(String walletAddress)? login,
     TResult? Function()? logout,
   }) {
     return started?.call();
@@ -154,7 +154,7 @@ class _$StartedImpl implements _Started {
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? started,
     TResult Function(AppBrightness brightness)? brightnessChanged,
-    TResult Function(TransactionActor actor)? login,
+    TResult Function(String walletAddress)? login,
     TResult Function()? logout,
     required TResult orElse(),
   }) {
@@ -278,7 +278,7 @@ class _$BrightnessChangedImpl implements _BrightnessChanged {
   TResult when<TResult extends Object?>({
     required TResult Function() started,
     required TResult Function(AppBrightness brightness) brightnessChanged,
-    required TResult Function(TransactionActor actor) login,
+    required TResult Function(String walletAddress) login,
     required TResult Function() logout,
   }) {
     return brightnessChanged(brightness);
@@ -289,7 +289,7 @@ class _$BrightnessChangedImpl implements _BrightnessChanged {
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? started,
     TResult? Function(AppBrightness brightness)? brightnessChanged,
-    TResult? Function(TransactionActor actor)? login,
+    TResult? Function(String walletAddress)? login,
     TResult? Function()? logout,
   }) {
     return brightnessChanged?.call(brightness);
@@ -300,7 +300,7 @@ class _$BrightnessChangedImpl implements _BrightnessChanged {
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? started,
     TResult Function(AppBrightness brightness)? brightnessChanged,
-    TResult Function(TransactionActor actor)? login,
+    TResult Function(String walletAddress)? login,
     TResult Function()? logout,
     required TResult orElse(),
   }) {
@@ -367,9 +367,7 @@ abstract class _$$LoggedInImplCopyWith<$Res> {
           _$LoggedInImpl value, $Res Function(_$LoggedInImpl) then) =
       __$$LoggedInImplCopyWithImpl<$Res>;
   @useResult
-  $Res call({TransactionActor actor});
-
-  $TransactionActorCopyWith<$Res> get actor;
+  $Res call({String walletAddress});
 }
 
 /// @nodoc
@@ -385,38 +383,28 @@ class __$$LoggedInImplCopyWithImpl<$Res>
   @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? actor = null,
+    Object? walletAddress = null,
   }) {
     return _then(_$LoggedInImpl(
-      null == actor
-          ? _value.actor
-          : actor // ignore: cast_nullable_to_non_nullable
-              as TransactionActor,
+      null == walletAddress
+          ? _value.walletAddress
+          : walletAddress // ignore: cast_nullable_to_non_nullable
+              as String,
     ));
-  }
-
-  /// Create a copy of SettingsEvent
-  /// with the given fields replaced by the non-null parameter values.
-  @override
-  @pragma('vm:prefer-inline')
-  $TransactionActorCopyWith<$Res> get actor {
-    return $TransactionActorCopyWith<$Res>(_value.actor, (value) {
-      return _then(_value.copyWith(actor: value));
-    });
   }
 }
 
 /// @nodoc
 
 class _$LoggedInImpl implements _LoggedIn {
-  const _$LoggedInImpl(this.actor);
+  const _$LoggedInImpl(this.walletAddress);
 
   @override
-  final TransactionActor actor;
+  final String walletAddress;
 
   @override
   String toString() {
-    return 'SettingsEvent.login(actor: $actor)';
+    return 'SettingsEvent.login(walletAddress: $walletAddress)';
   }
 
   @override
@@ -424,11 +412,12 @@ class _$LoggedInImpl implements _LoggedIn {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
             other is _$LoggedInImpl &&
-            (identical(other.actor, actor) || other.actor == actor));
+            (identical(other.walletAddress, walletAddress) ||
+                other.walletAddress == walletAddress));
   }
 
   @override
-  int get hashCode => Object.hash(runtimeType, actor);
+  int get hashCode => Object.hash(runtimeType, walletAddress);
 
   /// Create a copy of SettingsEvent
   /// with the given fields replaced by the non-null parameter values.
@@ -443,10 +432,10 @@ class _$LoggedInImpl implements _LoggedIn {
   TResult when<TResult extends Object?>({
     required TResult Function() started,
     required TResult Function(AppBrightness brightness) brightnessChanged,
-    required TResult Function(TransactionActor actor) login,
+    required TResult Function(String walletAddress) login,
     required TResult Function() logout,
   }) {
-    return login(actor);
+    return login(walletAddress);
   }
 
   @override
@@ -454,10 +443,10 @@ class _$LoggedInImpl implements _LoggedIn {
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? started,
     TResult? Function(AppBrightness brightness)? brightnessChanged,
-    TResult? Function(TransactionActor actor)? login,
+    TResult? Function(String walletAddress)? login,
     TResult? Function()? logout,
   }) {
-    return login?.call(actor);
+    return login?.call(walletAddress);
   }
 
   @override
@@ -465,12 +454,12 @@ class _$LoggedInImpl implements _LoggedIn {
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? started,
     TResult Function(AppBrightness brightness)? brightnessChanged,
-    TResult Function(TransactionActor actor)? login,
+    TResult Function(String walletAddress)? login,
     TResult Function()? logout,
     required TResult orElse(),
   }) {
     if (login != null) {
-      return login(actor);
+      return login(walletAddress);
     }
     return orElse();
   }
@@ -514,9 +503,9 @@ class _$LoggedInImpl implements _LoggedIn {
 }
 
 abstract class _LoggedIn implements SettingsEvent {
-  const factory _LoggedIn(final TransactionActor actor) = _$LoggedInImpl;
+  const factory _LoggedIn(final String walletAddress) = _$LoggedInImpl;
 
-  TransactionActor get actor;
+  String get walletAddress;
 
   /// Create a copy of SettingsEvent
   /// with the given fields replaced by the non-null parameter values.
@@ -568,7 +557,7 @@ class _$LoggedoutImpl implements _Loggedout {
   TResult when<TResult extends Object?>({
     required TResult Function() started,
     required TResult Function(AppBrightness brightness) brightnessChanged,
-    required TResult Function(TransactionActor actor) login,
+    required TResult Function(String walletAddress) login,
     required TResult Function() logout,
   }) {
     return logout();
@@ -579,7 +568,7 @@ class _$LoggedoutImpl implements _Loggedout {
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? started,
     TResult? Function(AppBrightness brightness)? brightnessChanged,
-    TResult? Function(TransactionActor actor)? login,
+    TResult? Function(String walletAddress)? login,
     TResult? Function()? logout,
   }) {
     return logout?.call();
@@ -590,7 +579,7 @@ class _$LoggedoutImpl implements _Loggedout {
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? started,
     TResult Function(AppBrightness brightness)? brightnessChanged,
-    TResult Function(TransactionActor actor)? login,
+    TResult Function(String walletAddress)? login,
     TResult Function()? logout,
     required TResult orElse(),
   }) {
@@ -644,55 +633,13 @@ abstract class _Loggedout implements SettingsEvent {
 
 /// @nodoc
 mixin _$SettingsState {
-  @optionalTypeArgs
-  TResult when<TResult extends Object?>({
-    required TResult Function() initial,
-    required TResult Function(Brightness brightness) brightness,
-    required TResult Function(TransactionActor actor) login,
-    required TResult Function() logout,
-  }) =>
-      throw _privateConstructorUsedError;
-  @optionalTypeArgs
-  TResult? whenOrNull<TResult extends Object?>({
-    TResult? Function()? initial,
-    TResult? Function(Brightness brightness)? brightness,
-    TResult? Function(TransactionActor actor)? login,
-    TResult? Function()? logout,
-  }) =>
-      throw _privateConstructorUsedError;
-  @optionalTypeArgs
-  TResult maybeWhen<TResult extends Object?>({
-    TResult Function()? initial,
-    TResult Function(Brightness brightness)? brightness,
-    TResult Function(TransactionActor actor)? login,
-    TResult Function()? logout,
-    required TResult orElse(),
-  }) =>
-      throw _privateConstructorUsedError;
-  @optionalTypeArgs
-  TResult map<TResult extends Object?>({
-    required TResult Function(_Initial value) initial,
-    required TResult Function(_Brightness value) brightness,
-    required TResult Function(_Login value) login,
-    required TResult Function(_Logout value) logout,
-  }) =>
-      throw _privateConstructorUsedError;
-  @optionalTypeArgs
-  TResult? mapOrNull<TResult extends Object?>({
-    TResult? Function(_Initial value)? initial,
-    TResult? Function(_Brightness value)? brightness,
-    TResult? Function(_Login value)? login,
-    TResult? Function(_Logout value)? logout,
-  }) =>
-      throw _privateConstructorUsedError;
-  @optionalTypeArgs
-  TResult maybeMap<TResult extends Object?>({
-    TResult Function(_Initial value)? initial,
-    TResult Function(_Brightness value)? brightness,
-    TResult Function(_Login value)? login,
-    TResult Function(_Logout value)? logout,
-    required TResult orElse(),
-  }) =>
+  Brightness? get brightness => throw _privateConstructorUsedError;
+  TransactionActor? get actor => throw _privateConstructorUsedError;
+
+  /// Create a copy of SettingsState
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
+  $SettingsStateCopyWith<SettingsState> get copyWith =>
       throw _privateConstructorUsedError;
 }
 
@@ -701,6 +648,10 @@ abstract class $SettingsStateCopyWith<$Res> {
   factory $SettingsStateCopyWith(
           SettingsState value, $Res Function(SettingsState) then) =
       _$SettingsStateCopyWithImpl<$Res, SettingsState>;
+  @useResult
+  $Res call({Brightness? brightness, TransactionActor? actor});
+
+  $TransactionActorCopyWith<$Res>? get actor;
 }
 
 /// @nodoc
@@ -715,555 +666,133 @@ class _$SettingsStateCopyWithImpl<$Res, $Val extends SettingsState>
 
   /// Create a copy of SettingsState
   /// with the given fields replaced by the non-null parameter values.
-}
-
-/// @nodoc
-abstract class _$$InitialImplCopyWith<$Res> {
-  factory _$$InitialImplCopyWith(
-          _$InitialImpl value, $Res Function(_$InitialImpl) then) =
-      __$$InitialImplCopyWithImpl<$Res>;
-}
-
-/// @nodoc
-class __$$InitialImplCopyWithImpl<$Res>
-    extends _$SettingsStateCopyWithImpl<$Res, _$InitialImpl>
-    implements _$$InitialImplCopyWith<$Res> {
-  __$$InitialImplCopyWithImpl(
-      _$InitialImpl _value, $Res Function(_$InitialImpl) _then)
-      : super(_value, _then);
-
-  /// Create a copy of SettingsState
-  /// with the given fields replaced by the non-null parameter values.
-}
-
-/// @nodoc
-
-class _$InitialImpl implements _Initial {
-  const _$InitialImpl();
-
-  @override
-  String toString() {
-    return 'SettingsState.initial()';
-  }
-
-  @override
-  bool operator ==(Object other) {
-    return identical(this, other) ||
-        (other.runtimeType == runtimeType && other is _$InitialImpl);
-  }
-
-  @override
-  int get hashCode => runtimeType.hashCode;
-
-  @override
-  @optionalTypeArgs
-  TResult when<TResult extends Object?>({
-    required TResult Function() initial,
-    required TResult Function(Brightness brightness) brightness,
-    required TResult Function(TransactionActor actor) login,
-    required TResult Function() logout,
-  }) {
-    return initial();
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult? whenOrNull<TResult extends Object?>({
-    TResult? Function()? initial,
-    TResult? Function(Brightness brightness)? brightness,
-    TResult? Function(TransactionActor actor)? login,
-    TResult? Function()? logout,
-  }) {
-    return initial?.call();
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult maybeWhen<TResult extends Object?>({
-    TResult Function()? initial,
-    TResult Function(Brightness brightness)? brightness,
-    TResult Function(TransactionActor actor)? login,
-    TResult Function()? logout,
-    required TResult orElse(),
-  }) {
-    if (initial != null) {
-      return initial();
-    }
-    return orElse();
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult map<TResult extends Object?>({
-    required TResult Function(_Initial value) initial,
-    required TResult Function(_Brightness value) brightness,
-    required TResult Function(_Login value) login,
-    required TResult Function(_Logout value) logout,
-  }) {
-    return initial(this);
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult? mapOrNull<TResult extends Object?>({
-    TResult? Function(_Initial value)? initial,
-    TResult? Function(_Brightness value)? brightness,
-    TResult? Function(_Login value)? login,
-    TResult? Function(_Logout value)? logout,
-  }) {
-    return initial?.call(this);
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult maybeMap<TResult extends Object?>({
-    TResult Function(_Initial value)? initial,
-    TResult Function(_Brightness value)? brightness,
-    TResult Function(_Login value)? login,
-    TResult Function(_Logout value)? logout,
-    required TResult orElse(),
-  }) {
-    if (initial != null) {
-      return initial(this);
-    }
-    return orElse();
-  }
-}
-
-abstract class _Initial implements SettingsState {
-  const factory _Initial() = _$InitialImpl;
-}
-
-/// @nodoc
-abstract class _$$BrightnessImplCopyWith<$Res> {
-  factory _$$BrightnessImplCopyWith(
-          _$BrightnessImpl value, $Res Function(_$BrightnessImpl) then) =
-      __$$BrightnessImplCopyWithImpl<$Res>;
-  @useResult
-  $Res call({Brightness brightness});
-}
-
-/// @nodoc
-class __$$BrightnessImplCopyWithImpl<$Res>
-    extends _$SettingsStateCopyWithImpl<$Res, _$BrightnessImpl>
-    implements _$$BrightnessImplCopyWith<$Res> {
-  __$$BrightnessImplCopyWithImpl(
-      _$BrightnessImpl _value, $Res Function(_$BrightnessImpl) _then)
-      : super(_value, _then);
-
-  /// Create a copy of SettingsState
-  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? brightness = null,
+    Object? brightness = freezed,
+    Object? actor = freezed,
   }) {
-    return _then(_$BrightnessImpl(
-      null == brightness
+    return _then(_value.copyWith(
+      brightness: freezed == brightness
           ? _value.brightness
           : brightness // ignore: cast_nullable_to_non_nullable
-              as Brightness,
-    ));
-  }
-}
-
-/// @nodoc
-
-class _$BrightnessImpl implements _Brightness {
-  const _$BrightnessImpl(this.brightness);
-
-  @override
-  final Brightness brightness;
-
-  @override
-  String toString() {
-    return 'SettingsState.brightness(brightness: $brightness)';
-  }
-
-  @override
-  bool operator ==(Object other) {
-    return identical(this, other) ||
-        (other.runtimeType == runtimeType &&
-            other is _$BrightnessImpl &&
-            (identical(other.brightness, brightness) ||
-                other.brightness == brightness));
-  }
-
-  @override
-  int get hashCode => Object.hash(runtimeType, brightness);
-
-  /// Create a copy of SettingsState
-  /// with the given fields replaced by the non-null parameter values.
-  @JsonKey(includeFromJson: false, includeToJson: false)
-  @override
-  @pragma('vm:prefer-inline')
-  _$$BrightnessImplCopyWith<_$BrightnessImpl> get copyWith =>
-      __$$BrightnessImplCopyWithImpl<_$BrightnessImpl>(this, _$identity);
-
-  @override
-  @optionalTypeArgs
-  TResult when<TResult extends Object?>({
-    required TResult Function() initial,
-    required TResult Function(Brightness brightness) brightness,
-    required TResult Function(TransactionActor actor) login,
-    required TResult Function() logout,
-  }) {
-    return brightness(this.brightness);
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult? whenOrNull<TResult extends Object?>({
-    TResult? Function()? initial,
-    TResult? Function(Brightness brightness)? brightness,
-    TResult? Function(TransactionActor actor)? login,
-    TResult? Function()? logout,
-  }) {
-    return brightness?.call(this.brightness);
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult maybeWhen<TResult extends Object?>({
-    TResult Function()? initial,
-    TResult Function(Brightness brightness)? brightness,
-    TResult Function(TransactionActor actor)? login,
-    TResult Function()? logout,
-    required TResult orElse(),
-  }) {
-    if (brightness != null) {
-      return brightness(this.brightness);
-    }
-    return orElse();
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult map<TResult extends Object?>({
-    required TResult Function(_Initial value) initial,
-    required TResult Function(_Brightness value) brightness,
-    required TResult Function(_Login value) login,
-    required TResult Function(_Logout value) logout,
-  }) {
-    return brightness(this);
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult? mapOrNull<TResult extends Object?>({
-    TResult? Function(_Initial value)? initial,
-    TResult? Function(_Brightness value)? brightness,
-    TResult? Function(_Login value)? login,
-    TResult? Function(_Logout value)? logout,
-  }) {
-    return brightness?.call(this);
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult maybeMap<TResult extends Object?>({
-    TResult Function(_Initial value)? initial,
-    TResult Function(_Brightness value)? brightness,
-    TResult Function(_Login value)? login,
-    TResult Function(_Logout value)? logout,
-    required TResult orElse(),
-  }) {
-    if (brightness != null) {
-      return brightness(this);
-    }
-    return orElse();
-  }
-}
-
-abstract class _Brightness implements SettingsState {
-  const factory _Brightness(final Brightness brightness) = _$BrightnessImpl;
-
-  Brightness get brightness;
-
-  /// Create a copy of SettingsState
-  /// with the given fields replaced by the non-null parameter values.
-  @JsonKey(includeFromJson: false, includeToJson: false)
-  _$$BrightnessImplCopyWith<_$BrightnessImpl> get copyWith =>
-      throw _privateConstructorUsedError;
-}
-
-/// @nodoc
-abstract class _$$LoginImplCopyWith<$Res> {
-  factory _$$LoginImplCopyWith(
-          _$LoginImpl value, $Res Function(_$LoginImpl) then) =
-      __$$LoginImplCopyWithImpl<$Res>;
-  @useResult
-  $Res call({TransactionActor actor});
-
-  $TransactionActorCopyWith<$Res> get actor;
-}
-
-/// @nodoc
-class __$$LoginImplCopyWithImpl<$Res>
-    extends _$SettingsStateCopyWithImpl<$Res, _$LoginImpl>
-    implements _$$LoginImplCopyWith<$Res> {
-  __$$LoginImplCopyWithImpl(
-      _$LoginImpl _value, $Res Function(_$LoginImpl) _then)
-      : super(_value, _then);
-
-  /// Create a copy of SettingsState
-  /// with the given fields replaced by the non-null parameter values.
-  @pragma('vm:prefer-inline')
-  @override
-  $Res call({
-    Object? actor = null,
-  }) {
-    return _then(_$LoginImpl(
-      null == actor
+              as Brightness?,
+      actor: freezed == actor
           ? _value.actor
           : actor // ignore: cast_nullable_to_non_nullable
-              as TransactionActor,
-    ));
+              as TransactionActor?,
+    ) as $Val);
   }
 
   /// Create a copy of SettingsState
   /// with the given fields replaced by the non-null parameter values.
   @override
   @pragma('vm:prefer-inline')
-  $TransactionActorCopyWith<$Res> get actor {
-    return $TransactionActorCopyWith<$Res>(_value.actor, (value) {
-      return _then(_value.copyWith(actor: value));
+  $TransactionActorCopyWith<$Res>? get actor {
+    if (_value.actor == null) {
+      return null;
+    }
+
+    return $TransactionActorCopyWith<$Res>(_value.actor!, (value) {
+      return _then(_value.copyWith(actor: value) as $Val);
     });
   }
 }
 
 /// @nodoc
-
-class _$LoginImpl implements _Login {
-  const _$LoginImpl(this.actor);
+abstract class _$$SettingsStateImplCopyWith<$Res>
+    implements $SettingsStateCopyWith<$Res> {
+  factory _$$SettingsStateImplCopyWith(
+          _$SettingsStateImpl value, $Res Function(_$SettingsStateImpl) then) =
+      __$$SettingsStateImplCopyWithImpl<$Res>;
+  @override
+  @useResult
+  $Res call({Brightness? brightness, TransactionActor? actor});
 
   @override
-  final TransactionActor actor;
+  $TransactionActorCopyWith<$Res>? get actor;
+}
+
+/// @nodoc
+class __$$SettingsStateImplCopyWithImpl<$Res>
+    extends _$SettingsStateCopyWithImpl<$Res, _$SettingsStateImpl>
+    implements _$$SettingsStateImplCopyWith<$Res> {
+  __$$SettingsStateImplCopyWithImpl(
+      _$SettingsStateImpl _value, $Res Function(_$SettingsStateImpl) _then)
+      : super(_value, _then);
+
+  /// Create a copy of SettingsState
+  /// with the given fields replaced by the non-null parameter values.
+  @pragma('vm:prefer-inline')
+  @override
+  $Res call({
+    Object? brightness = freezed,
+    Object? actor = freezed,
+  }) {
+    return _then(_$SettingsStateImpl(
+      brightness: freezed == brightness
+          ? _value.brightness
+          : brightness // ignore: cast_nullable_to_non_nullable
+              as Brightness?,
+      actor: freezed == actor
+          ? _value.actor
+          : actor // ignore: cast_nullable_to_non_nullable
+              as TransactionActor?,
+    ));
+  }
+}
+
+/// @nodoc
+
+class _$SettingsStateImpl implements _SettingsState {
+  const _$SettingsStateImpl({this.brightness, this.actor});
+
+  @override
+  final Brightness? brightness;
+  @override
+  final TransactionActor? actor;
 
   @override
   String toString() {
-    return 'SettingsState.login(actor: $actor)';
+    return 'SettingsState(brightness: $brightness, actor: $actor)';
   }
 
   @override
   bool operator ==(Object other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$LoginImpl &&
+            other is _$SettingsStateImpl &&
+            (identical(other.brightness, brightness) ||
+                other.brightness == brightness) &&
             (identical(other.actor, actor) || other.actor == actor));
   }
 
   @override
-  int get hashCode => Object.hash(runtimeType, actor);
+  int get hashCode => Object.hash(runtimeType, brightness, actor);
 
   /// Create a copy of SettingsState
   /// with the given fields replaced by the non-null parameter values.
   @JsonKey(includeFromJson: false, includeToJson: false)
   @override
   @pragma('vm:prefer-inline')
-  _$$LoginImplCopyWith<_$LoginImpl> get copyWith =>
-      __$$LoginImplCopyWithImpl<_$LoginImpl>(this, _$identity);
-
-  @override
-  @optionalTypeArgs
-  TResult when<TResult extends Object?>({
-    required TResult Function() initial,
-    required TResult Function(Brightness brightness) brightness,
-    required TResult Function(TransactionActor actor) login,
-    required TResult Function() logout,
-  }) {
-    return login(actor);
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult? whenOrNull<TResult extends Object?>({
-    TResult? Function()? initial,
-    TResult? Function(Brightness brightness)? brightness,
-    TResult? Function(TransactionActor actor)? login,
-    TResult? Function()? logout,
-  }) {
-    return login?.call(actor);
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult maybeWhen<TResult extends Object?>({
-    TResult Function()? initial,
-    TResult Function(Brightness brightness)? brightness,
-    TResult Function(TransactionActor actor)? login,
-    TResult Function()? logout,
-    required TResult orElse(),
-  }) {
-    if (login != null) {
-      return login(actor);
-    }
-    return orElse();
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult map<TResult extends Object?>({
-    required TResult Function(_Initial value) initial,
-    required TResult Function(_Brightness value) brightness,
-    required TResult Function(_Login value) login,
-    required TResult Function(_Logout value) logout,
-  }) {
-    return login(this);
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult? mapOrNull<TResult extends Object?>({
-    TResult? Function(_Initial value)? initial,
-    TResult? Function(_Brightness value)? brightness,
-    TResult? Function(_Login value)? login,
-    TResult? Function(_Logout value)? logout,
-  }) {
-    return login?.call(this);
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult maybeMap<TResult extends Object?>({
-    TResult Function(_Initial value)? initial,
-    TResult Function(_Brightness value)? brightness,
-    TResult Function(_Login value)? login,
-    TResult Function(_Logout value)? logout,
-    required TResult orElse(),
-  }) {
-    if (login != null) {
-      return login(this);
-    }
-    return orElse();
-  }
+  _$$SettingsStateImplCopyWith<_$SettingsStateImpl> get copyWith =>
+      __$$SettingsStateImplCopyWithImpl<_$SettingsStateImpl>(this, _$identity);
 }
 
-abstract class _Login implements SettingsState {
-  const factory _Login(final TransactionActor actor) = _$LoginImpl;
+abstract class _SettingsState implements SettingsState {
+  const factory _SettingsState(
+      {final Brightness? brightness,
+      final TransactionActor? actor}) = _$SettingsStateImpl;
 
-  TransactionActor get actor;
+  @override
+  Brightness? get brightness;
+  @override
+  TransactionActor? get actor;
 
   /// Create a copy of SettingsState
   /// with the given fields replaced by the non-null parameter values.
+  @override
   @JsonKey(includeFromJson: false, includeToJson: false)
-  _$$LoginImplCopyWith<_$LoginImpl> get copyWith =>
+  _$$SettingsStateImplCopyWith<_$SettingsStateImpl> get copyWith =>
       throw _privateConstructorUsedError;
-}
-
-/// @nodoc
-abstract class _$$LogoutImplCopyWith<$Res> {
-  factory _$$LogoutImplCopyWith(
-          _$LogoutImpl value, $Res Function(_$LogoutImpl) then) =
-      __$$LogoutImplCopyWithImpl<$Res>;
-}
-
-/// @nodoc
-class __$$LogoutImplCopyWithImpl<$Res>
-    extends _$SettingsStateCopyWithImpl<$Res, _$LogoutImpl>
-    implements _$$LogoutImplCopyWith<$Res> {
-  __$$LogoutImplCopyWithImpl(
-      _$LogoutImpl _value, $Res Function(_$LogoutImpl) _then)
-      : super(_value, _then);
-
-  /// Create a copy of SettingsState
-  /// with the given fields replaced by the non-null parameter values.
-}
-
-/// @nodoc
-
-class _$LogoutImpl implements _Logout {
-  const _$LogoutImpl();
-
-  @override
-  String toString() {
-    return 'SettingsState.logout()';
-  }
-
-  @override
-  bool operator ==(Object other) {
-    return identical(this, other) ||
-        (other.runtimeType == runtimeType && other is _$LogoutImpl);
-  }
-
-  @override
-  int get hashCode => runtimeType.hashCode;
-
-  @override
-  @optionalTypeArgs
-  TResult when<TResult extends Object?>({
-    required TResult Function() initial,
-    required TResult Function(Brightness brightness) brightness,
-    required TResult Function(TransactionActor actor) login,
-    required TResult Function() logout,
-  }) {
-    return logout();
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult? whenOrNull<TResult extends Object?>({
-    TResult? Function()? initial,
-    TResult? Function(Brightness brightness)? brightness,
-    TResult? Function(TransactionActor actor)? login,
-    TResult? Function()? logout,
-  }) {
-    return logout?.call();
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult maybeWhen<TResult extends Object?>({
-    TResult Function()? initial,
-    TResult Function(Brightness brightness)? brightness,
-    TResult Function(TransactionActor actor)? login,
-    TResult Function()? logout,
-    required TResult orElse(),
-  }) {
-    if (logout != null) {
-      return logout();
-    }
-    return orElse();
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult map<TResult extends Object?>({
-    required TResult Function(_Initial value) initial,
-    required TResult Function(_Brightness value) brightness,
-    required TResult Function(_Login value) login,
-    required TResult Function(_Logout value) logout,
-  }) {
-    return logout(this);
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult? mapOrNull<TResult extends Object?>({
-    TResult? Function(_Initial value)? initial,
-    TResult? Function(_Brightness value)? brightness,
-    TResult? Function(_Login value)? login,
-    TResult? Function(_Logout value)? logout,
-  }) {
-    return logout?.call(this);
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult maybeMap<TResult extends Object?>({
-    TResult Function(_Initial value)? initial,
-    TResult Function(_Brightness value)? brightness,
-    TResult Function(_Login value)? login,
-    TResult Function(_Logout value)? logout,
-    required TResult orElse(),
-  }) {
-    if (logout != null) {
-      return logout(this);
-    }
-    return orElse();
-  }
-}
-
-abstract class _Logout implements SettingsState {
-  const factory _Logout() = _$LogoutImpl;
 }

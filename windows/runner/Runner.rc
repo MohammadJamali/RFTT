@@ -89,11 +89,11 @@ BEGIN
     BEGIN
         BLOCK "040904e4"
         BEGIN
-            VALUE "CompanyName", "com.example.verygoodcore.timetracker" "\0"
+            VALUE "CompanyName", "ir.iamjamali.timetracker" "\0"
             VALUE "FileDescription", "timetracker" "\0"
             VALUE "FileVersion", VERSION_AS_STRING "\0"
             VALUE "InternalName", "timetracker" "\0"
-            VALUE "LegalCopyright", "Copyright (C) 2024 com.example.verygoodcore.timetracker. All rights reserved." "\0"
+            VALUE "LegalCopyright", "Copyright (C) 2024 ir.iamjamali.timetracker. All rights reserved." "\0"
             VALUE "OriginalFilename", "timetracker.exe" "\0"
             VALUE "ProductName", "Timetracker" "\0"
             VALUE "ProductVersion", VERSION_AS_STRING "\0"

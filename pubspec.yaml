@@ -17,6 +17,7 @@ dependencies:
   qr_flutter: ^4.0.0
   shared_preferences: ^2.0.15
   url_launcher: ^6.1.6
+
   reown_appkit: ^1.2.0
 
   json_annotation: ^4.9.0

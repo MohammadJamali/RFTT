@@ -1,6 +1,9 @@
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:reown_appkit/reown_appkit.dart';
-import 'package:timetracker/app/authentication/authentication.dart';
+import 'package:timetracker/app/app.dart';
+import 'package:timetracker/app/settings/bloc/settings_bloc.dart';
 import 'package:timetracker/l10n/l10n.dart';
 
 class LandingPage extends StatelessWidget {
@@ -75,6 +78,8 @@ class LandingPage extends StatelessWidget {
     final theme = Theme.of(context);
 
     final viewSize = MediaQuery.of(context).size;
+    final setting = context.read<SettingsBloc>();
+    final modelFuture = setting.model(context);
 
     return Scaffold(
       body: Center(
@@ -129,17 +134,24 @@ class LandingPage extends StatelessWidget {
                 ),
                 Padding(
                   padding: const EdgeInsets.symmetric(vertical: 16),
-                  child: ElevatedButton(
-                    onPressed: () => onStartButtonPressed(context),
-                    style: ElevatedButton.styleFrom(
-                      padding: EdgeInsets.zero,
-                      fixedSize: const Size.square(94),
-                      shape: const OvalBorder(),
-                      backgroundColor: Colors.orange,
-                    ),
-                    child: const Icon(
-                      Icons.arrow_forward_ios_rounded,
-                      color: Colors.white,
+                  child: FutureBuilder(
+                    future: modelFuture,
+                    builder: (context, snapshot) => ElevatedButton(
+                      onPressed: snapshot.data != null
+                          ? () => onStartButtonPressed(context, setting)
+                          : null,
+                      style: ElevatedButton.styleFrom(
+                        padding: EdgeInsets.zero,
+                        fixedSize: const Size.square(94),
+                        shape: const OvalBorder(),
+                        backgroundColor: Colors.orange,
+                      ),
+                      child: snapshot.data != null
+                          ? const Icon(
+                              Icons.arrow_forward_ios_rounded,
+                              color: Colors.white,
+                            )
+                          : const CupertinoActivityIndicator(),
                     ),
                   ),
                 ),
@@ -151,25 +163,12 @@ class LandingPage extends StatelessWidget {
     );
   }
 
-  Future<void> onStartButtonPressed(BuildContext context) async {
-    // Navigator.of(context).popAndPushNamed(AuthenticationPage.route);
-    final appKitModal = ReownAppKitModal(
-      context: context,
-      projectId: '99d47b5d1a6c90d04c710ce5cc5b6ee0',
-      metadata: const PairingMetadata(
-        name: 'Request Finance Time Tracker',
-        description: 'Monitize your time using cryptocurrency',
-        url: 'https://none.none',
-        icons: ['https://picsum.photos/200'],
-      ),
-    );
-    ReownAppKitModalNetworks.removeSupportedNetworks('solana');
-
-    try {
-      await appKitModal.init();
-    } catch (e) {
-      print(e);
-    }
-    await appKitModal.openModalView(const ReownAppKitModalQRCodePage());
+  Future<void> onStartButtonPressed(
+    BuildContext context,
+    SettingsBloc setting,
+  ) async {
+    final model = await setting.model(context);
+    await model?.openModalView(const ReownAppKitModalQRCodePage());
+    model?.closeModal();
   }
 }

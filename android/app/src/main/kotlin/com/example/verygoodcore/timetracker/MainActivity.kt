@@ -1,4 +1,4 @@
-package com.example.verygoodcore.timetracker
+package ir.iamjamali.timetracker
 
 import io.flutter.embedding.android.FlutterActivity
 
