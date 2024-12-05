@@ -7,9 +7,11 @@ part 'content_data.g.dart';
 class ContentData with _$ContentData {
   const factory ContentData({
     // '🍕'
-    required String reason,
+    String? reason,
     // '2023.06.16'
-    required String dueDate,
+    String? dueDate,
+    String? createdWith,
+    String? builderId,
   }) = _ContentData;
 
   factory ContentData.fromJson(Map<String, Object?> json) =>

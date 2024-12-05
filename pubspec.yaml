@@ -57,7 +57,8 @@ flutter:
 
   assets:
     - assets/images/icon.png
-    - assets/images/icon_white.png
+    - assets/images/requests_finance_icon.png
+    - assets/images/requests_finance_icon_white.png
     - assets/images/profile-picture.png
     - assets/images/tokens/eth.png
     - assets/images/tokens/btc.png

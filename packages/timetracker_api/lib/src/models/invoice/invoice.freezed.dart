@@ -22,16 +22,15 @@ Invoice _$InvoiceFromJson(Map<String, dynamic> json) {
 mixin _$Invoice {
   String get id => throw _privateConstructorUsedError;
   String get projectId => throw _privateConstructorUsedError;
-  String get timestamp => throw _privateConstructorUsedError;
+  int get timestamp => throw _privateConstructorUsedError;
   Currency get currency => throw _privateConstructorUsedError;
   TransactionActor get payee => throw _privateConstructorUsedError;
-  TransactionActor get payer => throw _privateConstructorUsedError;
-  String get paymentRecipient => throw _privateConstructorUsedError;
-  ContentData get contentData => throw _privateConstructorUsedError;
-  PaymentNetwork get paymentNetwork => throw _privateConstructorUsedError;
-  double get amount => throw _privateConstructorUsedError;
+  String get expectedAmount => throw _privateConstructorUsedError;
+  List<ExtensionsData> get extensionsData => throw _privateConstructorUsedError;
+  TransactionActor? get payer => throw _privateConstructorUsedError;
+  String? get paymentRecipient => throw _privateConstructorUsedError;
+  PaymentNetwork? get paymentNetwork => throw _privateConstructorUsedError;
   InvoiceStatusList get status => throw _privateConstructorUsedError;
-  String get feeRecipient => throw _privateConstructorUsedError;
 
   /// Serializes this Invoice to a JSON map.
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
@@ -50,22 +49,20 @@ abstract class $InvoiceCopyWith<$Res> {
   $Res call(
       {String id,
       String projectId,
-      String timestamp,
+      int timestamp,
       Currency currency,
       TransactionActor payee,
-      TransactionActor payer,
-      String paymentRecipient,
-      ContentData contentData,
-      PaymentNetwork paymentNetwork,
-      double amount,
-      InvoiceStatusList status,
-      String feeRecipient});
+      String expectedAmount,
+      List<ExtensionsData> extensionsData,
+      TransactionActor? payer,
+      String? paymentRecipient,
+      PaymentNetwork? paymentNetwork,
+      InvoiceStatusList status});
 
   $CurrencyCopyWith<$Res> get currency;
   $TransactionActorCopyWith<$Res> get payee;
-  $TransactionActorCopyWith<$Res> get payer;
-  $ContentDataCopyWith<$Res> get contentData;
-  $PaymentNetworkCopyWith<$Res> get paymentNetwork;
+  $TransactionActorCopyWith<$Res>? get payer;
+  $PaymentNetworkCopyWith<$Res>? get paymentNetwork;
 }
 
 /// @nodoc
@@ -88,13 +85,12 @@ class _$InvoiceCopyWithImpl<$Res, $Val extends Invoice>
     Object? timestamp = null,
     Object? currency = null,
     Object? payee = null,
-    Object? payer = null,
-    Object? paymentRecipient = null,
-    Object? contentData = null,
-    Object? paymentNetwork = null,
-    Object? amount = null,
+    Object? expectedAmount = null,
+    Object? extensionsData = null,
+    Object? payer = freezed,
+    Object? paymentRecipient = freezed,
+    Object? paymentNetwork = freezed,
     Object? status = null,
-    Object? feeRecipient = null,
   }) {
     return _then(_value.copyWith(
       id: null == id
@@ -108,7 +104,7 @@ class _$InvoiceCopyWithImpl<$Res, $Val extends Invoice>
       timestamp: null == timestamp
           ? _value.timestamp
           : timestamp // ignore: cast_nullable_to_non_nullable
-              as String,
+              as int,
       currency: null == currency
           ? _value.currency
           : currency // ignore: cast_nullable_to_non_nullable
@@ -117,34 +113,30 @@ class _$InvoiceCopyWithImpl<$Res, $Val extends Invoice>
           ? _value.payee
           : payee // ignore: cast_nullable_to_non_nullable
               as TransactionActor,
-      payer: null == payer
+      expectedAmount: null == expectedAmount
+          ? _value.expectedAmount
+          : expectedAmount // ignore: cast_nullable_to_non_nullable
+              as String,
+      extensionsData: null == extensionsData
+          ? _value.extensionsData
+          : extensionsData // ignore: cast_nullable_to_non_nullable
+              as List<ExtensionsData>,
+      payer: freezed == payer
           ? _value.payer
           : payer // ignore: cast_nullable_to_non_nullable
-              as TransactionActor,
-      paymentRecipient: null == paymentRecipient
+              as TransactionActor?,
+      paymentRecipient: freezed == paymentRecipient
           ? _value.paymentRecipient
           : paymentRecipient // ignore: cast_nullable_to_non_nullable
-              as String,
-      contentData: null == contentData
-          ? _value.contentData
-          : contentData // ignore: cast_nullable_to_non_nullable
-              as ContentData,
-      paymentNetwork: null == paymentNetwork
+              as String?,
+      paymentNetwork: freezed == paymentNetwork
           ? _value.paymentNetwork
           : paymentNetwork // ignore: cast_nullable_to_non_nullable
-              as PaymentNetwork,
-      amount: null == amount
-          ? _value.amount
-          : amount // ignore: cast_nullable_to_non_nullable
-              as double,
+              as PaymentNetwork?,
       status: null == status
           ? _value.status
           : status // ignore: cast_nullable_to_non_nullable
               as InvoiceStatusList,
-      feeRecipient: null == feeRecipient
-          ? _value.feeRecipient
-          : feeRecipient // ignore: cast_nullable_to_non_nullable
-              as String,
     ) as $Val);
   }
 
@@ -172,8 +164,12 @@ class _$InvoiceCopyWithImpl<$Res, $Val extends Invoice>
   /// with the given fields replaced by the non-null parameter values.
   @override
   @pragma('vm:prefer-inline')
-  $TransactionActorCopyWith<$Res> get payer {
-    return $TransactionActorCopyWith<$Res>(_value.payer, (value) {
+  $TransactionActorCopyWith<$Res>? get payer {
+    if (_value.payer == null) {
+      return null;
+    }
+
+    return $TransactionActorCopyWith<$Res>(_value.payer!, (value) {
       return _then(_value.copyWith(payer: value) as $Val);
     });
   }
@@ -182,18 +178,12 @@ class _$InvoiceCopyWithImpl<$Res, $Val extends Invoice>
   /// with the given fields replaced by the non-null parameter values.
   @override
   @pragma('vm:prefer-inline')
-  $ContentDataCopyWith<$Res> get contentData {
-    return $ContentDataCopyWith<$Res>(_value.contentData, (value) {
-      return _then(_value.copyWith(contentData: value) as $Val);
-    });
-  }
+  $PaymentNetworkCopyWith<$Res>? get paymentNetwork {
+    if (_value.paymentNetwork == null) {
+      return null;
+    }
 
-  /// Create a copy of Invoice
-  /// with the given fields replaced by the non-null parameter values.
-  @override
-  @pragma('vm:prefer-inline')
-  $PaymentNetworkCopyWith<$Res> get paymentNetwork {
-    return $PaymentNetworkCopyWith<$Res>(_value.paymentNetwork, (value) {
+    return $PaymentNetworkCopyWith<$Res>(_value.paymentNetwork!, (value) {
       return _then(_value.copyWith(paymentNetwork: value) as $Val);
     });
   }
@@ -209,27 +199,24 @@ abstract class _$$InvoiceImplCopyWith<$Res> implements $InvoiceCopyWith<$Res> {
   $Res call(
       {String id,
       String projectId,
-      String timestamp,
+      int timestamp,
       Currency currency,
       TransactionActor payee,
-      TransactionActor payer,
-      String paymentRecipient,
-      ContentData contentData,
-      PaymentNetwork paymentNetwork,
-      double amount,
-      InvoiceStatusList status,
-      String feeRecipient});
+      String expectedAmount,
+      List<ExtensionsData> extensionsData,
+      TransactionActor? payer,
+      String? paymentRecipient,
+      PaymentNetwork? paymentNetwork,
+      InvoiceStatusList status});
 
   @override
   $CurrencyCopyWith<$Res> get currency;
   @override
   $TransactionActorCopyWith<$Res> get payee;
   @override
-  $TransactionActorCopyWith<$Res> get payer;
+  $TransactionActorCopyWith<$Res>? get payer;
   @override
-  $ContentDataCopyWith<$Res> get contentData;
-  @override
-  $PaymentNetworkCopyWith<$Res> get paymentNetwork;
+  $PaymentNetworkCopyWith<$Res>? get paymentNetwork;
 }
 
 /// @nodoc
@@ -250,13 +237,12 @@ class __$$InvoiceImplCopyWithImpl<$Res>
     Object? timestamp = null,
     Object? currency = null,
     Object? payee = null,
-    Object? payer = null,
-    Object? paymentRecipient = null,
-    Object? contentData = null,
-    Object? paymentNetwork = null,
-    Object? amount = null,
+    Object? expectedAmount = null,
+    Object? extensionsData = null,
+    Object? payer = freezed,
+    Object? paymentRecipient = freezed,
+    Object? paymentNetwork = freezed,
     Object? status = null,
-    Object? feeRecipient = null,
   }) {
     return _then(_$InvoiceImpl(
       id: null == id
@@ -270,7 +256,7 @@ class __$$InvoiceImplCopyWithImpl<$Res>
       timestamp: null == timestamp
           ? _value.timestamp
           : timestamp // ignore: cast_nullable_to_non_nullable
-              as String,
+              as int,
       currency: null == currency
           ? _value.currency
           : currency // ignore: cast_nullable_to_non_nullable
@@ -279,34 +265,30 @@ class __$$InvoiceImplCopyWithImpl<$Res>
           ? _value.payee
           : payee // ignore: cast_nullable_to_non_nullable
               as TransactionActor,
-      payer: null == payer
+      expectedAmount: null == expectedAmount
+          ? _value.expectedAmount
+          : expectedAmount // ignore: cast_nullable_to_non_nullable
+              as String,
+      extensionsData: null == extensionsData
+          ? _value._extensionsData
+          : extensionsData // ignore: cast_nullable_to_non_nullable
+              as List<ExtensionsData>,
+      payer: freezed == payer
           ? _value.payer
           : payer // ignore: cast_nullable_to_non_nullable
-              as TransactionActor,
-      paymentRecipient: null == paymentRecipient
+              as TransactionActor?,
+      paymentRecipient: freezed == paymentRecipient
           ? _value.paymentRecipient
           : paymentRecipient // ignore: cast_nullable_to_non_nullable
-              as String,
-      contentData: null == contentData
-          ? _value.contentData
-          : contentData // ignore: cast_nullable_to_non_nullable
-              as ContentData,
-      paymentNetwork: null == paymentNetwork
+              as String?,
+      paymentNetwork: freezed == paymentNetwork
           ? _value.paymentNetwork
           : paymentNetwork // ignore: cast_nullable_to_non_nullable
-              as PaymentNetwork,
-      amount: null == amount
-          ? _value.amount
-          : amount // ignore: cast_nullable_to_non_nullable
-              as double,
+              as PaymentNetwork?,
       status: null == status
           ? _value.status
           : status // ignore: cast_nullable_to_non_nullable
               as InvoiceStatusList,
-      feeRecipient: null == feeRecipient
-          ? _value.feeRecipient
-          : feeRecipient // ignore: cast_nullable_to_non_nullable
-              as String,
     ));
   }
 }
@@ -320,13 +302,13 @@ class _$InvoiceImpl implements _Invoice {
       required this.timestamp,
       required this.currency,
       required this.payee,
-      required this.payer,
-      required this.paymentRecipient,
-      required this.contentData,
-      required this.paymentNetwork,
-      required this.amount,
-      this.status = InvoiceStatusList.Unpaid,
-      this.feeRecipient = '0x0000000000000000000000000000000000000000'});
+      required this.expectedAmount,
+      required final List<ExtensionsData> extensionsData,
+      this.payer,
+      this.paymentRecipient,
+      this.paymentNetwork,
+      this.status = InvoiceStatusList.Unpaid})
+      : _extensionsData = extensionsData;
 
   factory _$InvoiceImpl.fromJson(Map<String, dynamic> json) =>
       _$$InvoiceImplFromJson(json);
@@ -336,31 +318,34 @@ class _$InvoiceImpl implements _Invoice {
   @override
   final String projectId;
   @override
-  final String timestamp;
+  final int timestamp;
   @override
   final Currency currency;
   @override
   final TransactionActor payee;
   @override
-  final TransactionActor payer;
+  final String expectedAmount;
+  final List<ExtensionsData> _extensionsData;
   @override
-  final String paymentRecipient;
+  List<ExtensionsData> get extensionsData {
+    if (_extensionsData is EqualUnmodifiableListView) return _extensionsData;
+    // ignore: implicit_dynamic_type
+    return EqualUnmodifiableListView(_extensionsData);
+  }
+
   @override
-  final ContentData contentData;
+  final TransactionActor? payer;
   @override
-  final PaymentNetwork paymentNetwork;
+  final String? paymentRecipient;
   @override
-  final double amount;
+  final PaymentNetwork? paymentNetwork;
   @override
   @JsonKey()
   final InvoiceStatusList status;
-  @override
-  @JsonKey()
-  final String feeRecipient;
 
   @override
   String toString() {
-    return 'Invoice(id: $id, projectId: $projectId, timestamp: $timestamp, currency: $currency, payee: $payee, payer: $payer, paymentRecipient: $paymentRecipient, contentData: $contentData, paymentNetwork: $paymentNetwork, amount: $amount, status: $status, feeRecipient: $feeRecipient)';
+    return 'Invoice(id: $id, projectId: $projectId, timestamp: $timestamp, currency: $currency, payee: $payee, expectedAmount: $expectedAmount, extensionsData: $extensionsData, payer: $payer, paymentRecipient: $paymentRecipient, paymentNetwork: $paymentNetwork, status: $status)';
   }
 
   @override
@@ -376,17 +361,16 @@ class _$InvoiceImpl implements _Invoice {
             (identical(other.currency, currency) ||
                 other.currency == currency) &&
             (identical(other.payee, payee) || other.payee == payee) &&
+            (identical(other.expectedAmount, expectedAmount) ||
+                other.expectedAmount == expectedAmount) &&
+            const DeepCollectionEquality()
+                .equals(other._extensionsData, _extensionsData) &&
             (identical(other.payer, payer) || other.payer == payer) &&
             (identical(other.paymentRecipient, paymentRecipient) ||
                 other.paymentRecipient == paymentRecipient) &&
-            (identical(other.contentData, contentData) ||
-                other.contentData == contentData) &&
             (identical(other.paymentNetwork, paymentNetwork) ||
                 other.paymentNetwork == paymentNetwork) &&
-            (identical(other.amount, amount) || other.amount == amount) &&
-            (identical(other.status, status) || other.status == status) &&
-            (identical(other.feeRecipient, feeRecipient) ||
-                other.feeRecipient == feeRecipient));
+            (identical(other.status, status) || other.status == status));
   }
 
   @JsonKey(includeFromJson: false, includeToJson: false)
@@ -398,13 +382,12 @@ class _$InvoiceImpl implements _Invoice {
       timestamp,
       currency,
       payee,
+      expectedAmount,
+      const DeepCollectionEquality().hash(_extensionsData),
       payer,
       paymentRecipient,
-      contentData,
       paymentNetwork,
-      amount,
-      status,
-      feeRecipient);
+      status);
 
   /// Create a copy of Invoice
   /// with the given fields replaced by the non-null parameter values.
@@ -426,16 +409,15 @@ abstract class _Invoice implements Invoice {
   const factory _Invoice(
       {required final String id,
       required final String projectId,
-      required final String timestamp,
+      required final int timestamp,
       required final Currency currency,
       required final TransactionActor payee,
-      required final TransactionActor payer,
-      required final String paymentRecipient,
-      required final ContentData contentData,
-      required final PaymentNetwork paymentNetwork,
-      required final double amount,
-      final InvoiceStatusList status,
-      final String feeRecipient}) = _$InvoiceImpl;
+      required final String expectedAmount,
+      required final List<ExtensionsData> extensionsData,
+      final TransactionActor? payer,
+      final String? paymentRecipient,
+      final PaymentNetwork? paymentNetwork,
+      final InvoiceStatusList status}) = _$InvoiceImpl;
 
   factory _Invoice.fromJson(Map<String, dynamic> json) = _$InvoiceImpl.fromJson;
 
@@ -444,25 +426,23 @@ abstract class _Invoice implements Invoice {
   @override
   String get projectId;
   @override
-  String get timestamp;
+  int get timestamp;
   @override
   Currency get currency;
   @override
   TransactionActor get payee;
   @override
-  TransactionActor get payer;
+  String get expectedAmount;
   @override
-  String get paymentRecipient;
+  List<ExtensionsData> get extensionsData;
   @override
-  ContentData get contentData;
+  TransactionActor? get payer;
   @override
-  PaymentNetwork get paymentNetwork;
+  String? get paymentRecipient;
   @override
-  double get amount;
+  PaymentNetwork? get paymentNetwork;
   @override
   InvoiceStatusList get status;
-  @override
-  String get feeRecipient;
 
   /// Create a copy of Invoice
   /// with the given fields replaced by the non-null parameter values.

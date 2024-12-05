@@ -21,12 +21,19 @@ TransactionActor _$TransactionActorFromJson(Map<String, dynamic> json) {
 /// @nodoc
 mixin _$TransactionActor {
 // Types.Identity.TYPE.ETHEREUM_ADDRESS,
+// Types.Identity.TYPE.ETHEREUM_SMART_CONTRACT,
   String get type => throw _privateConstructorUsedError;
   String get value => throw _privateConstructorUsedError;
-  String? get name => throw _privateConstructorUsedError;
-  String? get taxId => throw _privateConstructorUsedError;
-  String? get profilePic => throw _privateConstructorUsedError;
   String? get email => throw _privateConstructorUsedError;
+  String? get firstName => throw _privateConstructorUsedError;
+  String? get lastName => throw _privateConstructorUsedError;
+  String? get businessName => throw _privateConstructorUsedError;
+  String? get phone => throw _privateConstructorUsedError;
+  String? get address => throw _privateConstructorUsedError;
+  String? get taxRegistration => throw _privateConstructorUsedError;
+  String? get companyRegistration => throw _privateConstructorUsedError;
+  String? get miscellaneous => throw _privateConstructorUsedError;
+  String? get profilePic => throw _privateConstructorUsedError;
 
   /// Serializes this TransactionActor to a JSON map.
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
@@ -47,10 +54,16 @@ abstract class $TransactionActorCopyWith<$Res> {
   $Res call(
       {String type,
       String value,
-      String? name,
-      String? taxId,
-      String? profilePic,
-      String? email});
+      String? email,
+      String? firstName,
+      String? lastName,
+      String? businessName,
+      String? phone,
+      String? address,
+      String? taxRegistration,
+      String? companyRegistration,
+      String? miscellaneous,
+      String? profilePic});
 }
 
 /// @nodoc
@@ -70,10 +83,16 @@ class _$TransactionActorCopyWithImpl<$Res, $Val extends TransactionActor>
   $Res call({
     Object? type = null,
     Object? value = null,
-    Object? name = freezed,
-    Object? taxId = freezed,
-    Object? profilePic = freezed,
     Object? email = freezed,
+    Object? firstName = freezed,
+    Object? lastName = freezed,
+    Object? businessName = freezed,
+    Object? phone = freezed,
+    Object? address = freezed,
+    Object? taxRegistration = freezed,
+    Object? companyRegistration = freezed,
+    Object? miscellaneous = freezed,
+    Object? profilePic = freezed,
   }) {
     return _then(_value.copyWith(
       type: null == type
@@ -84,21 +103,45 @@ class _$TransactionActorCopyWithImpl<$Res, $Val extends TransactionActor>
           ? _value.value
           : value // ignore: cast_nullable_to_non_nullable
               as String,
-      name: freezed == name
-          ? _value.name
-          : name // ignore: cast_nullable_to_non_nullable
+      email: freezed == email
+          ? _value.email
+          : email // ignore: cast_nullable_to_non_nullable
               as String?,
-      taxId: freezed == taxId
-          ? _value.taxId
-          : taxId // ignore: cast_nullable_to_non_nullable
+      firstName: freezed == firstName
+          ? _value.firstName
+          : firstName // ignore: cast_nullable_to_non_nullable
+              as String?,
+      lastName: freezed == lastName
+          ? _value.lastName
+          : lastName // ignore: cast_nullable_to_non_nullable
+              as String?,
+      businessName: freezed == businessName
+          ? _value.businessName
+          : businessName // ignore: cast_nullable_to_non_nullable
+              as String?,
+      phone: freezed == phone
+          ? _value.phone
+          : phone // ignore: cast_nullable_to_non_nullable
+              as String?,
+      address: freezed == address
+          ? _value.address
+          : address // ignore: cast_nullable_to_non_nullable
+              as String?,
+      taxRegistration: freezed == taxRegistration
+          ? _value.taxRegistration
+          : taxRegistration // ignore: cast_nullable_to_non_nullable
+              as String?,
+      companyRegistration: freezed == companyRegistration
+          ? _value.companyRegistration
+          : companyRegistration // ignore: cast_nullable_to_non_nullable
+              as String?,
+      miscellaneous: freezed == miscellaneous
+          ? _value.miscellaneous
+          : miscellaneous // ignore: cast_nullable_to_non_nullable
               as String?,
       profilePic: freezed == profilePic
           ? _value.profilePic
           : profilePic // ignore: cast_nullable_to_non_nullable
-              as String?,
-      email: freezed == email
-          ? _value.email
-          : email // ignore: cast_nullable_to_non_nullable
               as String?,
     ) as $Val);
   }
@@ -115,10 +158,16 @@ abstract class _$$TransactionActorImplCopyWith<$Res>
   $Res call(
       {String type,
       String value,
-      String? name,
-      String? taxId,
-      String? profilePic,
-      String? email});
+      String? email,
+      String? firstName,
+      String? lastName,
+      String? businessName,
+      String? phone,
+      String? address,
+      String? taxRegistration,
+      String? companyRegistration,
+      String? miscellaneous,
+      String? profilePic});
 }
 
 /// @nodoc
@@ -136,10 +185,16 @@ class __$$TransactionActorImplCopyWithImpl<$Res>
   $Res call({
     Object? type = null,
     Object? value = null,
-    Object? name = freezed,
-    Object? taxId = freezed,
-    Object? profilePic = freezed,
     Object? email = freezed,
+    Object? firstName = freezed,
+    Object? lastName = freezed,
+    Object? businessName = freezed,
+    Object? phone = freezed,
+    Object? address = freezed,
+    Object? taxRegistration = freezed,
+    Object? companyRegistration = freezed,
+    Object? miscellaneous = freezed,
+    Object? profilePic = freezed,
   }) {
     return _then(_$TransactionActorImpl(
       type: null == type
@@ -150,21 +205,45 @@ class __$$TransactionActorImplCopyWithImpl<$Res>
           ? _value.value
           : value // ignore: cast_nullable_to_non_nullable
               as String,
-      name: freezed == name
-          ? _value.name
-          : name // ignore: cast_nullable_to_non_nullable
+      email: freezed == email
+          ? _value.email
+          : email // ignore: cast_nullable_to_non_nullable
               as String?,
-      taxId: freezed == taxId
-          ? _value.taxId
-          : taxId // ignore: cast_nullable_to_non_nullable
+      firstName: freezed == firstName
+          ? _value.firstName
+          : firstName // ignore: cast_nullable_to_non_nullable
+              as String?,
+      lastName: freezed == lastName
+          ? _value.lastName
+          : lastName // ignore: cast_nullable_to_non_nullable
+              as String?,
+      businessName: freezed == businessName
+          ? _value.businessName
+          : businessName // ignore: cast_nullable_to_non_nullable
+              as String?,
+      phone: freezed == phone
+          ? _value.phone
+          : phone // ignore: cast_nullable_to_non_nullable
+              as String?,
+      address: freezed == address
+          ? _value.address
+          : address // ignore: cast_nullable_to_non_nullable
+              as String?,
+      taxRegistration: freezed == taxRegistration
+          ? _value.taxRegistration
+          : taxRegistration // ignore: cast_nullable_to_non_nullable
+              as String?,
+      companyRegistration: freezed == companyRegistration
+          ? _value.companyRegistration
+          : companyRegistration // ignore: cast_nullable_to_non_nullable
+              as String?,
+      miscellaneous: freezed == miscellaneous
+          ? _value.miscellaneous
+          : miscellaneous // ignore: cast_nullable_to_non_nullable
               as String?,
       profilePic: freezed == profilePic
           ? _value.profilePic
           : profilePic // ignore: cast_nullable_to_non_nullable
-              as String?,
-      email: freezed == email
-          ? _value.email
-          : email // ignore: cast_nullable_to_non_nullable
               as String?,
     ));
   }
@@ -176,31 +255,50 @@ class _$TransactionActorImpl implements _TransactionActor {
   const _$TransactionActorImpl(
       {required this.type,
       required this.value,
-      this.name,
-      this.taxId,
-      this.profilePic,
-      this.email});
+      this.email,
+      this.firstName,
+      this.lastName,
+      this.businessName,
+      this.phone,
+      this.address,
+      this.taxRegistration,
+      this.companyRegistration,
+      this.miscellaneous,
+      this.profilePic});
 
   factory _$TransactionActorImpl.fromJson(Map<String, dynamic> json) =>
       _$$TransactionActorImplFromJson(json);
 
 // Types.Identity.TYPE.ETHEREUM_ADDRESS,
+// Types.Identity.TYPE.ETHEREUM_SMART_CONTRACT,
   @override
   final String type;
   @override
   final String value;
   @override
-  final String? name;
+  final String? email;
   @override
-  final String? taxId;
+  final String? firstName;
+  @override
+  final String? lastName;
+  @override
+  final String? businessName;
+  @override
+  final String? phone;
+  @override
+  final String? address;
+  @override
+  final String? taxRegistration;
+  @override
+  final String? companyRegistration;
+  @override
+  final String? miscellaneous;
   @override
   final String? profilePic;
-  @override
-  final String? email;
 
   @override
   String toString() {
-    return 'TransactionActor(type: $type, value: $value, name: $name, taxId: $taxId, profilePic: $profilePic, email: $email)';
+    return 'TransactionActor(type: $type, value: $value, email: $email, firstName: $firstName, lastName: $lastName, businessName: $businessName, phone: $phone, address: $address, taxRegistration: $taxRegistration, companyRegistration: $companyRegistration, miscellaneous: $miscellaneous, profilePic: $profilePic)';
   }
 
   @override
@@ -210,17 +308,41 @@ class _$TransactionActorImpl implements _TransactionActor {
             other is _$TransactionActorImpl &&
             (identical(other.type, type) || other.type == type) &&
             (identical(other.value, value) || other.value == value) &&
-            (identical(other.name, name) || other.name == name) &&
-            (identical(other.taxId, taxId) || other.taxId == taxId) &&
+            (identical(other.email, email) || other.email == email) &&
+            (identical(other.firstName, firstName) ||
+                other.firstName == firstName) &&
+            (identical(other.lastName, lastName) ||
+                other.lastName == lastName) &&
+            (identical(other.businessName, businessName) ||
+                other.businessName == businessName) &&
+            (identical(other.phone, phone) || other.phone == phone) &&
+            (identical(other.address, address) || other.address == address) &&
+            (identical(other.taxRegistration, taxRegistration) ||
+                other.taxRegistration == taxRegistration) &&
+            (identical(other.companyRegistration, companyRegistration) ||
+                other.companyRegistration == companyRegistration) &&
+            (identical(other.miscellaneous, miscellaneous) ||
+                other.miscellaneous == miscellaneous) &&
             (identical(other.profilePic, profilePic) ||
-                other.profilePic == profilePic) &&
-            (identical(other.email, email) || other.email == email));
+                other.profilePic == profilePic));
   }
 
   @JsonKey(includeFromJson: false, includeToJson: false)
   @override
-  int get hashCode =>
-      Object.hash(runtimeType, type, value, name, taxId, profilePic, email);
+  int get hashCode => Object.hash(
+      runtimeType,
+      type,
+      value,
+      email,
+      firstName,
+      lastName,
+      businessName,
+      phone,
+      address,
+      taxRegistration,
+      companyRegistration,
+      miscellaneous,
+      profilePic);
 
   /// Create a copy of TransactionActor
   /// with the given fields replaced by the non-null parameter values.
@@ -243,27 +365,46 @@ abstract class _TransactionActor implements TransactionActor {
   const factory _TransactionActor(
       {required final String type,
       required final String value,
-      final String? name,
-      final String? taxId,
-      final String? profilePic,
-      final String? email}) = _$TransactionActorImpl;
+      final String? email,
+      final String? firstName,
+      final String? lastName,
+      final String? businessName,
+      final String? phone,
+      final String? address,
+      final String? taxRegistration,
+      final String? companyRegistration,
+      final String? miscellaneous,
+      final String? profilePic}) = _$TransactionActorImpl;
 
   factory _TransactionActor.fromJson(Map<String, dynamic> json) =
       _$TransactionActorImpl.fromJson;
 
 // Types.Identity.TYPE.ETHEREUM_ADDRESS,
+// Types.Identity.TYPE.ETHEREUM_SMART_CONTRACT,
   @override
   String get type;
   @override
   String get value;
   @override
-  String? get name;
+  String? get email;
   @override
-  String? get taxId;
+  String? get firstName;
+  @override
+  String? get lastName;
+  @override
+  String? get businessName;
+  @override
+  String? get phone;
+  @override
+  String? get address;
+  @override
+  String? get taxRegistration;
+  @override
+  String? get companyRegistration;
+  @override
+  String? get miscellaneous;
   @override
   String? get profilePic;
-  @override
-  String? get email;
 
   /// Create a copy of TransactionActor
   /// with the given fields replaced by the non-null parameter values.

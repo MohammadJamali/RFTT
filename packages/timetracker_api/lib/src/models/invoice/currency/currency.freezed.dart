@@ -20,10 +20,13 @@ Currency _$CurrencyFromJson(Map<String, dynamic> json) {
 
 /// @nodoc
 mixin _$Currency {
-// Types.RequestLogic.CURRENCY.ERC20,
-  String get currencyType => throw _privateConstructorUsedError;
+  CurrencyType get type => throw _privateConstructorUsedError;
   String get value => throw _privateConstructorUsedError;
   String get network => throw _privateConstructorUsedError;
+  int get decimals => throw _privateConstructorUsedError;
+  int get chainId => throw _privateConstructorUsedError;
+  CurrencySymbol get symbol => throw _privateConstructorUsedError;
+  String get name => throw _privateConstructorUsedError;
 
   /// Serializes this Currency to a JSON map.
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
@@ -40,7 +43,14 @@ abstract class $CurrencyCopyWith<$Res> {
   factory $CurrencyCopyWith(Currency value, $Res Function(Currency) then) =
       _$CurrencyCopyWithImpl<$Res, Currency>;
   @useResult
-  $Res call({String currencyType, String value, String network});
+  $Res call(
+      {CurrencyType type,
+      String value,
+      String network,
+      int decimals,
+      int chainId,
+      CurrencySymbol symbol,
+      String name});
 }
 
 /// @nodoc
@@ -58,15 +68,19 @@ class _$CurrencyCopyWithImpl<$Res, $Val extends Currency>
   @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? currencyType = null,
+    Object? type = null,
     Object? value = null,
     Object? network = null,
+    Object? decimals = null,
+    Object? chainId = null,
+    Object? symbol = null,
+    Object? name = null,
   }) {
     return _then(_value.copyWith(
-      currencyType: null == currencyType
-          ? _value.currencyType
-          : currencyType // ignore: cast_nullable_to_non_nullable
-              as String,
+      type: null == type
+          ? _value.type
+          : type // ignore: cast_nullable_to_non_nullable
+              as CurrencyType,
       value: null == value
           ? _value.value
           : value // ignore: cast_nullable_to_non_nullable
@@ -74,6 +88,22 @@ class _$CurrencyCopyWithImpl<$Res, $Val extends Currency>
       network: null == network
           ? _value.network
           : network // ignore: cast_nullable_to_non_nullable
+              as String,
+      decimals: null == decimals
+          ? _value.decimals
+          : decimals // ignore: cast_nullable_to_non_nullable
+              as int,
+      chainId: null == chainId
+          ? _value.chainId
+          : chainId // ignore: cast_nullable_to_non_nullable
+              as int,
+      symbol: null == symbol
+          ? _value.symbol
+          : symbol // ignore: cast_nullable_to_non_nullable
+              as CurrencySymbol,
+      name: null == name
+          ? _value.name
+          : name // ignore: cast_nullable_to_non_nullable
               as String,
     ) as $Val);
   }
@@ -87,7 +117,14 @@ abstract class _$$CurrencyImplCopyWith<$Res>
       __$$CurrencyImplCopyWithImpl<$Res>;
   @override
   @useResult
-  $Res call({String currencyType, String value, String network});
+  $Res call(
+      {CurrencyType type,
+      String value,
+      String network,
+      int decimals,
+      int chainId,
+      CurrencySymbol symbol,
+      String name});
 }
 
 /// @nodoc
@@ -103,15 +140,19 @@ class __$$CurrencyImplCopyWithImpl<$Res>
   @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? currencyType = null,
+    Object? type = null,
     Object? value = null,
     Object? network = null,
+    Object? decimals = null,
+    Object? chainId = null,
+    Object? symbol = null,
+    Object? name = null,
   }) {
     return _then(_$CurrencyImpl(
-      currencyType: null == currencyType
-          ? _value.currencyType
-          : currencyType // ignore: cast_nullable_to_non_nullable
-              as String,
+      type: null == type
+          ? _value.type
+          : type // ignore: cast_nullable_to_non_nullable
+              as CurrencyType,
       value: null == value
           ? _value.value
           : value // ignore: cast_nullable_to_non_nullable
@@ -119,6 +160,22 @@ class __$$CurrencyImplCopyWithImpl<$Res>
       network: null == network
           ? _value.network
           : network // ignore: cast_nullable_to_non_nullable
+              as String,
+      decimals: null == decimals
+          ? _value.decimals
+          : decimals // ignore: cast_nullable_to_non_nullable
+              as int,
+      chainId: null == chainId
+          ? _value.chainId
+          : chainId // ignore: cast_nullable_to_non_nullable
+              as int,
+      symbol: null == symbol
+          ? _value.symbol
+          : symbol // ignore: cast_nullable_to_non_nullable
+              as CurrencySymbol,
+      name: null == name
+          ? _value.name
+          : name // ignore: cast_nullable_to_non_nullable
               as String,
     ));
   }
@@ -128,22 +185,35 @@ class __$$CurrencyImplCopyWithImpl<$Res>
 @JsonSerializable()
 class _$CurrencyImpl implements _Currency {
   const _$CurrencyImpl(
-      {required this.currencyType, required this.value, required this.network});
+      {required this.type,
+      required this.value,
+      required this.network,
+      required this.decimals,
+      required this.chainId,
+      required this.symbol,
+      required this.name});
 
   factory _$CurrencyImpl.fromJson(Map<String, dynamic> json) =>
       _$$CurrencyImplFromJson(json);
 
-// Types.RequestLogic.CURRENCY.ERC20,
   @override
-  final String currencyType;
+  final CurrencyType type;
   @override
   final String value;
   @override
   final String network;
+  @override
+  final int decimals;
+  @override
+  final int chainId;
+  @override
+  final CurrencySymbol symbol;
+  @override
+  final String name;
 
   @override
   String toString() {
-    return 'Currency(currencyType: $currencyType, value: $value, network: $network)';
+    return 'Currency(type: $type, value: $value, network: $network, decimals: $decimals, chainId: $chainId, symbol: $symbol, name: $name)';
   }
 
   @override
@@ -151,15 +221,20 @@ class _$CurrencyImpl implements _Currency {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
             other is _$CurrencyImpl &&
-            (identical(other.currencyType, currencyType) ||
-                other.currencyType == currencyType) &&
+            (identical(other.type, type) || other.type == type) &&
             (identical(other.value, value) || other.value == value) &&
-            (identical(other.network, network) || other.network == network));
+            (identical(other.network, network) || other.network == network) &&
+            (identical(other.decimals, decimals) ||
+                other.decimals == decimals) &&
+            (identical(other.chainId, chainId) || other.chainId == chainId) &&
+            (identical(other.symbol, symbol) || other.symbol == symbol) &&
+            (identical(other.name, name) || other.name == name));
   }
 
   @JsonKey(includeFromJson: false, includeToJson: false)
   @override
-  int get hashCode => Object.hash(runtimeType, currencyType, value, network);
+  int get hashCode => Object.hash(
+      runtimeType, type, value, network, decimals, chainId, symbol, name);
 
   /// Create a copy of Currency
   /// with the given fields replaced by the non-null parameter values.
@@ -179,20 +254,31 @@ class _$CurrencyImpl implements _Currency {
 
 abstract class _Currency implements Currency {
   const factory _Currency(
-      {required final String currencyType,
+      {required final CurrencyType type,
       required final String value,
-      required final String network}) = _$CurrencyImpl;
+      required final String network,
+      required final int decimals,
+      required final int chainId,
+      required final CurrencySymbol symbol,
+      required final String name}) = _$CurrencyImpl;
 
   factory _Currency.fromJson(Map<String, dynamic> json) =
       _$CurrencyImpl.fromJson;
 
-// Types.RequestLogic.CURRENCY.ERC20,
   @override
-  String get currencyType;
+  CurrencyType get type;
   @override
   String get value;
   @override
   String get network;
+  @override
+  int get decimals;
+  @override
+  int get chainId;
+  @override
+  CurrencySymbol get symbol;
+  @override
+  String get name;
 
   /// Create a copy of Currency
   /// with the given fields replaced by the non-null parameter values.

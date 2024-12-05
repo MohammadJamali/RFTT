@@ -1,5 +1,14 @@
+export 'invoice/currency/currency.dart';
 export 'invoice/invoice.dart';
+export 'invoice/enums/extension_type.dart';
+export 'invoice/enums/payment_network_ids.dart';
+export 'invoice/enums/symbols.dart';
+export 'invoice/enums/currency_type.dart';
+export 'invoice/content_data/content_data.dart';
 export 'invoice/invoice_status.dart';
 export 'project/project.dart';
 export 'task/task.dart';
+export 'constants.dart';
+export 'invoice/extensions_data/extensions_data.dart';
+export 'invoice/extensions_data/extension_data_parameter/extension_data_parameter.dart';
 export 'transaction_actor/transaction_actor.dart';

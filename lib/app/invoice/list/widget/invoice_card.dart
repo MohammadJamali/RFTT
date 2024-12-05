@@ -26,8 +26,8 @@ class InvoiceCard extends StatelessWidget {
               Row(
                 children: [
                   ProfileListItem(
-                    title: invoice.payer.name ?? 'Payer',
-                    description: invoice.payer.value,
+                    title: invoice.payer?.firstName ?? 'Payer',
+                    description: invoice.payer?.value ?? 'Unknown',
                   ),
                   const Spacer(),
                   InvoiceStatus(status: invoice.status),
@@ -37,11 +37,12 @@ class InvoiceCard extends StatelessWidget {
               Label.row({
                 'Amount': 'Amount',
                 'No': '#${invoice.id}',
-                'Date': DateFormat.yMMMd().format(
-                  DateTime.parse(
-                    invoice.contentData.dueDate.replaceAll('.', '-'),
-                  ),
-                ),
+                'Date': 'DateFormat'
+                // 'Date': DateFormat.yMMMd().format(
+                //   DateTime.parse(
+                //     invoice.contentData.dueDate.replaceAll('.', '-'),
+                //   ),
+                // ),
               }),
             ],
           ),

@@ -11,10 +11,17 @@ class TransactionActor with _$TransactionActor {
     required String type,
     required String value,
 
-    String? name,
-    String? taxId,
-    String? profilePic,
     String? email,
+    String? firstName,
+    String? lastName,
+    String? businessName,
+    String? phone,
+    String? address,
+    String? taxRegistration,
+    String? companyRegistration,
+    String? miscellaneous,
+
+    String? profilePic,
   }) = _TransactionActor;
 
   factory TransactionActor.fromJson(Map<String, Object?> json) =>
