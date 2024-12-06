@@ -6,8 +6,8 @@ part of 'extensions_data.dart';
 // JsonSerializableGenerator
 // **************************************************************************
 
-_$ExtensionsDataImpl _$$ExtensionsDataImplFromJson(Map<String, dynamic> json) =>
-    _$ExtensionsDataImpl(
+_$ExtensionDataImpl _$$ExtensionDataImplFromJson(Map<String, dynamic> json) =>
+    _$ExtensionDataImpl(
       id: json['id'] as String?,
       action: json['action'] as String?,
       type: json['type'] as String?,
@@ -18,12 +18,11 @@ _$ExtensionsDataImpl _$$ExtensionsDataImplFromJson(Map<String, dynamic> json) =>
       version: json['version'] as String?,
     );
 
-Map<String, dynamic> _$$ExtensionsDataImplToJson(
-        _$ExtensionsDataImpl instance) =>
+Map<String, dynamic> _$$ExtensionDataImplToJson(_$ExtensionDataImpl instance) =>
     <String, dynamic>{
-      'id': instance.id,
-      'action': instance.action,
-      'type': instance.type,
-      'parameters': instance.parameters,
-      'version': instance.version,
+      if (instance.id case final value?) 'id': value,
+      if (instance.action case final value?) 'action': value,
+      if (instance.type case final value?) 'type': value,
+      if (instance.parameters case final value?) 'parameters': value,
+      if (instance.version case final value?) 'version': value,
     };

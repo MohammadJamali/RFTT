@@ -5,15 +5,16 @@ part 'extensions_data.freezed.dart';
 part 'extensions_data.g.dart';
 
 @freezed
-class ExtensionsData with _$ExtensionsData {
-  const factory ExtensionsData({
+class ExtensionData with _$ExtensionData {
+  @JsonSerializable(includeIfNull: false)
+  const factory ExtensionData({
     String? id,
     String? action,
     String? type,
     ExtensionDataParameter? parameters,
     String? version,
-  }) = _ExtensionsData;
+  }) = _ExtensionData;
 
-  factory ExtensionsData.fromJson(Map<String, Object?> json) =>
-      _$ExtensionsDataFromJson(json);
+  factory ExtensionData.fromJson(Map<String, Object?> json) =>
+      _$ExtensionDataFromJson(json);
 }

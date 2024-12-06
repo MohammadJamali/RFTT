@@ -1,6 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:timetracker/app/invoice/list/bloc/list_bloc.dart';
 import 'package:timetracker/app/invoice/list/widget/statistic_counter.dart';
 
 class InvoiceStatistics extends StatelessWidget {

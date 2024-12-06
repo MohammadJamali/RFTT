@@ -113,7 +113,8 @@ class __$$IdentityImplCopyWithImpl<$Res>
 }
 
 /// @nodoc
-@JsonSerializable()
+
+@JsonSerializable(includeIfNull: false)
 class _$IdentityImpl implements _Identity {
   const _$IdentityImpl({required this.type, required this.value});
 

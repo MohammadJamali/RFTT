@@ -6,6 +6,7 @@ part 'identity.g.dart';
 
 @freezed
 class Identity with _$Identity {
+  @JsonSerializable(includeIfNull: false)
   const factory Identity({
     required IdentityType type,
     required String value,

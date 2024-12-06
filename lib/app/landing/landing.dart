@@ -1,8 +1,10 @@
+import 'dart:async';
+
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:reown_appkit/reown_appkit.dart';
-import 'package:timetracker/app/app.dart';
+import 'package:timetracker/app/home/view/home.dart';
 import 'package:timetracker/app/settings/bloc/settings_bloc.dart';
 import 'package:timetracker/l10n/l10n.dart';
 
@@ -170,5 +172,14 @@ class LandingPage extends StatelessWidget {
     final model = await setting.model(context);
     await model?.openModalView(const ReownAppKitModalQRCodePage());
     model?.closeModal();
+    if ((model?.isConnected ?? false) && context.mounted) {
+      setting.add(
+        SettingsEvent.login(
+          model!.session!.getAddress(
+            SettingsBloc.namespace,
+          )!,
+        ),
+      );
+    }
   }
 }

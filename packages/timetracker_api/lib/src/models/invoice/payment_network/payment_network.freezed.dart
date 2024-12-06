@@ -159,7 +159,8 @@ class __$$PaymentNetworkImplCopyWithImpl<$Res>
 }
 
 /// @nodoc
-@JsonSerializable()
+
+@JsonSerializable(includeIfNull: false)
 class _$PaymentNetworkImpl implements _PaymentNetwork {
   const _$PaymentNetworkImpl(
       {required this.id,

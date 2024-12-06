@@ -194,7 +194,8 @@ class __$$ExtensionDataParameterImplCopyWithImpl<$Res>
 }
 
 /// @nodoc
-@JsonSerializable()
+
+@JsonSerializable(includeIfNull: false)
 class _$ExtensionDataParameterImpl implements _ExtensionDataParameter {
   const _$ExtensionDataParameterImpl(
       {this.feeAddress,

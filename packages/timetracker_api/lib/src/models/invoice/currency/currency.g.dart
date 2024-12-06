@@ -8,24 +8,20 @@ part of 'currency.dart';
 
 _$CurrencyImpl _$$CurrencyImplFromJson(Map<String, dynamic> json) =>
     _$CurrencyImpl(
+      network: json['network'] as String,
       type: $enumDecode(_$CurrencyTypeEnumMap, json['type']),
       value: json['value'] as String,
-      network: json['network'] as String,
+      name: json['name'] as String,
       decimals: (json['decimals'] as num).toInt(),
       chainId: (json['chainId'] as num).toInt(),
       symbol: $enumDecode(_$CurrencySymbolEnumMap, json['symbol']),
-      name: json['name'] as String,
     );
 
 Map<String, dynamic> _$$CurrencyImplToJson(_$CurrencyImpl instance) =>
     <String, dynamic>{
+      'network': instance.network,
       'type': _$CurrencyTypeEnumMap[instance.type]!,
       'value': instance.value,
-      'network': instance.network,
-      'decimals': instance.decimals,
-      'chainId': instance.chainId,
-      'symbol': _$CurrencySymbolEnumMap[instance.symbol]!,
-      'name': instance.name,
     };
 
 const _$CurrencyTypeEnumMap = {

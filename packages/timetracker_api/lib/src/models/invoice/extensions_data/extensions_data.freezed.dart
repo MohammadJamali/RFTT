@@ -14,33 +14,33 @@ T _$identity<T>(T value) => value;
 final _privateConstructorUsedError = UnsupportedError(
     'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#adding-getters-and-methods-to-our-models');
 
-ExtensionsData _$ExtensionsDataFromJson(Map<String, dynamic> json) {
-  return _ExtensionsData.fromJson(json);
+ExtensionData _$ExtensionDataFromJson(Map<String, dynamic> json) {
+  return _ExtensionData.fromJson(json);
 }
 
 /// @nodoc
-mixin _$ExtensionsData {
+mixin _$ExtensionData {
   String? get id => throw _privateConstructorUsedError;
   String? get action => throw _privateConstructorUsedError;
   String? get type => throw _privateConstructorUsedError;
   ExtensionDataParameter? get parameters => throw _privateConstructorUsedError;
   String? get version => throw _privateConstructorUsedError;
 
-  /// Serializes this ExtensionsData to a JSON map.
+  /// Serializes this ExtensionData to a JSON map.
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
 
-  /// Create a copy of ExtensionsData
+  /// Create a copy of ExtensionData
   /// with the given fields replaced by the non-null parameter values.
   @JsonKey(includeFromJson: false, includeToJson: false)
-  $ExtensionsDataCopyWith<ExtensionsData> get copyWith =>
+  $ExtensionDataCopyWith<ExtensionData> get copyWith =>
       throw _privateConstructorUsedError;
 }
 
 /// @nodoc
-abstract class $ExtensionsDataCopyWith<$Res> {
-  factory $ExtensionsDataCopyWith(
-          ExtensionsData value, $Res Function(ExtensionsData) then) =
-      _$ExtensionsDataCopyWithImpl<$Res, ExtensionsData>;
+abstract class $ExtensionDataCopyWith<$Res> {
+  factory $ExtensionDataCopyWith(
+          ExtensionData value, $Res Function(ExtensionData) then) =
+      _$ExtensionDataCopyWithImpl<$Res, ExtensionData>;
   @useResult
   $Res call(
       {String? id,
@@ -53,16 +53,16 @@ abstract class $ExtensionsDataCopyWith<$Res> {
 }
 
 /// @nodoc
-class _$ExtensionsDataCopyWithImpl<$Res, $Val extends ExtensionsData>
-    implements $ExtensionsDataCopyWith<$Res> {
-  _$ExtensionsDataCopyWithImpl(this._value, this._then);
+class _$ExtensionDataCopyWithImpl<$Res, $Val extends ExtensionData>
+    implements $ExtensionDataCopyWith<$Res> {
+  _$ExtensionDataCopyWithImpl(this._value, this._then);
 
   // ignore: unused_field
   final $Val _value;
   // ignore: unused_field
   final $Res Function($Val) _then;
 
-  /// Create a copy of ExtensionsData
+  /// Create a copy of ExtensionData
   /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
@@ -97,7 +97,7 @@ class _$ExtensionsDataCopyWithImpl<$Res, $Val extends ExtensionsData>
     ) as $Val);
   }
 
-  /// Create a copy of ExtensionsData
+  /// Create a copy of ExtensionData
   /// with the given fields replaced by the non-null parameter values.
   @override
   @pragma('vm:prefer-inline')
@@ -113,11 +113,11 @@ class _$ExtensionsDataCopyWithImpl<$Res, $Val extends ExtensionsData>
 }
 
 /// @nodoc
-abstract class _$$ExtensionsDataImplCopyWith<$Res>
-    implements $ExtensionsDataCopyWith<$Res> {
-  factory _$$ExtensionsDataImplCopyWith(_$ExtensionsDataImpl value,
-          $Res Function(_$ExtensionsDataImpl) then) =
-      __$$ExtensionsDataImplCopyWithImpl<$Res>;
+abstract class _$$ExtensionDataImplCopyWith<$Res>
+    implements $ExtensionDataCopyWith<$Res> {
+  factory _$$ExtensionDataImplCopyWith(
+          _$ExtensionDataImpl value, $Res Function(_$ExtensionDataImpl) then) =
+      __$$ExtensionDataImplCopyWithImpl<$Res>;
   @override
   @useResult
   $Res call(
@@ -132,14 +132,14 @@ abstract class _$$ExtensionsDataImplCopyWith<$Res>
 }
 
 /// @nodoc
-class __$$ExtensionsDataImplCopyWithImpl<$Res>
-    extends _$ExtensionsDataCopyWithImpl<$Res, _$ExtensionsDataImpl>
-    implements _$$ExtensionsDataImplCopyWith<$Res> {
-  __$$ExtensionsDataImplCopyWithImpl(
-      _$ExtensionsDataImpl _value, $Res Function(_$ExtensionsDataImpl) _then)
+class __$$ExtensionDataImplCopyWithImpl<$Res>
+    extends _$ExtensionDataCopyWithImpl<$Res, _$ExtensionDataImpl>
+    implements _$$ExtensionDataImplCopyWith<$Res> {
+  __$$ExtensionDataImplCopyWithImpl(
+      _$ExtensionDataImpl _value, $Res Function(_$ExtensionDataImpl) _then)
       : super(_value, _then);
 
-  /// Create a copy of ExtensionsData
+  /// Create a copy of ExtensionData
   /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
@@ -150,7 +150,7 @@ class __$$ExtensionsDataImplCopyWithImpl<$Res>
     Object? parameters = freezed,
     Object? version = freezed,
   }) {
-    return _then(_$ExtensionsDataImpl(
+    return _then(_$ExtensionDataImpl(
       id: freezed == id
           ? _value.id
           : id // ignore: cast_nullable_to_non_nullable
@@ -176,13 +176,14 @@ class __$$ExtensionsDataImplCopyWithImpl<$Res>
 }
 
 /// @nodoc
-@JsonSerializable()
-class _$ExtensionsDataImpl implements _ExtensionsData {
-  const _$ExtensionsDataImpl(
+
+@JsonSerializable(includeIfNull: false)
+class _$ExtensionDataImpl implements _ExtensionData {
+  const _$ExtensionDataImpl(
       {this.id, this.action, this.type, this.parameters, this.version});
 
-  factory _$ExtensionsDataImpl.fromJson(Map<String, dynamic> json) =>
-      _$$ExtensionsDataImplFromJson(json);
+  factory _$ExtensionDataImpl.fromJson(Map<String, dynamic> json) =>
+      _$$ExtensionDataImplFromJson(json);
 
   @override
   final String? id;
@@ -197,14 +198,14 @@ class _$ExtensionsDataImpl implements _ExtensionsData {
 
   @override
   String toString() {
-    return 'ExtensionsData(id: $id, action: $action, type: $type, parameters: $parameters, version: $version)';
+    return 'ExtensionData(id: $id, action: $action, type: $type, parameters: $parameters, version: $version)';
   }
 
   @override
   bool operator ==(Object other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$ExtensionsDataImpl &&
+            other is _$ExtensionDataImpl &&
             (identical(other.id, id) || other.id == id) &&
             (identical(other.action, action) || other.action == action) &&
             (identical(other.type, type) || other.type == type) &&
@@ -218,33 +219,32 @@ class _$ExtensionsDataImpl implements _ExtensionsData {
   int get hashCode =>
       Object.hash(runtimeType, id, action, type, parameters, version);
 
-  /// Create a copy of ExtensionsData
+  /// Create a copy of ExtensionData
   /// with the given fields replaced by the non-null parameter values.
   @JsonKey(includeFromJson: false, includeToJson: false)
   @override
   @pragma('vm:prefer-inline')
-  _$$ExtensionsDataImplCopyWith<_$ExtensionsDataImpl> get copyWith =>
-      __$$ExtensionsDataImplCopyWithImpl<_$ExtensionsDataImpl>(
-          this, _$identity);
+  _$$ExtensionDataImplCopyWith<_$ExtensionDataImpl> get copyWith =>
+      __$$ExtensionDataImplCopyWithImpl<_$ExtensionDataImpl>(this, _$identity);
 
   @override
   Map<String, dynamic> toJson() {
-    return _$$ExtensionsDataImplToJson(
+    return _$$ExtensionDataImplToJson(
       this,
     );
   }
 }
 
-abstract class _ExtensionsData implements ExtensionsData {
-  const factory _ExtensionsData(
+abstract class _ExtensionData implements ExtensionData {
+  const factory _ExtensionData(
       {final String? id,
       final String? action,
       final String? type,
       final ExtensionDataParameter? parameters,
-      final String? version}) = _$ExtensionsDataImpl;
+      final String? version}) = _$ExtensionDataImpl;
 
-  factory _ExtensionsData.fromJson(Map<String, dynamic> json) =
-      _$ExtensionsDataImpl.fromJson;
+  factory _ExtensionData.fromJson(Map<String, dynamic> json) =
+      _$ExtensionDataImpl.fromJson;
 
   @override
   String? get id;
@@ -257,10 +257,10 @@ abstract class _ExtensionsData implements ExtensionsData {
   @override
   String? get version;
 
-  /// Create a copy of ExtensionsData
+  /// Create a copy of ExtensionData
   /// with the given fields replaced by the non-null parameter values.
   @override
   @JsonKey(includeFromJson: false, includeToJson: false)
-  _$$ExtensionsDataImplCopyWith<_$ExtensionsDataImpl> get copyWith =>
+  _$$ExtensionDataImplCopyWith<_$ExtensionDataImpl> get copyWith =>
       throw _privateConstructorUsedError;
 }

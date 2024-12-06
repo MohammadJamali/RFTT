@@ -250,7 +250,8 @@ class __$$TransactionActorImplCopyWithImpl<$Res>
 }
 
 /// @nodoc
-@JsonSerializable()
+
+@JsonSerializable(includeIfNull: false)
 class _$TransactionActorImpl implements _TransactionActor {
   const _$TransactionActorImpl(
       {required this.type,

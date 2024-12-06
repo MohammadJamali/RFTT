@@ -6,6 +6,9 @@ class DBHelper {
   static const String tableProjects = 'projects';
   static const String tableTasks = 'tasks';
 
+  static const String tableInvoiceMeta = 'invoice_meta';
+  static const String tableStorageMeta = 'storage_meta';
+
   Future<Database> initDB() async {
     return openDatabase(
       dbName,
@@ -15,23 +18,39 @@ class DBHelper {
           CREATE TABLE $tableInvoices (
             id INTEGER PRIMARY KEY AUTOINCREMENT,
             projectId INTEGER,
-            timestamp TEXT,
+            timestamp INTEGER,
+            currencyNetwork TEXT,
             currencyType TEXT,
             currencyValue TEXT,
-            currencyNetwork TEXT,
-            payeeDisplayName TEXT,
-            payeeValue TEXT,
-            payeeType TEXT,
-            payerDisplayName TEXT,
-            payerValue TEXT,
-            payerType TEXT,
-            contentDataReason TEXT,
-            contentDataDueDate TEXT,
-            paymentNetworkId TEXT,
-            paymentNetworkName TEXT,
-            paymentNetworkAddress TEXT,
-            paymentNetworkFeeAmount TEXT,
-            feeRecipient TEXT
+            currencySymbol TEXT,
+            expectedAmount TEXT,
+            contentDataReason: TEXT,
+            contentDataDueDate: TEXT,
+            payeeType: TEXT,
+            payeeValue: TEXT,
+            paymentNetworkName: TEXT,
+            paymentAddress: TEXT,
+            paymentFeeAddress: TEXT,
+            paymentFeeAmount: TEXT,
+            metaId INTEGER,
+            FOREIGN KEY(metaId) REFERENCES $tableInvoiceMeta(id)
+          );
+
+          CREATE TABLE $tableInvoiceMeta (
+            id INTEGER PRIMARY KEY AUTOINCREMENT,
+            transactionStorageLocation TEXT,
+            storageType TEXT,
+            state TEXT,
+            timestamp INTEGER,
+            storageMetaId INTEGER,
+            FOREIGN KEY(storageMetaId) REFERENCES $tableStorageMeta(id)
+          );
+
+          CREATE TABLE $tableStorageMeta (
+            id INTEGER PRIMARY KEY AUTOINCREMENT,
+            ipfs TEXT,
+            local TEXT,
+            ethereum TEXT
           );
 
           CREATE TABLE $tableProjects (

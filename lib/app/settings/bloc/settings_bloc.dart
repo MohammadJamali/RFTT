@@ -25,7 +25,7 @@ class SettingsBloc extends Bloc<SettingsEvent, SettingsState> {
           description: 'Monitize your time using cryptocurrency',
           url: 'https://timetracker.iamjamali.ir',
           icons: [
-            'https://imagedelivery.net/_aTEfDRm7z3tKgu9JhfeKA/3e785947-b9d5-4cc4-41b9-b4c33da45000/lg'
+            'https://raw.githubusercontent.com/MohammadJamali/RequestFinanceTimeTracker/refs/heads/main/assets/images/icon_square.png',
           ],
         ),
       ),
@@ -45,7 +45,7 @@ class SettingsBloc extends Bloc<SettingsEvent, SettingsState> {
 
   static const String namespace = 'eip155';
 
-  Completer<ReownAppKit> _appKit;
+  final Completer<ReownAppKit> _appKit;
   ReownAppKitModal? _appKitModal;
 
   @override

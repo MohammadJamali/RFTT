@@ -26,7 +26,7 @@ mixin _$Invoice {
   Currency get currency => throw _privateConstructorUsedError;
   TransactionActor get payee => throw _privateConstructorUsedError;
   String get expectedAmount => throw _privateConstructorUsedError;
-  List<ExtensionsData> get extensionsData => throw _privateConstructorUsedError;
+  List<ExtensionData> get extensionsData => throw _privateConstructorUsedError;
   TransactionActor? get payer => throw _privateConstructorUsedError;
   String? get paymentRecipient => throw _privateConstructorUsedError;
   PaymentNetwork? get paymentNetwork => throw _privateConstructorUsedError;
@@ -53,7 +53,7 @@ abstract class $InvoiceCopyWith<$Res> {
       Currency currency,
       TransactionActor payee,
       String expectedAmount,
-      List<ExtensionsData> extensionsData,
+      List<ExtensionData> extensionsData,
       TransactionActor? payer,
       String? paymentRecipient,
       PaymentNetwork? paymentNetwork,
@@ -120,7 +120,7 @@ class _$InvoiceCopyWithImpl<$Res, $Val extends Invoice>
       extensionsData: null == extensionsData
           ? _value.extensionsData
           : extensionsData // ignore: cast_nullable_to_non_nullable
-              as List<ExtensionsData>,
+              as List<ExtensionData>,
       payer: freezed == payer
           ? _value.payer
           : payer // ignore: cast_nullable_to_non_nullable
@@ -203,7 +203,7 @@ abstract class _$$InvoiceImplCopyWith<$Res> implements $InvoiceCopyWith<$Res> {
       Currency currency,
       TransactionActor payee,
       String expectedAmount,
-      List<ExtensionsData> extensionsData,
+      List<ExtensionData> extensionsData,
       TransactionActor? payer,
       String? paymentRecipient,
       PaymentNetwork? paymentNetwork,
@@ -272,7 +272,7 @@ class __$$InvoiceImplCopyWithImpl<$Res>
       extensionsData: null == extensionsData
           ? _value._extensionsData
           : extensionsData // ignore: cast_nullable_to_non_nullable
-              as List<ExtensionsData>,
+              as List<ExtensionData>,
       payer: freezed == payer
           ? _value.payer
           : payer // ignore: cast_nullable_to_non_nullable
@@ -303,7 +303,7 @@ class _$InvoiceImpl implements _Invoice {
       required this.currency,
       required this.payee,
       required this.expectedAmount,
-      required final List<ExtensionsData> extensionsData,
+      required final List<ExtensionData> extensionsData,
       this.payer,
       this.paymentRecipient,
       this.paymentNetwork,
@@ -325,9 +325,9 @@ class _$InvoiceImpl implements _Invoice {
   final TransactionActor payee;
   @override
   final String expectedAmount;
-  final List<ExtensionsData> _extensionsData;
+  final List<ExtensionData> _extensionsData;
   @override
-  List<ExtensionsData> get extensionsData {
+  List<ExtensionData> get extensionsData {
     if (_extensionsData is EqualUnmodifiableListView) return _extensionsData;
     // ignore: implicit_dynamic_type
     return EqualUnmodifiableListView(_extensionsData);
@@ -413,7 +413,7 @@ abstract class _Invoice implements Invoice {
       required final Currency currency,
       required final TransactionActor payee,
       required final String expectedAmount,
-      required final List<ExtensionsData> extensionsData,
+      required final List<ExtensionData> extensionsData,
       final TransactionActor? payer,
       final String? paymentRecipient,
       final PaymentNetwork? paymentNetwork,
@@ -434,7 +434,7 @@ abstract class _Invoice implements Invoice {
   @override
   String get expectedAmount;
   @override
-  List<ExtensionsData> get extensionsData;
+  List<ExtensionData> get extensionsData;
   @override
   TransactionActor? get payer;
   @override

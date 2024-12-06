@@ -1,13 +1,11 @@
-import 'dart:math';
+import 'dart:convert';
 import 'package:timetracker_api/timetracker_api.dart';
-import 'package:timetracker_repository/src/models/invoice_request.dart';
 import 'package:timetracker_repository/src/utils/crypto.dart';
 import 'package:timetracker_repository/src/utils/map.dart';
-import 'package:timetracker_repository/src/utils/units.dart';
-import 'package:uuid/uuid.dart';
+import 'package:timetracker_api/src/utils/units.dart';
+import 'package:http/http.dart' as http;
 
-typedef SignStringCallBack = Future<String> Function(
-    String walletAddress, String data);
+typedef SignWithWalletCallBack = Future<String> Function(String data);
 
 /// {@template invoices_repository}
 /// A repository that handles `invoice` related requests.
@@ -20,170 +18,72 @@ class InvoiceRepository {
 
   final InvoiceApi _invoiceApi;
 
-  String _generateSalt({int length = 16}) {
-    final random = Random.secure();
-    final bytes = List<int>.generate(length ~/ 2, (_) => random.nextInt(256));
-    return bytes.map((byte) => byte.toRadixString(16).padLeft(2, '0')).join();
-  }
-
-  Future<InvoiceRequest> createInvoiceRequest({
-    required String projectId,
-    required double expectedAmount,
-    required String walletAddress,
-    required String createdWith,
-    required SignStringCallBack signCallBack,
+  Future<InvoiceCreatedResponse?> createInvoiceRequest({
+    required CreateInvoiceRequest request,
+    required SignWithWalletCallBack signer,
   }) async {
-    final salt = _generateSalt();
     final timestamp = DateTime.now().millisecondsSinceEpoch ~/ 1000;
 
-    final currency = currencies[CurrencySymbol.FAU]!;
-
-    final invoice = Invoice(
-      id: const Uuid().v4(),
-      projectId: projectId,
-      timestamp: timestamp,
-      currency: currency,
-      expectedAmount: parseUnits(
-        '$expectedAmount',
-        currency.decimals,
-      ).toString(),
-      payee: TransactionActor(
-        type: 'ethereumAddress',
-        value: walletAddress,
-      ),
-      extensionsData: [
-        ExtensionsData(
-          action: 'create',
-          id: 'pn-erc20-fee-proxy-contract',
-          parameters: ExtensionDataParameter(
-            feeAddress: '0x0000000000000000000000000000000000000000',
-            feeAmount: '0',
-            paymentAddress: walletAddress,
-            paymentNetworkName: 'sepolia',
-            salt: salt,
-          ),
-          version: '0.2.0',
+    if (request.requestInfo.timestamp == null) {
+      request = request.copyWith(
+        requestInfo: request.requestInfo.copyWith(
+          timestamp: timestamp,
         ),
-        ExtensionsData(
-          action: 'create',
-          id: 'content-data',
-          parameters: ExtensionDataParameter(
-            content: ContentData(
-              builderId: 'request-network',
-              createdWith: createdWith,
-              dueDate: '',
-              reason: '',
-            ),
-          ),
-          version: '0.1.0',
-        ),
-      ],
-    );
+      );
+    }
 
-    final serializedInvoice = invoice.toJson();
-
-    final data = {
+    final unsignedAction = {
       'name': 'create',
-      'parameters': serializedInvoice,
+      'parameters': request.toApiJson(),
       'version': '2.0.3',
     };
-    final json = normalizeMap(data);
-    final signiture = await signCallBack(walletAddress, json);
+
+    final normalizeUnsignedAction = normalizeMap(unsignedAction);
+    final signedUnsignedAction = await signer(normalizeUnsignedAction);
 
     final action = {
-      'data': data,
+      'data': unsignedAction,
       'signature': {
         'method': 'ecdsa-ethereum',
-        'value': signiture,
+        'value': signedUnsignedAction,
       },
     };
+    final requestHash = _multiFormatSerialize(action);
 
-    final requestId = _multiFormatSerialize(data);
+    final serializedPayee = request.requestInfo.payee.toJson();
+    final payeeHash = _multiFormatSerialize(serializedPayee);
 
-    final hashedTopics = [
-      {
-        'type': 'ethereumAddress',
-        'value': walletAddress,
+    final body = {
+      'channelId': requestHash,
+      'topics': [payeeHash, requestHash],
+      'transactionData': {'data': action},
+    };
+
+    try {
+      final rawResponse = await http.post(
+        Uri.parse('https://sepolia.gateway.request.network/persistTransaction'),
+        headers: {
+          'Content-Type': 'application/json',
+          'X-Request-Network-Client-Version': '0.50.0',
+        },
+        body: jsonEncode(body),
+      );
+
+      if (rawResponse.statusCode != 200) {
+        print('Failed to persist transaction: ${rawResponse.statusCode}');
+        return null;
       }
-    ].map(_multiFormatSerialize);
 
-    return InvoiceRequest(
-      invoice: invoice,
-      action: action,
-      requestId: requestId,
-      hashedTopics: hashedTopics,
-      request: {
-        ...serializedInvoice,
-        'extensions': {
-          'content-data': {
-            'events': [],
-            'id': 'content-data',
-            'type': 'content-data',
-            'values': {
-              'content': {
-                'reason': '',
-                'dueDate': '',
-                'builderId': 'request-network',
-                'createdWith': createdWith,
-              },
-              'builderId': 'request-network',
-              'createdWith': createdWith,
-              'dueDate': '',
-              'reason': '',
-            },
-            'version': '0.1.0',
-          },
-          'pn-erc20-fee-proxy-contract': {
-            'id': 'pn-erc20-fee-proxy-contract',
-            'type': 'payment-network',
-            'events': [
-              {
-                'name': 'create',
-                'parameters': {
-                  'feeAddress': '0x0000000000000000000000000000000000000000',
-                  'feeAmount': '0',
-                  'paymentAddress': walletAddress,
-                  'salt': salt,
-                },
-              },
-            ],
-            'values': {
-              'feeAddress': '0x0000000000000000000000000000000000000000',
-              'feeAmount': '0',
-              'paymentAddress': walletAddress,
-              'receivedPaymentAmount': '0',
-              'receivedRefundAmount': '0',
-              'salt': salt,
-              'sentPaymentAmount': '0',
-              'sentRefundAmount': '0',
-            },
-          },
-        },
-        'requestId': requestId,
-        'timestamp': timestamp,
-        'version': '2.0.3',
-        'events': {
-          'actionSigner': {
-            'type': 'ethereumAddress',
-            'value': walletAddress,
-          },
-          'type': 'ethereumAddress',
-          'value': walletAddress,
-          'name': 'create',
-          'parameters': {
-            'expectedAmount': '2000000000000000000',
-            'extensionsDataLength': 2,
-            'isSignedRequest': false,
-          },
-          'expectedAmount': '2000000000000000000',
-        },
-        'state': 'created',
-        'creator': {
-          'type': 'ethereumAddress',
-          'value': '0x33AbA93A575d8FCCc4129989880E3EcFCA9EBd1F',
-        },
-      },
-    );
+      final response = InvoiceCreatedResponse.fromJson(
+        jsonDecode(rawResponse.body) as Map<String, dynamic>,
+      );
+
+      return response;
+    } catch (error) {
+      print('Error persisting transaction: $error');
+    }
+
+    return null;
   }
 
   String _multiFormatSerialize(Map<dynamic, dynamic> data) {

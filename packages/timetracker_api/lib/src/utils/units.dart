@@ -1,5 +1,5 @@
 BigInt parseUnits(String value, int decimals) {
-  var parts = value.split('.');
+  final parts = value.split('.');
   var integer = parts[0];
   var fraction = parts.length > 1 ? parts[1] : '0';
 

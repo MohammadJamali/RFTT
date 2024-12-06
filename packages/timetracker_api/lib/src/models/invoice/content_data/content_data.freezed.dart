@@ -20,11 +20,10 @@ ContentData _$ContentDataFromJson(Map<String, dynamic> json) {
 
 /// @nodoc
 mixin _$ContentData {
-// '🍕'
-  String? get reason => throw _privateConstructorUsedError; // '2023.06.16'
-  String? get dueDate => throw _privateConstructorUsedError;
-  String? get createdWith => throw _privateConstructorUsedError;
   String? get builderId => throw _privateConstructorUsedError;
+  String? get createdWith => throw _privateConstructorUsedError; // '2023.06.16'
+  String? get dueDate => throw _privateConstructorUsedError; // '🍕'
+  String? get reason => throw _privateConstructorUsedError;
 
   /// Serializes this ContentData to a JSON map.
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
@@ -43,10 +42,10 @@ abstract class $ContentDataCopyWith<$Res> {
       _$ContentDataCopyWithImpl<$Res, ContentData>;
   @useResult
   $Res call(
-      {String? reason,
-      String? dueDate,
+      {String? builderId,
       String? createdWith,
-      String? builderId});
+      String? dueDate,
+      String? reason});
 }
 
 /// @nodoc
@@ -64,27 +63,27 @@ class _$ContentDataCopyWithImpl<$Res, $Val extends ContentData>
   @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? reason = freezed,
-    Object? dueDate = freezed,
-    Object? createdWith = freezed,
     Object? builderId = freezed,
+    Object? createdWith = freezed,
+    Object? dueDate = freezed,
+    Object? reason = freezed,
   }) {
     return _then(_value.copyWith(
-      reason: freezed == reason
-          ? _value.reason
-          : reason // ignore: cast_nullable_to_non_nullable
-              as String?,
-      dueDate: freezed == dueDate
-          ? _value.dueDate
-          : dueDate // ignore: cast_nullable_to_non_nullable
+      builderId: freezed == builderId
+          ? _value.builderId
+          : builderId // ignore: cast_nullable_to_non_nullable
               as String?,
       createdWith: freezed == createdWith
           ? _value.createdWith
           : createdWith // ignore: cast_nullable_to_non_nullable
               as String?,
-      builderId: freezed == builderId
-          ? _value.builderId
-          : builderId // ignore: cast_nullable_to_non_nullable
+      dueDate: freezed == dueDate
+          ? _value.dueDate
+          : dueDate // ignore: cast_nullable_to_non_nullable
+              as String?,
+      reason: freezed == reason
+          ? _value.reason
+          : reason // ignore: cast_nullable_to_non_nullable
               as String?,
     ) as $Val);
   }
@@ -99,10 +98,10 @@ abstract class _$$ContentDataImplCopyWith<$Res>
   @override
   @useResult
   $Res call(
-      {String? reason,
-      String? dueDate,
+      {String? builderId,
       String? createdWith,
-      String? builderId});
+      String? dueDate,
+      String? reason});
 }
 
 /// @nodoc
@@ -118,55 +117,56 @@ class __$$ContentDataImplCopyWithImpl<$Res>
   @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? reason = freezed,
-    Object? dueDate = freezed,
-    Object? createdWith = freezed,
     Object? builderId = freezed,
+    Object? createdWith = freezed,
+    Object? dueDate = freezed,
+    Object? reason = freezed,
   }) {
     return _then(_$ContentDataImpl(
-      reason: freezed == reason
-          ? _value.reason
-          : reason // ignore: cast_nullable_to_non_nullable
-              as String?,
-      dueDate: freezed == dueDate
-          ? _value.dueDate
-          : dueDate // ignore: cast_nullable_to_non_nullable
+      builderId: freezed == builderId
+          ? _value.builderId
+          : builderId // ignore: cast_nullable_to_non_nullable
               as String?,
       createdWith: freezed == createdWith
           ? _value.createdWith
           : createdWith // ignore: cast_nullable_to_non_nullable
               as String?,
-      builderId: freezed == builderId
-          ? _value.builderId
-          : builderId // ignore: cast_nullable_to_non_nullable
+      dueDate: freezed == dueDate
+          ? _value.dueDate
+          : dueDate // ignore: cast_nullable_to_non_nullable
+              as String?,
+      reason: freezed == reason
+          ? _value.reason
+          : reason // ignore: cast_nullable_to_non_nullable
               as String?,
     ));
   }
 }
 
 /// @nodoc
-@JsonSerializable()
+
+@JsonSerializable(includeIfNull: false)
 class _$ContentDataImpl implements _ContentData {
   const _$ContentDataImpl(
-      {this.reason, this.dueDate, this.createdWith, this.builderId});
+      {this.builderId, this.createdWith, this.dueDate, this.reason});
 
   factory _$ContentDataImpl.fromJson(Map<String, dynamic> json) =>
       _$$ContentDataImplFromJson(json);
 
-// '🍕'
   @override
-  final String? reason;
+  final String? builderId;
+  @override
+  final String? createdWith;
 // '2023.06.16'
   @override
   final String? dueDate;
+// '🍕'
   @override
-  final String? createdWith;
-  @override
-  final String? builderId;
+  final String? reason;
 
   @override
   String toString() {
-    return 'ContentData(reason: $reason, dueDate: $dueDate, createdWith: $createdWith, builderId: $builderId)';
+    return 'ContentData(builderId: $builderId, createdWith: $createdWith, dueDate: $dueDate, reason: $reason)';
   }
 
   @override
@@ -174,18 +174,18 @@ class _$ContentDataImpl implements _ContentData {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
             other is _$ContentDataImpl &&
-            (identical(other.reason, reason) || other.reason == reason) &&
-            (identical(other.dueDate, dueDate) || other.dueDate == dueDate) &&
+            (identical(other.builderId, builderId) ||
+                other.builderId == builderId) &&
             (identical(other.createdWith, createdWith) ||
                 other.createdWith == createdWith) &&
-            (identical(other.builderId, builderId) ||
-                other.builderId == builderId));
+            (identical(other.dueDate, dueDate) || other.dueDate == dueDate) &&
+            (identical(other.reason, reason) || other.reason == reason));
   }
 
   @JsonKey(includeFromJson: false, includeToJson: false)
   @override
   int get hashCode =>
-      Object.hash(runtimeType, reason, dueDate, createdWith, builderId);
+      Object.hash(runtimeType, builderId, createdWith, dueDate, reason);
 
   /// Create a copy of ContentData
   /// with the given fields replaced by the non-null parameter values.
@@ -205,23 +205,22 @@ class _$ContentDataImpl implements _ContentData {
 
 abstract class _ContentData implements ContentData {
   const factory _ContentData(
-      {final String? reason,
-      final String? dueDate,
+      {final String? builderId,
       final String? createdWith,
-      final String? builderId}) = _$ContentDataImpl;
+      final String? dueDate,
+      final String? reason}) = _$ContentDataImpl;
 
   factory _ContentData.fromJson(Map<String, dynamic> json) =
       _$ContentDataImpl.fromJson;
 
-// '🍕'
-  @override
-  String? get reason; // '2023.06.16'
-  @override
-  String? get dueDate;
-  @override
-  String? get createdWith;
   @override
   String? get builderId;
+  @override
+  String? get createdWith; // '2023.06.16'
+  @override
+  String? get dueDate; // '🍕'
+  @override
+  String? get reason;
 
   /// Create a copy of ContentData
   /// with the given fields replaced by the non-null parameter values.

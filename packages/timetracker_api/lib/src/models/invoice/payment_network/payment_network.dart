@@ -5,6 +5,7 @@ part 'payment_network.g.dart';
 
 @freezed
 class PaymentNetwork with _$PaymentNetwork {
+  @JsonSerializable(includeIfNull: false)
   const factory PaymentNetwork({
     required String id,
     // 'sepolia'

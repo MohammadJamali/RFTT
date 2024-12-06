@@ -55,7 +55,7 @@ class App extends StatelessWidget {
               if (setting.actor != null) {
                 return const HomePage();
               }
-              return const ProjectsPage();
+              return const LandingPage();
             },
           ),
         ),

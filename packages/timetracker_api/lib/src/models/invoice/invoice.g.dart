@@ -15,7 +15,7 @@ _$InvoiceImpl _$$InvoiceImplFromJson(Map<String, dynamic> json) =>
       payee: TransactionActor.fromJson(json['payee'] as Map<String, dynamic>),
       expectedAmount: json['expectedAmount'] as String,
       extensionsData: (json['extensionsData'] as List<dynamic>)
-          .map((e) => ExtensionsData.fromJson(e as Map<String, dynamic>))
+          .map((e) => ExtensionData.fromJson(e as Map<String, dynamic>))
           .toList(),
       payer: json['payer'] == null
           ? null

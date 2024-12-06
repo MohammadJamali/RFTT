@@ -22,10 +22,11 @@ _$ExtensionDataParameterImpl _$$ExtensionDataParameterImplFromJson(
 Map<String, dynamic> _$$ExtensionDataParameterImplToJson(
         _$ExtensionDataParameterImpl instance) =>
     <String, dynamic>{
-      'feeAddress': instance.feeAddress,
-      'feeAmount': instance.feeAmount,
-      'paymentAddress': instance.paymentAddress,
-      'paymentNetworkName': instance.paymentNetworkName,
-      'content': instance.content,
-      'salt': instance.salt,
+      if (instance.feeAddress case final value?) 'feeAddress': value,
+      if (instance.feeAmount case final value?) 'feeAmount': value,
+      if (instance.paymentAddress case final value?) 'paymentAddress': value,
+      if (instance.paymentNetworkName case final value?)
+        'paymentNetworkName': value,
+      if (instance.content case final value?) 'content': value,
+      if (instance.salt case final value?) 'salt': value,
     };

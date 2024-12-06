@@ -5,6 +5,7 @@ part 'transaction_actor.g.dart';
 
 @freezed
 class TransactionActor with _$TransactionActor {
+  @JsonSerializable(includeIfNull: false)
   const factory TransactionActor({
     // Types.Identity.TYPE.ETHEREUM_ADDRESS,
     // Types.Identity.TYPE.ETHEREUM_SMART_CONTRACT,

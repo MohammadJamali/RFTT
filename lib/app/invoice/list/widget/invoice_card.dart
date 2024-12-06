@@ -37,7 +37,7 @@ class InvoiceCard extends StatelessWidget {
               Label.row({
                 'Amount': 'Amount',
                 'No': '#${invoice.id}',
-                'Date': 'DateFormat'
+                'Date': 'DateFormat',
                 // 'Date': DateFormat.yMMMd().format(
                 //   DateTime.parse(
                 //     invoice.contentData.dueDate.replaceAll('.', '-'),

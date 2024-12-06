@@ -17,7 +17,7 @@ class Invoice with _$Invoice {
     required Currency currency,
     required TransactionActor payee,
     required String expectedAmount,
-    required List<ExtensionsData> extensionsData,
+    required List<ExtensionData> extensionsData,
     TransactionActor? payer,
     String? paymentRecipient,
     PaymentNetwork? paymentNetwork,

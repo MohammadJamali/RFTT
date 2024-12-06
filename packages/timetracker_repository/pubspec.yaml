@@ -11,6 +11,8 @@ dependencies:
   crypto: ^3.0.6
   json_sorter: ^1.0.0
   sha3: ^0.2.0
+  http:
+  pointycastle:
   
   timetracker_api:
     path: ../timetracker_api

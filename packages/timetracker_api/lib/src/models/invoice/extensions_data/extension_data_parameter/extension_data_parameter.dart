@@ -6,6 +6,7 @@ part 'extension_data_parameter.g.dart';
 
 @freezed
 class ExtensionDataParameter with _$ExtensionDataParameter {
+  @JsonSerializable(includeIfNull: false)
   const factory ExtensionDataParameter({
     String? feeAddress,
     String? feeAmount,

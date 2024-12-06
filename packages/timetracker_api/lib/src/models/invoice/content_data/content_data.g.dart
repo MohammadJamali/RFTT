@@ -8,16 +8,16 @@ part of 'content_data.dart';
 
 _$ContentDataImpl _$$ContentDataImplFromJson(Map<String, dynamic> json) =>
     _$ContentDataImpl(
-      reason: json['reason'] as String?,
-      dueDate: json['dueDate'] as String?,
-      createdWith: json['createdWith'] as String?,
       builderId: json['builderId'] as String?,
+      createdWith: json['createdWith'] as String?,
+      dueDate: json['dueDate'] as String?,
+      reason: json['reason'] as String?,
     );
 
 Map<String, dynamic> _$$ContentDataImplToJson(_$ContentDataImpl instance) =>
     <String, dynamic>{
-      'reason': instance.reason,
-      'dueDate': instance.dueDate,
-      'createdWith': instance.createdWith,
-      'builderId': instance.builderId,
+      if (instance.builderId case final value?) 'builderId': value,
+      if (instance.createdWith case final value?) 'createdWith': value,
+      if (instance.dueDate case final value?) 'dueDate': value,
+      if (instance.reason case final value?) 'reason': value,
     };

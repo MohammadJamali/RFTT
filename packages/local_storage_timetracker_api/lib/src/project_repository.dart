@@ -1,6 +1,6 @@
 import 'package:local_storage_timetracker_api/local_storage_timetracker_api.dart';
-import 'package:timetracker_api/timetracker_api.dart';
 import 'package:rxdart/subjects.dart';
+import 'package:timetracker_api/timetracker_api.dart';
 
 class LocalStorageProjectApi extends ProjectsApi {
   LocalStorageProjectApi()
