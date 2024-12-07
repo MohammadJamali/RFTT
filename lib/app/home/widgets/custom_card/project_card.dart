@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
-import 'package:timetracker/app/projects/widgets/custom_card/custom_card.dart';
+import 'package:timetracker/app/home/widgets/custom_card/custom_card.dart';
 import 'package:timetracker/utils/time.dart';
 import 'package:timetracker_api/timetracker_api.dart';
 

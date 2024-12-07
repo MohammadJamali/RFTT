@@ -4,6 +4,6 @@ part of 'settings_bloc.dart';
 class SettingsState with _$SettingsState {
   const factory SettingsState({
     Brightness? brightness,
-    TransactionActor? actor,
+    Account? account,
   }) = _SettingsState;
 }

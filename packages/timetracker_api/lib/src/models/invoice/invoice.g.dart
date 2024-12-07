@@ -26,6 +26,9 @@ _$InvoiceImpl _$$InvoiceImplFromJson(Map<String, dynamic> json) =>
       storageLocation: json['storageLocation'] as String?,
       channelId: json['channelId'] as String?,
       signature: json['signature'] as String?,
+      account: json['account'] == null
+          ? null
+          : Account.fromJson(json['account'] as Map<String, dynamic>),
       state: $enumDecodeNullable(_$InvoiceStateEnumMap, json['state']) ??
           InvoiceState.created,
     );
@@ -41,6 +44,7 @@ Map<String, dynamic> _$$InvoiceImplToJson(_$InvoiceImpl instance) =>
       if (instance.storageLocation case final value?) 'storageLocation': value,
       if (instance.channelId case final value?) 'channelId': value,
       if (instance.signature case final value?) 'signature': value,
+      if (instance.account case final value?) 'account': value,
       'state': _$InvoiceStateEnumMap[instance.state]!,
     };
 

@@ -20,3 +20,5 @@ const Map<CurrencySymbol, Currency> currencies = {
     decimals: 6,
   ),
 };
+
+const zeroAddress = '0x0000000000000000000000000000000000000000';

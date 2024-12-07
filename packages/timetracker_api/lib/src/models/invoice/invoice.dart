@@ -21,6 +21,7 @@ class Invoice with _$Invoice {
     String? storageLocation,
     String? channelId,
     String? signature,
+    Account? account,
     @Default(InvoiceState.created) InvoiceState state,
   }) = _Invoice;
 

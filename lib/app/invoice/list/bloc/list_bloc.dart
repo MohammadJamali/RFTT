@@ -10,27 +10,21 @@ part 'list_state.dart';
 part 'list_bloc.freezed.dart';
 
 class InvoiceListBloc extends Bloc<InvoiceListEvent, InvoiceListState> {
-  InvoiceListBloc(this.repository) : super(const InvoiceListState.initial()) {
+  InvoiceListBloc(
+    this.invoiceRepository,
+  ) : super(const InvoiceListState.initial()) {
     on<_InvoiceSearch>(_onSearch);
     on<_FetchInvoices>(_onfetchInvoiceList);
   }
-  final InvoiceRepository repository;
+  final InvoiceRepository invoiceRepository;
 
   FutureOr<void> _onSearch(
     _InvoiceSearch event,
     Emitter<InvoiceListState> emit,
   ) async {
-    final invoices = await repository.fetchInvoiceList();
-
-    invoices
-        .where(
-          (invoice) =>
-              invoice.requestInfo.payee.lastName?.toLowerCase().contains(
-                    event.query.toLowerCase(),
-                  ) ??
-              false,
-        )
-        .toList();
+    final invoices = await invoiceRepository.searchInvoicesByAccountName(
+      event.query.toLowerCase(),
+    );
 
     emit(InvoiceListState.loaded(invoices));
   }
@@ -39,7 +33,7 @@ class InvoiceListBloc extends Bloc<InvoiceListEvent, InvoiceListState> {
     _FetchInvoices event,
     Emitter<InvoiceListState> emit,
   ) async {
-    final invoices = await repository.fetchInvoiceList();
+    final invoices = await invoiceRepository.list();
     emit(InvoiceListState.loaded(invoices));
   }
 }

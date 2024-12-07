@@ -3,9 +3,9 @@ import 'package:timetracker_api/timetracker_api.dart';
 /// {@template project_api}
 /// The interface for an API that provides access to a list of projects.
 /// {@endtemplate}
-abstract class IProjectsApi {
+abstract class IProjectApi {
   /// {@macro project_api}
-  const IProjectsApi();
+  const IProjectApi();
 
   Future<List<Project>> list({String? id});
   Future<void> add(Project project);

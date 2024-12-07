@@ -2,7 +2,7 @@ import 'dart:ui';
 
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:timetracker/app/projects/bloc/projects_bloc.dart';
+import 'package:timetracker/app/home/bloc/home_bloc.dart';
 import 'package:timetracker_api/timetracker_api.dart';
 
 class AddEditProjectDialog extends StatefulWidget {
@@ -64,10 +64,10 @@ class _AddEditProjectDialogState extends State<AddEditProjectDialog> {
                       created: DateTime.now(),
                     );
 
-                widget.context.read<ProjectsBloc>().add(
+                widget.context.read<HomeBloc>().add(
                       widget.project == null
-                          ? ProjectsEvent.addProject(project)
-                          : ProjectsEvent.editProject(project),
+                          ? HomeEvent.addProject(project)
+                          : HomeEvent.editProject(project),
                     );
 
                 Navigator.pop(context);

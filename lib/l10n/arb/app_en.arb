@@ -2,7 +2,7 @@
   "@@locale": "en",
   "landing": "Saturn\nTime Tracker",
   "slogan": "A free, open-source time tracking tool\nDesigned for freelancers, agencies, and businesses",
-  "appTitle": "Saturn Time Tracker",
+  "appTitle": "Saturn",
   "@appTitle": {
     "description": "Text shown in the AppBar of the Counter Page"
   },

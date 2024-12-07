@@ -6,9 +6,9 @@ import 'package:timetracker_api/timetracker_api.dart';
 class InvoiceRepository {
   /// {@macro invoice_repository}
   const InvoiceRepository({
-    required INetworkInvoiceApi onlineApi,
+    required INetworkInvoiceApi networkApi,
     required ILocalStorageInvoiceApi localApi,
-  })  : _onlineApi = onlineApi,
+  })  : _onlineApi = networkApi,
         _localApi = localApi;
 
   final INetworkInvoiceApi _onlineApi;
@@ -22,6 +22,9 @@ class InvoiceRepository {
 
     await _localApi.add(invoice);
   }
+
+  Future<List<Invoice>> searchInvoicesByAccountName(String partialName) =>
+      _localApi.searchInvoicesByAccountName(partialName);
 
   Future<void> refreshState(String id) async {
     final invoices = await _localApi.list(id: id);

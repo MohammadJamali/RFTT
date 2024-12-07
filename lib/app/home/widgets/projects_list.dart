@@ -1,17 +1,17 @@
 import 'package:draggable_carousel_slider/draggable_carousel_slider.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:timetracker/app/projects/bloc/projects_bloc.dart';
-import 'package:timetracker/app/projects/widgets/add_edit_project_dialog.dart';
-import 'package:timetracker/app/projects/widgets/custom_card/project_card.dart';
-import 'package:timetracker/app/projects/widgets/custom_card/project_card_empty.dart';
+import 'package:timetracker/app/home/bloc/home_bloc.dart';
+import 'package:timetracker/app/home/widgets/add_edit_project_dialog.dart';
+import 'package:timetracker/app/home/widgets/custom_card/project_card.dart';
+import 'package:timetracker/app/home/widgets/custom_card/project_card_empty.dart';
 
 class ProjectsList extends StatelessWidget {
   const ProjectsList({super.key});
 
   @override
   Widget build(BuildContext context) {
-    return BlocBuilder<ProjectsBloc, ProjectsState>(
+    return BlocBuilder<HomeBloc, HomeState>(
       builder: (context, state) {
         if (state.projects.isEmpty) {
           return EmptyProjectCard(
@@ -27,8 +27,8 @@ class ProjectsList extends StatelessWidget {
               (project) => ProjectCard(
                 project: project,
                 onClicked: () {},
-                onDelete: () => context.read<ProjectsBloc>().add(
-                      ProjectsEvent.deleteProject(
+                onDelete: () => context.read<HomeBloc>().add(
+                      HomeEvent.deleteProject(
                         project.id,
                       ),
                     ),

@@ -3,7 +3,7 @@
 // ignore_for_file: type=lint
 // ignore_for_file: unused_element, deprecated_member_use, deprecated_member_use_from_same_package, use_function_type_syntax_for_parameters, unnecessary_const, avoid_init_to_null, invalid_override_different_default_values_named, prefer_expression_function_bodies, annotate_overrides, invalid_annotation_target, unnecessary_question_mark
 
-part of 'projects_bloc.dart';
+part of 'home_bloc.dart';
 
 // **************************************************************************
 // FreezedGenerator
@@ -15,7 +15,7 @@ final _privateConstructorUsedError = UnsupportedError(
     'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#adding-getters-and-methods-to-our-models');
 
 /// @nodoc
-mixin _$ProjectsEvent {
+mixin _$HomeEvent {
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function() started,
@@ -69,23 +69,22 @@ mixin _$ProjectsEvent {
 }
 
 /// @nodoc
-abstract class $ProjectsEventCopyWith<$Res> {
-  factory $ProjectsEventCopyWith(
-          ProjectsEvent value, $Res Function(ProjectsEvent) then) =
-      _$ProjectsEventCopyWithImpl<$Res, ProjectsEvent>;
+abstract class $HomeEventCopyWith<$Res> {
+  factory $HomeEventCopyWith(HomeEvent value, $Res Function(HomeEvent) then) =
+      _$HomeEventCopyWithImpl<$Res, HomeEvent>;
 }
 
 /// @nodoc
-class _$ProjectsEventCopyWithImpl<$Res, $Val extends ProjectsEvent>
-    implements $ProjectsEventCopyWith<$Res> {
-  _$ProjectsEventCopyWithImpl(this._value, this._then);
+class _$HomeEventCopyWithImpl<$Res, $Val extends HomeEvent>
+    implements $HomeEventCopyWith<$Res> {
+  _$HomeEventCopyWithImpl(this._value, this._then);
 
   // ignore: unused_field
   final $Val _value;
   // ignore: unused_field
   final $Res Function($Val) _then;
 
-  /// Create a copy of ProjectsEvent
+  /// Create a copy of HomeEvent
   /// with the given fields replaced by the non-null parameter values.
 }
 
@@ -98,13 +97,13 @@ abstract class _$$StartedImplCopyWith<$Res> {
 
 /// @nodoc
 class __$$StartedImplCopyWithImpl<$Res>
-    extends _$ProjectsEventCopyWithImpl<$Res, _$StartedImpl>
+    extends _$HomeEventCopyWithImpl<$Res, _$StartedImpl>
     implements _$$StartedImplCopyWith<$Res> {
   __$$StartedImplCopyWithImpl(
       _$StartedImpl _value, $Res Function(_$StartedImpl) _then)
       : super(_value, _then);
 
-  /// Create a copy of ProjectsEvent
+  /// Create a copy of HomeEvent
   /// with the given fields replaced by the non-null parameter values.
 }
 
@@ -115,7 +114,7 @@ class _$StartedImpl implements _Started {
 
   @override
   String toString() {
-    return 'ProjectsEvent.started()';
+    return 'HomeEvent.started()';
   }
 
   @override
@@ -202,7 +201,7 @@ class _$StartedImpl implements _Started {
   }
 }
 
-abstract class _Started implements ProjectsEvent {
+abstract class _Started implements HomeEvent {
   const factory _Started() = _$StartedImpl;
 }
 
@@ -219,13 +218,13 @@ abstract class _$$AddProjectImplCopyWith<$Res> {
 
 /// @nodoc
 class __$$AddProjectImplCopyWithImpl<$Res>
-    extends _$ProjectsEventCopyWithImpl<$Res, _$AddProjectImpl>
+    extends _$HomeEventCopyWithImpl<$Res, _$AddProjectImpl>
     implements _$$AddProjectImplCopyWith<$Res> {
   __$$AddProjectImplCopyWithImpl(
       _$AddProjectImpl _value, $Res Function(_$AddProjectImpl) _then)
       : super(_value, _then);
 
-  /// Create a copy of ProjectsEvent
+  /// Create a copy of HomeEvent
   /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
@@ -240,7 +239,7 @@ class __$$AddProjectImplCopyWithImpl<$Res>
     ));
   }
 
-  /// Create a copy of ProjectsEvent
+  /// Create a copy of HomeEvent
   /// with the given fields replaced by the non-null parameter values.
   @override
   @pragma('vm:prefer-inline')
@@ -261,7 +260,7 @@ class _$AddProjectImpl implements _AddProject {
 
   @override
   String toString() {
-    return 'ProjectsEvent.addProject(project: $project)';
+    return 'HomeEvent.addProject(project: $project)';
   }
 
   @override
@@ -275,7 +274,7 @@ class _$AddProjectImpl implements _AddProject {
   @override
   int get hashCode => Object.hash(runtimeType, project);
 
-  /// Create a copy of ProjectsEvent
+  /// Create a copy of HomeEvent
   /// with the given fields replaced by the non-null parameter values.
   @JsonKey(includeFromJson: false, includeToJson: false)
   @override
@@ -358,12 +357,12 @@ class _$AddProjectImpl implements _AddProject {
   }
 }
 
-abstract class _AddProject implements ProjectsEvent {
+abstract class _AddProject implements HomeEvent {
   const factory _AddProject(final Project project) = _$AddProjectImpl;
 
   Project get project;
 
-  /// Create a copy of ProjectsEvent
+  /// Create a copy of HomeEvent
   /// with the given fields replaced by the non-null parameter values.
   @JsonKey(includeFromJson: false, includeToJson: false)
   _$$AddProjectImplCopyWith<_$AddProjectImpl> get copyWith =>
@@ -383,13 +382,13 @@ abstract class _$$EditProjectImplCopyWith<$Res> {
 
 /// @nodoc
 class __$$EditProjectImplCopyWithImpl<$Res>
-    extends _$ProjectsEventCopyWithImpl<$Res, _$EditProjectImpl>
+    extends _$HomeEventCopyWithImpl<$Res, _$EditProjectImpl>
     implements _$$EditProjectImplCopyWith<$Res> {
   __$$EditProjectImplCopyWithImpl(
       _$EditProjectImpl _value, $Res Function(_$EditProjectImpl) _then)
       : super(_value, _then);
 
-  /// Create a copy of ProjectsEvent
+  /// Create a copy of HomeEvent
   /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
@@ -404,7 +403,7 @@ class __$$EditProjectImplCopyWithImpl<$Res>
     ));
   }
 
-  /// Create a copy of ProjectsEvent
+  /// Create a copy of HomeEvent
   /// with the given fields replaced by the non-null parameter values.
   @override
   @pragma('vm:prefer-inline')
@@ -425,7 +424,7 @@ class _$EditProjectImpl implements _EditProject {
 
   @override
   String toString() {
-    return 'ProjectsEvent.editProject(project: $project)';
+    return 'HomeEvent.editProject(project: $project)';
   }
 
   @override
@@ -439,7 +438,7 @@ class _$EditProjectImpl implements _EditProject {
   @override
   int get hashCode => Object.hash(runtimeType, project);
 
-  /// Create a copy of ProjectsEvent
+  /// Create a copy of HomeEvent
   /// with the given fields replaced by the non-null parameter values.
   @JsonKey(includeFromJson: false, includeToJson: false)
   @override
@@ -522,12 +521,12 @@ class _$EditProjectImpl implements _EditProject {
   }
 }
 
-abstract class _EditProject implements ProjectsEvent {
+abstract class _EditProject implements HomeEvent {
   const factory _EditProject(final Project project) = _$EditProjectImpl;
 
   Project get project;
 
-  /// Create a copy of ProjectsEvent
+  /// Create a copy of HomeEvent
   /// with the given fields replaced by the non-null parameter values.
   @JsonKey(includeFromJson: false, includeToJson: false)
   _$$EditProjectImplCopyWith<_$EditProjectImpl> get copyWith =>
@@ -545,13 +544,13 @@ abstract class _$$DeleteProjectImplCopyWith<$Res> {
 
 /// @nodoc
 class __$$DeleteProjectImplCopyWithImpl<$Res>
-    extends _$ProjectsEventCopyWithImpl<$Res, _$DeleteProjectImpl>
+    extends _$HomeEventCopyWithImpl<$Res, _$DeleteProjectImpl>
     implements _$$DeleteProjectImplCopyWith<$Res> {
   __$$DeleteProjectImplCopyWithImpl(
       _$DeleteProjectImpl _value, $Res Function(_$DeleteProjectImpl) _then)
       : super(_value, _then);
 
-  /// Create a copy of ProjectsEvent
+  /// Create a copy of HomeEvent
   /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
@@ -577,7 +576,7 @@ class _$DeleteProjectImpl implements _DeleteProject {
 
   @override
   String toString() {
-    return 'ProjectsEvent.deleteProject(id: $id)';
+    return 'HomeEvent.deleteProject(id: $id)';
   }
 
   @override
@@ -591,7 +590,7 @@ class _$DeleteProjectImpl implements _DeleteProject {
   @override
   int get hashCode => Object.hash(runtimeType, id);
 
-  /// Create a copy of ProjectsEvent
+  /// Create a copy of HomeEvent
   /// with the given fields replaced by the non-null parameter values.
   @JsonKey(includeFromJson: false, includeToJson: false)
   @override
@@ -674,12 +673,12 @@ class _$DeleteProjectImpl implements _DeleteProject {
   }
 }
 
-abstract class _DeleteProject implements ProjectsEvent {
+abstract class _DeleteProject implements HomeEvent {
   const factory _DeleteProject(final String id) = _$DeleteProjectImpl;
 
   String get id;
 
-  /// Create a copy of ProjectsEvent
+  /// Create a copy of HomeEvent
   /// with the given fields replaced by the non-null parameter values.
   @JsonKey(includeFromJson: false, includeToJson: false)
   _$$DeleteProjectImplCopyWith<_$DeleteProjectImpl> get copyWith =>
@@ -687,7 +686,7 @@ abstract class _DeleteProject implements ProjectsEvent {
 }
 
 /// @nodoc
-mixin _$ProjectsState {
+mixin _$HomeState {
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function() initial,
@@ -729,23 +728,22 @@ mixin _$ProjectsState {
 }
 
 /// @nodoc
-abstract class $ProjectsStateCopyWith<$Res> {
-  factory $ProjectsStateCopyWith(
-          ProjectsState value, $Res Function(ProjectsState) then) =
-      _$ProjectsStateCopyWithImpl<$Res, ProjectsState>;
+abstract class $HomeStateCopyWith<$Res> {
+  factory $HomeStateCopyWith(HomeState value, $Res Function(HomeState) then) =
+      _$HomeStateCopyWithImpl<$Res, HomeState>;
 }
 
 /// @nodoc
-class _$ProjectsStateCopyWithImpl<$Res, $Val extends ProjectsState>
-    implements $ProjectsStateCopyWith<$Res> {
-  _$ProjectsStateCopyWithImpl(this._value, this._then);
+class _$HomeStateCopyWithImpl<$Res, $Val extends HomeState>
+    implements $HomeStateCopyWith<$Res> {
+  _$HomeStateCopyWithImpl(this._value, this._then);
 
   // ignore: unused_field
   final $Val _value;
   // ignore: unused_field
   final $Res Function($Val) _then;
 
-  /// Create a copy of ProjectsState
+  /// Create a copy of HomeState
   /// with the given fields replaced by the non-null parameter values.
 }
 
@@ -758,13 +756,13 @@ abstract class _$$InitialImplCopyWith<$Res> {
 
 /// @nodoc
 class __$$InitialImplCopyWithImpl<$Res>
-    extends _$ProjectsStateCopyWithImpl<$Res, _$InitialImpl>
+    extends _$HomeStateCopyWithImpl<$Res, _$InitialImpl>
     implements _$$InitialImplCopyWith<$Res> {
   __$$InitialImplCopyWithImpl(
       _$InitialImpl _value, $Res Function(_$InitialImpl) _then)
       : super(_value, _then);
 
-  /// Create a copy of ProjectsState
+  /// Create a copy of HomeState
   /// with the given fields replaced by the non-null parameter values.
 }
 
@@ -775,7 +773,7 @@ class _$InitialImpl extends _Initial {
 
   @override
   String toString() {
-    return 'ProjectsState.initial()';
+    return 'HomeState.initial()';
   }
 
   @override
@@ -850,7 +848,7 @@ class _$InitialImpl extends _Initial {
   }
 }
 
-abstract class _Initial extends ProjectsState {
+abstract class _Initial extends HomeState {
   factory _Initial() = _$InitialImpl;
   _Initial._() : super._();
 }
@@ -866,13 +864,13 @@ abstract class _$$LoadedImplCopyWith<$Res> {
 
 /// @nodoc
 class __$$LoadedImplCopyWithImpl<$Res>
-    extends _$ProjectsStateCopyWithImpl<$Res, _$LoadedImpl>
+    extends _$HomeStateCopyWithImpl<$Res, _$LoadedImpl>
     implements _$$LoadedImplCopyWith<$Res> {
   __$$LoadedImplCopyWithImpl(
       _$LoadedImpl _value, $Res Function(_$LoadedImpl) _then)
       : super(_value, _then);
 
-  /// Create a copy of ProjectsState
+  /// Create a copy of HomeState
   /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
@@ -905,7 +903,7 @@ class _$LoadedImpl extends _Loaded {
 
   @override
   String toString() {
-    return 'ProjectsState.loaded(projects: $projects)';
+    return 'HomeState.loaded(projects: $projects)';
   }
 
   @override
@@ -920,7 +918,7 @@ class _$LoadedImpl extends _Loaded {
   int get hashCode =>
       Object.hash(runtimeType, const DeepCollectionEquality().hash(_projects));
 
-  /// Create a copy of ProjectsState
+  /// Create a copy of HomeState
   /// with the given fields replaced by the non-null parameter values.
   @JsonKey(includeFromJson: false, includeToJson: false)
   @override
@@ -991,13 +989,13 @@ class _$LoadedImpl extends _Loaded {
   }
 }
 
-abstract class _Loaded extends ProjectsState {
+abstract class _Loaded extends HomeState {
   factory _Loaded(final List<Project> projects) = _$LoadedImpl;
   _Loaded._() : super._();
 
   List<Project> get projects;
 
-  /// Create a copy of ProjectsState
+  /// Create a copy of HomeState
   /// with the given fields replaced by the non-null parameter values.
   @JsonKey(includeFromJson: false, includeToJson: false)
   _$$LoadedImplCopyWith<_$LoadedImpl> get copyWith =>

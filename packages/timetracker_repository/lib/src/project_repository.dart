@@ -6,10 +6,10 @@ import 'package:timetracker_api/timetracker_api.dart';
 class ProjectRepository {
   /// {@macro projects_repository}
   const ProjectRepository({
-    required IProjectsApi projectsApi,
+    required IProjectApi projectsApi,
   }) : _api = projectsApi;
 
-  final IProjectsApi _api;
+  final IProjectApi _api;
 
   Future<List<Project>> list({String? id}) => _api.list(id: id);
   Stream<Project> projectStream() => _api.projectStream();

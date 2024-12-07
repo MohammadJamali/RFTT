@@ -20,6 +20,8 @@ TransactionActor _$TransactionActorFromJson(Map<String, dynamic> json) {
 
 /// @nodoc
 mixin _$TransactionActor {
+  @JsonKey(includeToJson: false)
+  String? get id => throw _privateConstructorUsedError;
   String get type => throw _privateConstructorUsedError;
   String get value => throw _privateConstructorUsedError;
 
@@ -39,7 +41,8 @@ abstract class $TransactionActorCopyWith<$Res> {
           TransactionActor value, $Res Function(TransactionActor) then) =
       _$TransactionActorCopyWithImpl<$Res, TransactionActor>;
   @useResult
-  $Res call({String type, String value});
+  $Res call(
+      {@JsonKey(includeToJson: false) String? id, String type, String value});
 }
 
 /// @nodoc
@@ -57,10 +60,15 @@ class _$TransactionActorCopyWithImpl<$Res, $Val extends TransactionActor>
   @pragma('vm:prefer-inline')
   @override
   $Res call({
+    Object? id = freezed,
     Object? type = null,
     Object? value = null,
   }) {
     return _then(_value.copyWith(
+      id: freezed == id
+          ? _value.id
+          : id // ignore: cast_nullable_to_non_nullable
+              as String?,
       type: null == type
           ? _value.type
           : type // ignore: cast_nullable_to_non_nullable
@@ -81,7 +89,8 @@ abstract class _$$TransactionActorImplCopyWith<$Res>
       __$$TransactionActorImplCopyWithImpl<$Res>;
   @override
   @useResult
-  $Res call({String type, String value});
+  $Res call(
+      {@JsonKey(includeToJson: false) String? id, String type, String value});
 }
 
 /// @nodoc
@@ -97,10 +106,15 @@ class __$$TransactionActorImplCopyWithImpl<$Res>
   @pragma('vm:prefer-inline')
   @override
   $Res call({
+    Object? id = freezed,
     Object? type = null,
     Object? value = null,
   }) {
     return _then(_$TransactionActorImpl(
+      id: freezed == id
+          ? _value.id
+          : id // ignore: cast_nullable_to_non_nullable
+              as String?,
       type: null == type
           ? _value.type
           : type // ignore: cast_nullable_to_non_nullable
@@ -117,11 +131,17 @@ class __$$TransactionActorImplCopyWithImpl<$Res>
 
 @JsonSerializable(includeIfNull: false)
 class _$TransactionActorImpl implements _TransactionActor {
-  const _$TransactionActorImpl({required this.type, required this.value});
+  const _$TransactionActorImpl(
+      {@JsonKey(includeToJson: false) this.id,
+      required this.type,
+      required this.value});
 
   factory _$TransactionActorImpl.fromJson(Map<String, dynamic> json) =>
       _$$TransactionActorImplFromJson(json);
 
+  @override
+  @JsonKey(includeToJson: false)
+  final String? id;
   @override
   final String type;
   @override
@@ -129,7 +149,7 @@ class _$TransactionActorImpl implements _TransactionActor {
 
   @override
   String toString() {
-    return 'TransactionActor(type: $type, value: $value)';
+    return 'TransactionActor(id: $id, type: $type, value: $value)';
   }
 
   @override
@@ -137,13 +157,14 @@ class _$TransactionActorImpl implements _TransactionActor {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
             other is _$TransactionActorImpl &&
+            (identical(other.id, id) || other.id == id) &&
             (identical(other.type, type) || other.type == type) &&
             (identical(other.value, value) || other.value == value));
   }
 
   @JsonKey(includeFromJson: false, includeToJson: false)
   @override
-  int get hashCode => Object.hash(runtimeType, type, value);
+  int get hashCode => Object.hash(runtimeType, id, type, value);
 
   /// Create a copy of TransactionActor
   /// with the given fields replaced by the non-null parameter values.
@@ -164,12 +185,16 @@ class _$TransactionActorImpl implements _TransactionActor {
 
 abstract class _TransactionActor implements TransactionActor {
   const factory _TransactionActor(
-      {required final String type,
+      {@JsonKey(includeToJson: false) final String? id,
+      required final String type,
       required final String value}) = _$TransactionActorImpl;
 
   factory _TransactionActor.fromJson(Map<String, dynamic> json) =
       _$TransactionActorImpl.fromJson;
 
+  @override
+  @JsonKey(includeToJson: false)
+  String? get id;
   @override
   String get type;
   @override

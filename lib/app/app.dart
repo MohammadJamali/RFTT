@@ -1,9 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:local_storage_timetracker_api/local_storage_timetracker_api.dart';
-import 'package:timetracker/app/home/view/home.dart';
+import 'package:network_timetracker_api/network_timetracker_api.dart';
+import 'package:timetracker/app/account/account.dart';
+import 'package:timetracker/app/home/view/home_page.dart';
 import 'package:timetracker/app/landing/landing.dart';
-import 'package:timetracker/app/projects/view/projects_page.dart';
 import 'package:timetracker/app/settings/bloc/settings_bloc.dart';
 import 'package:timetracker/app/settings/view/settings.dart';
 import 'package:timetracker/app/tasks/tasks_page.dart';
@@ -25,34 +26,43 @@ class App extends StatelessWidget {
       supportedLocales: AppLocalizations.supportedLocales,
       routes: {
         LandingPage.route: (_) => const LandingPage(),
-        ProjectsPage.route: (_) => const ProjectsPage(),
+        HomePage.route: (_) => const HomePage(),
         TasksPage.route: (_) => const TasksPage(),
         TimerPage.route: (_) => const TimerPage(),
         SettingsPage.route: (_) => const SettingsPage(),
+        AccountFormPage.route: (_) => const AccountFormPage(),
       },
       home: MultiRepositoryProvider(
         providers: [
           RepositoryProvider(
+            create: (_) => AccountRepository(
+              localApi: SqliteStorageAccountApi(),
+            ),
+          ),
+          RepositoryProvider(
             create: (_) => InvoiceRepository(
-              localApi: LocalStorageInvoiceApi(),
+              localApi: SqliteStorageInvoiceApi(),
+              networkApi: NetworkInvoiceApi(),
             ),
           ),
           RepositoryProvider(
             create: (_) => ProjectRepository(
-              projectsApi: LocalStorageProjectApi(),
+              projectsApi: SqliteStorageProjectApi(),
             ),
           ),
           RepositoryProvider(
             create: (_) => TaskRepository(
-              tasksApi: LocalStorageTaskApi(),
+              tasksApi: SqliteStorageTaskApi(),
             ),
           ),
         ],
         child: BlocProvider(
-          create: (context) => SettingsBloc(),
+          create: (context) => SettingsBloc(
+            context.read<AccountRepository>(),
+          ),
           child: BlocBuilder<SettingsBloc, SettingsState>(
             builder: (_, setting) {
-              if (setting.actor != null) {
+              if (setting.account != null) {
                 return const HomePage();
               }
               return const LandingPage();

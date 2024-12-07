@@ -20,7 +20,7 @@ mixin _$SettingsEvent {
   TResult when<TResult extends Object?>({
     required TResult Function() started,
     required TResult Function(AppBrightness brightness) brightnessChanged,
-    required TResult Function(String walletAddress) login,
+    required TResult Function(TransactionActor actor) login,
     required TResult Function() logout,
   }) =>
       throw _privateConstructorUsedError;
@@ -28,7 +28,7 @@ mixin _$SettingsEvent {
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? started,
     TResult? Function(AppBrightness brightness)? brightnessChanged,
-    TResult? Function(String walletAddress)? login,
+    TResult? Function(TransactionActor actor)? login,
     TResult? Function()? logout,
   }) =>
       throw _privateConstructorUsedError;
@@ -36,7 +36,7 @@ mixin _$SettingsEvent {
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? started,
     TResult Function(AppBrightness brightness)? brightnessChanged,
-    TResult Function(String walletAddress)? login,
+    TResult Function(TransactionActor actor)? login,
     TResult Function()? logout,
     required TResult orElse(),
   }) =>
@@ -132,7 +132,7 @@ class _$StartedImpl implements _Started {
   TResult when<TResult extends Object?>({
     required TResult Function() started,
     required TResult Function(AppBrightness brightness) brightnessChanged,
-    required TResult Function(String walletAddress) login,
+    required TResult Function(TransactionActor actor) login,
     required TResult Function() logout,
   }) {
     return started();
@@ -143,7 +143,7 @@ class _$StartedImpl implements _Started {
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? started,
     TResult? Function(AppBrightness brightness)? brightnessChanged,
-    TResult? Function(String walletAddress)? login,
+    TResult? Function(TransactionActor actor)? login,
     TResult? Function()? logout,
   }) {
     return started?.call();
@@ -154,7 +154,7 @@ class _$StartedImpl implements _Started {
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? started,
     TResult Function(AppBrightness brightness)? brightnessChanged,
-    TResult Function(String walletAddress)? login,
+    TResult Function(TransactionActor actor)? login,
     TResult Function()? logout,
     required TResult orElse(),
   }) {
@@ -278,7 +278,7 @@ class _$BrightnessChangedImpl implements _BrightnessChanged {
   TResult when<TResult extends Object?>({
     required TResult Function() started,
     required TResult Function(AppBrightness brightness) brightnessChanged,
-    required TResult Function(String walletAddress) login,
+    required TResult Function(TransactionActor actor) login,
     required TResult Function() logout,
   }) {
     return brightnessChanged(brightness);
@@ -289,7 +289,7 @@ class _$BrightnessChangedImpl implements _BrightnessChanged {
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? started,
     TResult? Function(AppBrightness brightness)? brightnessChanged,
-    TResult? Function(String walletAddress)? login,
+    TResult? Function(TransactionActor actor)? login,
     TResult? Function()? logout,
   }) {
     return brightnessChanged?.call(brightness);
@@ -300,7 +300,7 @@ class _$BrightnessChangedImpl implements _BrightnessChanged {
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? started,
     TResult Function(AppBrightness brightness)? brightnessChanged,
-    TResult Function(String walletAddress)? login,
+    TResult Function(TransactionActor actor)? login,
     TResult Function()? logout,
     required TResult orElse(),
   }) {
@@ -367,7 +367,9 @@ abstract class _$$LoggedInImplCopyWith<$Res> {
           _$LoggedInImpl value, $Res Function(_$LoggedInImpl) then) =
       __$$LoggedInImplCopyWithImpl<$Res>;
   @useResult
-  $Res call({String walletAddress});
+  $Res call({TransactionActor actor});
+
+  $TransactionActorCopyWith<$Res> get actor;
 }
 
 /// @nodoc
@@ -383,28 +385,38 @@ class __$$LoggedInImplCopyWithImpl<$Res>
   @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? walletAddress = null,
+    Object? actor = null,
   }) {
     return _then(_$LoggedInImpl(
-      null == walletAddress
-          ? _value.walletAddress
-          : walletAddress // ignore: cast_nullable_to_non_nullable
-              as String,
+      null == actor
+          ? _value.actor
+          : actor // ignore: cast_nullable_to_non_nullable
+              as TransactionActor,
     ));
+  }
+
+  /// Create a copy of SettingsEvent
+  /// with the given fields replaced by the non-null parameter values.
+  @override
+  @pragma('vm:prefer-inline')
+  $TransactionActorCopyWith<$Res> get actor {
+    return $TransactionActorCopyWith<$Res>(_value.actor, (value) {
+      return _then(_value.copyWith(actor: value));
+    });
   }
 }
 
 /// @nodoc
 
 class _$LoggedInImpl implements _LoggedIn {
-  const _$LoggedInImpl(this.walletAddress);
+  const _$LoggedInImpl(this.actor);
 
   @override
-  final String walletAddress;
+  final TransactionActor actor;
 
   @override
   String toString() {
-    return 'SettingsEvent.login(walletAddress: $walletAddress)';
+    return 'SettingsEvent.login(actor: $actor)';
   }
 
   @override
@@ -412,12 +424,11 @@ class _$LoggedInImpl implements _LoggedIn {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
             other is _$LoggedInImpl &&
-            (identical(other.walletAddress, walletAddress) ||
-                other.walletAddress == walletAddress));
+            (identical(other.actor, actor) || other.actor == actor));
   }
 
   @override
-  int get hashCode => Object.hash(runtimeType, walletAddress);
+  int get hashCode => Object.hash(runtimeType, actor);
 
   /// Create a copy of SettingsEvent
   /// with the given fields replaced by the non-null parameter values.
@@ -432,10 +443,10 @@ class _$LoggedInImpl implements _LoggedIn {
   TResult when<TResult extends Object?>({
     required TResult Function() started,
     required TResult Function(AppBrightness brightness) brightnessChanged,
-    required TResult Function(String walletAddress) login,
+    required TResult Function(TransactionActor actor) login,
     required TResult Function() logout,
   }) {
-    return login(walletAddress);
+    return login(actor);
   }
 
   @override
@@ -443,10 +454,10 @@ class _$LoggedInImpl implements _LoggedIn {
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? started,
     TResult? Function(AppBrightness brightness)? brightnessChanged,
-    TResult? Function(String walletAddress)? login,
+    TResult? Function(TransactionActor actor)? login,
     TResult? Function()? logout,
   }) {
-    return login?.call(walletAddress);
+    return login?.call(actor);
   }
 
   @override
@@ -454,12 +465,12 @@ class _$LoggedInImpl implements _LoggedIn {
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? started,
     TResult Function(AppBrightness brightness)? brightnessChanged,
-    TResult Function(String walletAddress)? login,
+    TResult Function(TransactionActor actor)? login,
     TResult Function()? logout,
     required TResult orElse(),
   }) {
     if (login != null) {
-      return login(walletAddress);
+      return login(actor);
     }
     return orElse();
   }
@@ -503,9 +514,9 @@ class _$LoggedInImpl implements _LoggedIn {
 }
 
 abstract class _LoggedIn implements SettingsEvent {
-  const factory _LoggedIn(final String walletAddress) = _$LoggedInImpl;
+  const factory _LoggedIn(final TransactionActor actor) = _$LoggedInImpl;
 
-  String get walletAddress;
+  TransactionActor get actor;
 
   /// Create a copy of SettingsEvent
   /// with the given fields replaced by the non-null parameter values.
@@ -557,7 +568,7 @@ class _$LoggedoutImpl implements _Loggedout {
   TResult when<TResult extends Object?>({
     required TResult Function() started,
     required TResult Function(AppBrightness brightness) brightnessChanged,
-    required TResult Function(String walletAddress) login,
+    required TResult Function(TransactionActor actor) login,
     required TResult Function() logout,
   }) {
     return logout();
@@ -568,7 +579,7 @@ class _$LoggedoutImpl implements _Loggedout {
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? started,
     TResult? Function(AppBrightness brightness)? brightnessChanged,
-    TResult? Function(String walletAddress)? login,
+    TResult? Function(TransactionActor actor)? login,
     TResult? Function()? logout,
   }) {
     return logout?.call();
@@ -579,7 +590,7 @@ class _$LoggedoutImpl implements _Loggedout {
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? started,
     TResult Function(AppBrightness brightness)? brightnessChanged,
-    TResult Function(String walletAddress)? login,
+    TResult Function(TransactionActor actor)? login,
     TResult Function()? logout,
     required TResult orElse(),
   }) {
@@ -634,7 +645,7 @@ abstract class _Loggedout implements SettingsEvent {
 /// @nodoc
 mixin _$SettingsState {
   Brightness? get brightness => throw _privateConstructorUsedError;
-  TransactionActor? get actor => throw _privateConstructorUsedError;
+  Account? get account => throw _privateConstructorUsedError;
 
   /// Create a copy of SettingsState
   /// with the given fields replaced by the non-null parameter values.
@@ -649,9 +660,9 @@ abstract class $SettingsStateCopyWith<$Res> {
           SettingsState value, $Res Function(SettingsState) then) =
       _$SettingsStateCopyWithImpl<$Res, SettingsState>;
   @useResult
-  $Res call({Brightness? brightness, TransactionActor? actor});
+  $Res call({Brightness? brightness, Account? account});
 
-  $TransactionActorCopyWith<$Res>? get actor;
+  $AccountCopyWith<$Res>? get account;
 }
 
 /// @nodoc
@@ -670,17 +681,17 @@ class _$SettingsStateCopyWithImpl<$Res, $Val extends SettingsState>
   @override
   $Res call({
     Object? brightness = freezed,
-    Object? actor = freezed,
+    Object? account = freezed,
   }) {
     return _then(_value.copyWith(
       brightness: freezed == brightness
           ? _value.brightness
           : brightness // ignore: cast_nullable_to_non_nullable
               as Brightness?,
-      actor: freezed == actor
-          ? _value.actor
-          : actor // ignore: cast_nullable_to_non_nullable
-              as TransactionActor?,
+      account: freezed == account
+          ? _value.account
+          : account // ignore: cast_nullable_to_non_nullable
+              as Account?,
     ) as $Val);
   }
 
@@ -688,13 +699,13 @@ class _$SettingsStateCopyWithImpl<$Res, $Val extends SettingsState>
   /// with the given fields replaced by the non-null parameter values.
   @override
   @pragma('vm:prefer-inline')
-  $TransactionActorCopyWith<$Res>? get actor {
-    if (_value.actor == null) {
+  $AccountCopyWith<$Res>? get account {
+    if (_value.account == null) {
       return null;
     }
 
-    return $TransactionActorCopyWith<$Res>(_value.actor!, (value) {
-      return _then(_value.copyWith(actor: value) as $Val);
+    return $AccountCopyWith<$Res>(_value.account!, (value) {
+      return _then(_value.copyWith(account: value) as $Val);
     });
   }
 }
@@ -707,10 +718,10 @@ abstract class _$$SettingsStateImplCopyWith<$Res>
       __$$SettingsStateImplCopyWithImpl<$Res>;
   @override
   @useResult
-  $Res call({Brightness? brightness, TransactionActor? actor});
+  $Res call({Brightness? brightness, Account? account});
 
   @override
-  $TransactionActorCopyWith<$Res>? get actor;
+  $AccountCopyWith<$Res>? get account;
 }
 
 /// @nodoc
@@ -727,17 +738,17 @@ class __$$SettingsStateImplCopyWithImpl<$Res>
   @override
   $Res call({
     Object? brightness = freezed,
-    Object? actor = freezed,
+    Object? account = freezed,
   }) {
     return _then(_$SettingsStateImpl(
       brightness: freezed == brightness
           ? _value.brightness
           : brightness // ignore: cast_nullable_to_non_nullable
               as Brightness?,
-      actor: freezed == actor
-          ? _value.actor
-          : actor // ignore: cast_nullable_to_non_nullable
-              as TransactionActor?,
+      account: freezed == account
+          ? _value.account
+          : account // ignore: cast_nullable_to_non_nullable
+              as Account?,
     ));
   }
 }
@@ -745,16 +756,16 @@ class __$$SettingsStateImplCopyWithImpl<$Res>
 /// @nodoc
 
 class _$SettingsStateImpl implements _SettingsState {
-  const _$SettingsStateImpl({this.brightness, this.actor});
+  const _$SettingsStateImpl({this.brightness, this.account});
 
   @override
   final Brightness? brightness;
   @override
-  final TransactionActor? actor;
+  final Account? account;
 
   @override
   String toString() {
-    return 'SettingsState(brightness: $brightness, actor: $actor)';
+    return 'SettingsState(brightness: $brightness, account: $account)';
   }
 
   @override
@@ -764,11 +775,11 @@ class _$SettingsStateImpl implements _SettingsState {
             other is _$SettingsStateImpl &&
             (identical(other.brightness, brightness) ||
                 other.brightness == brightness) &&
-            (identical(other.actor, actor) || other.actor == actor));
+            (identical(other.account, account) || other.account == account));
   }
 
   @override
-  int get hashCode => Object.hash(runtimeType, brightness, actor);
+  int get hashCode => Object.hash(runtimeType, brightness, account);
 
   /// Create a copy of SettingsState
   /// with the given fields replaced by the non-null parameter values.
@@ -782,12 +793,12 @@ class _$SettingsStateImpl implements _SettingsState {
 abstract class _SettingsState implements SettingsState {
   const factory _SettingsState(
       {final Brightness? brightness,
-      final TransactionActor? actor}) = _$SettingsStateImpl;
+      final Account? account}) = _$SettingsStateImpl;
 
   @override
   Brightness? get brightness;
   @override
-  TransactionActor? get actor;
+  Account? get account;
 
   /// Create a copy of SettingsState
   /// with the given fields replaced by the non-null parameter values.

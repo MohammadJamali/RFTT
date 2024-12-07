@@ -7,25 +7,40 @@ import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:reown_appkit/reown_appkit.dart';
 import 'package:timetracker/app/settings/enums/brightness.dart';
 import 'package:timetracker_api/timetracker_api.dart';
+import 'package:timetracker_repository/timetracker_repository.dart';
+import 'package:uuid/uuid.dart';
 
 part 'settings_event.dart';
 part 'settings_state.dart';
 part 'settings_bloc.freezed.dart';
 
 class SettingsBloc extends Bloc<SettingsEvent, SettingsState> {
-  SettingsBloc()
+  SettingsBloc(this._accountRepository)
       : _appKit = Completer<ReownAppKit>(),
         super(const SettingsState()) {
+    _initializeAppKit();
+    on<_BrightnessChanged>(_onBrightnessChanged);
+    on<_LoggedIn>(_onLoggedIn);
+    on<_Loggedout>(_onLoggedout);
+  }
+
+  static const String namespace = 'eip155';
+
+  final Completer<ReownAppKit> _appKit;
+  final AccountRepository _accountRepository;
+  ReownAppKitModal? _appKitModal;
+
+  void _initializeAppKit() {
     ReownAppKitModalNetworks.removeSupportedNetworks('solana');
     _appKit.complete(
       ReownAppKit.createInstance(
         projectId: '99d47b5d1a6c90d04c710ce5cc5b6ee0',
         metadata: const PairingMetadata(
-          name: 'Time Tracker',
+          name: 'Saturn',
           description: 'Monitize your time using cryptocurrency',
-          url: 'https://timetracker.iamjamali.ir',
+          url: 'https://saturn.iamjamali.ir',
           icons: [
-            'https://raw.githubusercontent.com/MohammadJamali/RequestFinanceTimeTracker/refs/heads/main/assets/images/icon_square.png',
+            'https://raw.githubusercontent.com/MohammadJamali/Saturn/refs/heads/main/assets/images/icon_square.png',
           ],
         ),
       ),
@@ -37,16 +52,7 @@ class SettingsBloc extends Bloc<SettingsEvent, SettingsState> {
       value.onSessionExpire.subscribe(_onSessionExpire);
       value.onSessionPing.subscribe(_onSessionPing);
     });
-
-    on<_BrightnessChanged>(_onBrightnessChanged);
-    on<_LoggedIn>(_onLoggedIn);
-    on<_Loggedout>(_onLoggedout);
   }
-
-  static const String namespace = 'eip155';
-
-  final Completer<ReownAppKit> _appKit;
-  ReownAppKitModal? _appKitModal;
 
   @override
   Future<void> close() async {
@@ -69,7 +75,7 @@ class SettingsBloc extends Bloc<SettingsEvent, SettingsState> {
 
     await _appKitModal?.init();
 
-    if ((_appKitModal?.isConnected ?? false) && state.actor == null) {
+    if ((_appKitModal?.isConnected ?? false) && state.account == null) {
       _onSessionConnect(null);
     }
 
@@ -87,7 +93,14 @@ class SettingsBloc extends Bloc<SettingsEvent, SettingsState> {
     final address = walletAddress();
     if (address == null) return;
 
-    add(SettingsEvent.login(address));
+    add(
+      SettingsEvent.login(
+        TransactionActor(
+          type: 'ethereumAddress',
+          value: address,
+        ),
+      ),
+    );
   }
 
   void _onSessionEvent(SessionEvent? args) {
@@ -118,24 +131,26 @@ class SettingsBloc extends Bloc<SettingsEvent, SettingsState> {
     emit(state.copyWith(brightness: brightness));
   }
 
-  FutureOr<void> _onLoggedIn(
+  Future<void> _onLoggedIn(
     _LoggedIn event,
     Emitter<SettingsState> emit,
-  ) {
-    emit(
-      state.copyWith(
-        actor: TransactionActor(
-          type: 'ethereumAddress',
-          value: event.walletAddress,
-        ),
-      ),
-    );
+  ) async {
+    var account = await _accountRepository.getAccountByTransactionActor(event.actor);
+    if (account == null) {
+      final accountId = const Uuid().v4();
+      await _accountRepository.add(Account(id: accountId));
+      await _accountRepository.addTransactionActor(accountId, event.actor);
+
+      account = await _accountRepository.getAccountByTransactionActor(event.actor);
+    }
+
+    emit(state.copyWith(account: account));
   }
 
   FutureOr<void> _onLoggedout(
     _Loggedout event,
     Emitter<SettingsState> emit,
   ) {
-    emit(state.copyWith(actor: null));
+    emit(state.copyWith(account: null));
   }
 }

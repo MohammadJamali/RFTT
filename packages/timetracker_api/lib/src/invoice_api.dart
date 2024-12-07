@@ -1,4 +1,3 @@
-import 'package:timetracker_api/src/models/invoice/invoice_transactions/invoice_transactions.dart';
 import 'package:timetracker_api/timetracker_api.dart';
 
 typedef SignWithWalletCallBack = Future<String> Function(String data);
@@ -33,6 +32,7 @@ abstract class ILocalStorageInvoiceApi implements _IInvoiceApi {
   const ILocalStorageInvoiceApi();
 
   Future<void> add(Invoice invoice);
+  Future<List<Invoice>> searchInvoicesByAccountName(String partialName);
 }
 
 /// Error thrown when a [Invoice] with a given id is not found.

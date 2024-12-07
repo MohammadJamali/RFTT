@@ -9,6 +9,7 @@ part of 'transaction_actor.dart';
 _$TransactionActorImpl _$$TransactionActorImplFromJson(
         Map<String, dynamic> json) =>
     _$TransactionActorImpl(
+      id: json['id'] as String?,
       type: json['type'] as String,
       value: json['value'] as String,
     );

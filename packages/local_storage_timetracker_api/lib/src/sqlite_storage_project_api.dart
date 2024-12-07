@@ -3,7 +3,7 @@ import 'package:local_storage_timetracker_api/src/utils/database.dart';
 import 'package:rxdart/subjects.dart';
 import 'package:timetracker_api/timetracker_api.dart';
 
-class ProjectRepository extends IProjectsApi {
+class SqliteStorageProjectApi extends IProjectApi {
   final _dbHelper = DatabaseHelper();
   final _projectStream = BehaviorSubject<Project>();
 

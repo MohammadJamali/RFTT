@@ -35,12 +35,12 @@ class InvoiceCard extends StatelessWidget {
               ),
               const SizedBox(height: 16),
               Label.row({
-                'Amount': '${invoice.requestInfo.expectedAmount} '
-                    '(${invoice.requestInfo.currency.name})',
+                'Amount': '${invoice.requestInfo?.expectedAmount ?? 0} '
+                    '(${invoice.requestInfo?.currency.name ?? '-'})',
                 'No': invoice.storageLocation ?? 'Draft',
                 'Date': DateFormat.yMMMd().format(
                   parseDateTimeFromTimestamp(
-                    invoice.requestInfo.timestamp ??
+                    invoice.requestInfo?.timestamp ??
                         getCurrentTimestampInSeconds(),
                   ),
                 ),

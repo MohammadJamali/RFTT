@@ -1,5 +1,5 @@
-import 'package:sqflite/sqflite.dart';
 import 'package:path/path.dart';
+import 'package:sqflite/sqflite.dart';
 
 class DatabaseHelper {
   factory DatabaseHelper() => _instance;
@@ -7,6 +7,7 @@ class DatabaseHelper {
   DatabaseHelper._internal();
 
   static const String dbName = 'timetracker.db';
+  static const String tableAccounts = 'accounts';
   static const String tableProjects = 'projects';
   static const String tableTasks = 'tasks';
 
@@ -33,17 +34,32 @@ class DatabaseHelper {
       path,
       version: 1,
       onCreate: (db, version) async {
+        // Account table
+        await db.execute('''
+          CREATE TABLE $tableAccounts (
+            id TEXT PRIMARY KEY,
+            title TEXT,
+            email TEXT,
+            name TEXT,
+            profilePicture TEXT,
+            totalInvoices INTEGER DEFAULT 0,
+            paiedInvoices INTEGER DEFAULT 0
+          )
+        ''');
+
         // Project table
         await db.execute('''
           CREATE TABLE $tableProjects (
             id TEXT PRIMARY KEY,
-            title TEXT NOT NULL,
-            created TEXT NOT NULL,
+            accountId TEXT,
+            title TEXT,
+            created TEXT,
             description TEXT,
             duration INTEGER DEFAULT 0,
             finishedTasks INTEGER DEFAULT 0,
             totalTasks INTEGER DEFAULT 0,
-            deadline TEXT
+            deadline TEXT,
+            FOREIGN KEY (accountId) REFERENCES $tableProjects (id) ON DELETE SET NULL
           )
         ''');
 
@@ -51,14 +67,14 @@ class DatabaseHelper {
         await db.execute('''
           CREATE TABLE $tableTasks (
             id TEXT PRIMARY KEY,
-            projectId TEXT NOT NULL,
-            title TEXT NOT NULL,
-            created TEXT NOT NULL,
+            projectId TEXT,
+            title TEXT,
+            created TEXT,
             duration INTEGER DEFAULT 0,
             description TEXT,
             deadline TEXT,
             tags TEXT,
-            FOREIGN KEY (projectId) REFERENCES project (id) ON DELETE CASCADE
+            FOREIGN KEY (projectId) REFERENCES $tableProjects (id) ON DELETE CASCADE
           )
         ''');
 
@@ -67,11 +83,13 @@ class DatabaseHelper {
           CREATE TABLE $tableInvoices (
             id TEXT PRIMARY KEY,
             projectId TEXT,
+            signerId TEXT,
             storageLocation TEXT,
             channelId TEXT,
             signature TEXT,
             state TEXT DEFAULT 'created',
-            FOREIGN KEY (projectId) REFERENCES project (id) ON DELETE CASCADE
+            FOREIGN KEY (projectId) REFERENCES $tableProjects (id) ON DELETE SET NULL,
+            FOREIGN KEY (signerId) REFERENCES $tableTransactionsActor (id) ON DELETE SET NULL
           )
         ''');
 
@@ -79,45 +97,46 @@ class DatabaseHelper {
         await db.execute('''
           CREATE TABLE $tableRequestsInfo (
             id TEXT PRIMARY KEY,
-            invoiceId TEXT NOT NULL,
-            currency TEXT NOT NULL,
-            expectedAmount TEXT NOT NULL,
-            payee TEXT NOT NULL,
+            invoiceId TEXT,
+            currency TEXT,
+            expectedAmount TEXT,
+            payee TEXT,
             timestamp INTEGER,
-            FOREIGN KEY (invoiceId) REFERENCES invoice (id) ON DELETE CASCADE
+            FOREIGN KEY (invoiceId) REFERENCES $tableInvoices (id) ON DELETE CASCADE
           )
         ''');
 
         await db.execute('''
           CREATE TABLE $tablePaymentsNetwork (
             id TEXT PRIMARY KEY,
-            invoiceId TEXT NOT NULL,
-            paymentNetworkName TEXT NOT NULL,
-            paymentAddress TEXT NOT NULL,
-            feeAddress TEXT NOT NULL,
-            feeAmount TEXT NOT NULL,
-            FOREIGN KEY (invoiceId) REFERENCES invoice (id) ON DELETE CASCADE
+            invoiceId TEXT,
+            paymentNetworkName TEXT,
+            paymentAddress TEXT,
+            feeAddress TEXT,
+            feeAmount TEXT,
+            FOREIGN KEY (invoiceId) REFERENCES $tableInvoices (id) ON DELETE CASCADE
           )
         ''');
 
         await db.execute('''
           CREATE TABLE $tableInvoiceContentData (
             id TEXT PRIMARY KEY,
-            invoiceId TEXT NOT NULL,
+            invoiceId TEXT,
             builderId TEXT,
             createdWith TEXT,
             dueDate TEXT,
             reason TEXT,
-            FOREIGN KEY (invoiceId) REFERENCES invoice (id) ON DELETE CASCADE
+            FOREIGN KEY (invoiceId) REFERENCES $tableInvoices (id) ON DELETE CASCADE
           )
         ''');
 
         await db.execute('''
           CREATE TABLE $tableTransactionsActor (
-            type TEXT PRIMARY KEY,
-            value TEXT PRIMARY KEY,
-            invoiceId TEXT NOT NULL,
-            FOREIGN KEY (invoiceId) REFERENCES invoice (id) ON DELETE CASCADE
+            id TEXT PRIMARY KEY,
+            accountId TEXT,
+            type TEXT,
+            value TEXT,
+            FOREIGN KEY (accountId) REFERENCES $tableAccounts (id) ON DELETE SET NULL
           )
         ''');
       },

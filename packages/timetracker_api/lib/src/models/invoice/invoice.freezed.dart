@@ -29,6 +29,7 @@ mixin _$Invoice {
   String? get storageLocation => throw _privateConstructorUsedError;
   String? get channelId => throw _privateConstructorUsedError;
   String? get signature => throw _privateConstructorUsedError;
+  Account? get account => throw _privateConstructorUsedError;
   InvoiceState get state => throw _privateConstructorUsedError;
 
   /// Serializes this Invoice to a JSON map.
@@ -55,12 +56,14 @@ abstract class $InvoiceCopyWith<$Res> {
       String? storageLocation,
       String? channelId,
       String? signature,
+      Account? account,
       InvoiceState state});
 
   $RequestInfoCopyWith<$Res>? get requestInfo;
   $PaymentNetworkCopyWith<$Res>? get paymentNetwork;
   $ContentDataCopyWith<$Res>? get contentData;
   $TransactionActorCopyWith<$Res>? get signer;
+  $AccountCopyWith<$Res>? get account;
 }
 
 /// @nodoc
@@ -87,6 +90,7 @@ class _$InvoiceCopyWithImpl<$Res, $Val extends Invoice>
     Object? storageLocation = freezed,
     Object? channelId = freezed,
     Object? signature = freezed,
+    Object? account = freezed,
     Object? state = null,
   }) {
     return _then(_value.copyWith(
@@ -126,6 +130,10 @@ class _$InvoiceCopyWithImpl<$Res, $Val extends Invoice>
           ? _value.signature
           : signature // ignore: cast_nullable_to_non_nullable
               as String?,
+      account: freezed == account
+          ? _value.account
+          : account // ignore: cast_nullable_to_non_nullable
+              as Account?,
       state: null == state
           ? _value.state
           : state // ignore: cast_nullable_to_non_nullable
@@ -188,6 +196,20 @@ class _$InvoiceCopyWithImpl<$Res, $Val extends Invoice>
       return _then(_value.copyWith(signer: value) as $Val);
     });
   }
+
+  /// Create a copy of Invoice
+  /// with the given fields replaced by the non-null parameter values.
+  @override
+  @pragma('vm:prefer-inline')
+  $AccountCopyWith<$Res>? get account {
+    if (_value.account == null) {
+      return null;
+    }
+
+    return $AccountCopyWith<$Res>(_value.account!, (value) {
+      return _then(_value.copyWith(account: value) as $Val);
+    });
+  }
 }
 
 /// @nodoc
@@ -207,6 +229,7 @@ abstract class _$$InvoiceImplCopyWith<$Res> implements $InvoiceCopyWith<$Res> {
       String? storageLocation,
       String? channelId,
       String? signature,
+      Account? account,
       InvoiceState state});
 
   @override
@@ -217,6 +240,8 @@ abstract class _$$InvoiceImplCopyWith<$Res> implements $InvoiceCopyWith<$Res> {
   $ContentDataCopyWith<$Res>? get contentData;
   @override
   $TransactionActorCopyWith<$Res>? get signer;
+  @override
+  $AccountCopyWith<$Res>? get account;
 }
 
 /// @nodoc
@@ -241,6 +266,7 @@ class __$$InvoiceImplCopyWithImpl<$Res>
     Object? storageLocation = freezed,
     Object? channelId = freezed,
     Object? signature = freezed,
+    Object? account = freezed,
     Object? state = null,
   }) {
     return _then(_$InvoiceImpl(
@@ -280,6 +306,10 @@ class __$$InvoiceImplCopyWithImpl<$Res>
           ? _value.signature
           : signature // ignore: cast_nullable_to_non_nullable
               as String?,
+      account: freezed == account
+          ? _value.account
+          : account // ignore: cast_nullable_to_non_nullable
+              as Account?,
       state: null == state
           ? _value.state
           : state // ignore: cast_nullable_to_non_nullable
@@ -302,6 +332,7 @@ class _$InvoiceImpl extends _Invoice {
       this.storageLocation,
       this.channelId,
       this.signature,
+      this.account,
       this.state = InvoiceState.created})
       : super._();
 
@@ -327,12 +358,14 @@ class _$InvoiceImpl extends _Invoice {
   @override
   final String? signature;
   @override
+  final Account? account;
+  @override
   @JsonKey()
   final InvoiceState state;
 
   @override
   String toString() {
-    return 'Invoice(requestInfo: $requestInfo, paymentNetwork: $paymentNetwork, contentData: $contentData, signer: $signer, id: $id, projectId: $projectId, storageLocation: $storageLocation, channelId: $channelId, signature: $signature, state: $state)';
+    return 'Invoice(requestInfo: $requestInfo, paymentNetwork: $paymentNetwork, contentData: $contentData, signer: $signer, id: $id, projectId: $projectId, storageLocation: $storageLocation, channelId: $channelId, signature: $signature, account: $account, state: $state)';
   }
 
   @override
@@ -356,6 +389,7 @@ class _$InvoiceImpl extends _Invoice {
                 other.channelId == channelId) &&
             (identical(other.signature, signature) ||
                 other.signature == signature) &&
+            (identical(other.account, account) || other.account == account) &&
             (identical(other.state, state) || other.state == state));
   }
 
@@ -372,6 +406,7 @@ class _$InvoiceImpl extends _Invoice {
       storageLocation,
       channelId,
       signature,
+      account,
       state);
 
   /// Create a copy of Invoice
@@ -401,6 +436,7 @@ abstract class _Invoice extends Invoice {
       final String? storageLocation,
       final String? channelId,
       final String? signature,
+      final Account? account,
       final InvoiceState state}) = _$InvoiceImpl;
   const _Invoice._() : super._();
 
@@ -424,6 +460,8 @@ abstract class _Invoice extends Invoice {
   String? get channelId;
   @override
   String? get signature;
+  @override
+  Account? get account;
   @override
   InvoiceState get state;
 

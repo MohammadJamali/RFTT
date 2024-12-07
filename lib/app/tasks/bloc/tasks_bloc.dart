@@ -28,21 +28,21 @@ class TasksBloc extends Bloc<TasksEvent, TasksState> {
     return super.close();
   }
 
-  late StreamSubscription<List<Task>> subscription;
+  late StreamSubscription<Task> subscription;
   final TaskRepository repository;
 
   Future<void> _onTasksUpdated(
     _TasksUpdated event,
     Emitter<TasksState> emit,
   ) async {
-    emit(TasksState.loaded(event.tasks));
+    emit(TasksState.loaded([event.task]));
   }
 
   Future<void> _onFetchTasks(
     _FetchTasks event,
     Emitter<TasksState> emit,
   ) async {
-    final tasks = await repository.fetchTasks();
+    final tasks = await repository.list();
     emit(TasksState.loaded(tasks));
   }
 
@@ -50,7 +50,7 @@ class TasksBloc extends Bloc<TasksEvent, TasksState> {
     _AddTask event,
     Emitter<TasksState> emit,
   ) async {
-    await repository.addTask(event.task);
+    await repository.add(event.task);
     add(const TasksEvent.fetchTasks());
   }
 
@@ -58,7 +58,7 @@ class TasksBloc extends Bloc<TasksEvent, TasksState> {
     _UpdateTask event,
     Emitter<TasksState> emit,
   ) async {
-    await repository.updateTask(event.task);
+    await repository.add(event.task);
     add(const TasksEvent.fetchTasks());
   }
 
@@ -66,7 +66,7 @@ class TasksBloc extends Bloc<TasksEvent, TasksState> {
     _DeleteTask event,
     Emitter<TasksState> emit,
   ) async {
-    await repository.deleteTask(event.id);
+    await repository.delete(event.id);
     add(const TasksEvent.fetchTasks());
   }
 }
