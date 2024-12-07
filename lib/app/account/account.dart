@@ -7,6 +7,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:timetracker/app/account/bloc/account_bloc.dart';
+import 'package:timetracker/widgets/text_form_field.dart';
 import 'package:timetracker_api/timetracker_api.dart';
 import 'package:timetracker_repository/timetracker_repository.dart';
 import 'package:uuid/uuid.dart';
@@ -111,29 +112,6 @@ class _AccountFormViewState extends State<AccountFormView> {
     return account;
   }
 
-  Widget _textField(
-    String label, {
-    void Function(String)? onChanged,
-    TextEditingController? controller,
-    String? defaultValue,
-  }) =>
-      TextFormField(
-        controller: controller,
-        initialValue: defaultValue,
-        decoration: InputDecoration(
-          labelText: label,
-          filled: true,
-          fillColor: Colors.grey.shade100,
-          focusColor: Colors.black,
-          border: OutlineInputBorder(
-            borderSide: BorderSide.none,
-            borderRadius: BorderRadius.circular(
-              16,
-            ),
-          ),
-        ),
-        onChanged: onChanged,
-      );
 
   Future<Account>? loadAccountFeature;
 
@@ -242,7 +220,7 @@ class _AccountFormViewState extends State<AccountFormView> {
                           ),
                         ),
                         const SizedBox(height: 24),
-                        _textField(
+                        StyledTextField(
                           'Name',
                           defaultValue: state.name,
                           onChanged: (value) => context
@@ -252,7 +230,7 @@ class _AccountFormViewState extends State<AccountFormView> {
                               ),
                         ),
                         const SizedBox(height: 16),
-                        _textField(
+                        StyledTextField(
                           'Email',
                           defaultValue: state.email,
                           onChanged: (value) => context
@@ -353,7 +331,7 @@ class _AccountFormViewState extends State<AccountFormView> {
                   }).toList(),
                 ),
                 const SizedBox(height: 16),
-                _textField(
+                StyledTextField(
                   'Wallet Address',
                   controller: valueController,
                 )

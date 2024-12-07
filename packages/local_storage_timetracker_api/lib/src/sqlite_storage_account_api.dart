@@ -145,7 +145,7 @@ class SqliteStorageAccountApi extends IAccountApi {
       }
     }
 
-    return accounts;
+    return accounts.reversed.toList();
   }
 
   @override

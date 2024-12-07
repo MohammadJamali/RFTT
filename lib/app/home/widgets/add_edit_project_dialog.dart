@@ -3,6 +3,7 @@ import 'dart:ui';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:timetracker/app/home/bloc/home_bloc.dart';
+import 'package:timetracker/widgets/text_form_field.dart';
 import 'package:timetracker_api/timetracker_api.dart';
 
 class AddEditProjectDialog extends StatefulWidget {
@@ -37,9 +38,9 @@ class _AddEditProjectDialogState extends State<AddEditProjectDialog> {
         title: Text(widget.project == null ? 'Add Project' : 'Edit Project'),
         content: Form(
           key: _formKey,
-          child: TextFormField(
-            initialValue: _title,
-            decoration: const InputDecoration(labelText: 'Title'),
+          child: StyledTextField(
+            'Title',
+            defaultValue: _title,
             onSaved: (value) => _title = value ?? '',
             validator: (value) =>
                 value == null || value.isEmpty ? 'Required' : null,
