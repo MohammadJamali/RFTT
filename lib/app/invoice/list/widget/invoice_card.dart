@@ -26,23 +26,24 @@ class InvoiceCard extends StatelessWidget {
               Row(
                 children: [
                   ProfileListItem(
-                    title: invoice.payer?.firstName ?? 'Payer',
-                    description: invoice.payer?.value ?? 'Unknown',
+                    title: 'Payer',
+                    description: 'Unknown',
                   ),
                   const Spacer(),
-                  InvoiceStatus(status: invoice.status),
+                  InvoiceStatus(state: invoice.state),
                 ],
               ),
               const SizedBox(height: 16),
               Label.row({
-                'Amount': 'Amount',
-                'No': '#${invoice.id}',
-                'Date': 'DateFormat',
-                // 'Date': DateFormat.yMMMd().format(
-                //   DateTime.parse(
-                //     invoice.contentData.dueDate.replaceAll('.', '-'),
-                //   ),
-                // ),
+                'Amount': '${invoice.requestInfo.expectedAmount} '
+                    '(${invoice.requestInfo.currency.name})',
+                'No': invoice.storageLocation ?? 'Draft',
+                'Date': DateFormat.yMMMd().format(
+                  parseDateTimeFromTimestamp(
+                    invoice.requestInfo.timestamp ??
+                        getCurrentTimestampInSeconds(),
+                  ),
+                ),
               }),
             ],
           ),

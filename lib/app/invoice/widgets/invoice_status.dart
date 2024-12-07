@@ -3,11 +3,11 @@ import 'package:timetracker_api/timetracker_api.dart';
 
 class InvoiceStatus extends StatelessWidget {
   const InvoiceStatus({
-    required this.status,
+    required this.state,
     super.key,
   });
 
-  final InvoiceStatusList status;
+  final InvoiceState state;
 
   @override
   Widget build(BuildContext context) {
@@ -16,15 +16,15 @@ class InvoiceStatus extends StatelessWidget {
     return Container(
       decoration: BoxDecoration(
         borderRadius: BorderRadius.circular(8),
-        color: status == InvoiceStatusList.Paid
+        color: state == InvoiceState.accepted
             ? Colors.green.shade100
             : Colors.amber.shade100,
       ),
       padding: const EdgeInsets.symmetric(horizontal: 24, vertical: 8),
       child: Text(
-        status.name,
+        state.name,
         style: theme.textTheme.bodyMedium?.copyWith(
-          color: status == InvoiceStatusList.Paid
+          color: [InvoiceState.pending, InvoiceState.created].contains(state)
               ? Colors.green
               : Colors.amber.shade700,
         ),

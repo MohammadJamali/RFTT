@@ -6,29 +6,14 @@ import 'package:timetracker_api/timetracker_api.dart';
 class ProjectRepository {
   /// {@macro projects_repository}
   const ProjectRepository({
-    required ProjectsApi projectsApi,
-  }) : _projectsApi = projectsApi;
+    required IProjectsApi projectsApi,
+  }) : _api = projectsApi;
 
-  final ProjectsApi _projectsApi;
+  final IProjectsApi _api;
 
-  /// Provides a [Stream] of all tasks.
-  Future<List<Project>> fetchProjects() => _projectsApi.fetchProjects();
-
-  /// Provides a [Stream] of all projects.
-  Stream<List<Project>> getProjects() => _projectsApi.getProjects();
-
-  /// Saves a new [project].
-  Future<void> addProject(Project project) => _projectsApi.addProject(project);
-
-  /// Update a [project].
-  ///
-  /// If a [project] with the same id already exists, it will be replaced.
-  Future<void> updateProject(Project project) =>
-      _projectsApi.updateProject(project);
-
-  /// Deletes the `project` with the given id.
-  ///
-  /// If no `project` with the given id exists, a [ProjectNotFoundException] error is
-  /// thrown.
-  Future<void> deleteProject(String id) => _projectsApi.deleteProject(id);
+  Future<List<Project>> list({String? id}) => _api.list(id: id);
+  Stream<Project> projectStream() => _api.projectStream();
+  Future<void> add(Project project) => _api.add(project);
+  Future<void> update(Project project) => _api.update(project);
+  Future<void> delete(String id) => _api.delete(id);
 }

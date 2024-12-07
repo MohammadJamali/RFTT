@@ -1,6 +1,6 @@
 import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:timetracker_api/src/models/invoice/currency/currency.dart';
-import 'package:timetracker_api/src/models/transaction_actor/transaction_actor.dart';
+import 'package:timetracker_api/src/models/invoice/transaction_actor/transaction_actor.dart';
 
 part 'request_info.freezed.dart';
 part 'request_info.g.dart';

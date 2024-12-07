@@ -8,43 +8,45 @@ part of 'invoice.dart';
 
 _$InvoiceImpl _$$InvoiceImplFromJson(Map<String, dynamic> json) =>
     _$InvoiceImpl(
-      id: json['id'] as String,
-      projectId: json['projectId'] as String,
-      timestamp: (json['timestamp'] as num).toInt(),
-      currency: Currency.fromJson(json['currency'] as Map<String, dynamic>),
-      payee: TransactionActor.fromJson(json['payee'] as Map<String, dynamic>),
-      expectedAmount: json['expectedAmount'] as String,
-      extensionsData: (json['extensionsData'] as List<dynamic>)
-          .map((e) => ExtensionData.fromJson(e as Map<String, dynamic>))
-          .toList(),
-      payer: json['payer'] == null
+      requestInfo: json['requestInfo'] == null
           ? null
-          : TransactionActor.fromJson(json['payer'] as Map<String, dynamic>),
-      paymentRecipient: json['paymentRecipient'] as String?,
+          : RequestInfo.fromJson(json['requestInfo'] as Map<String, dynamic>),
       paymentNetwork: json['paymentNetwork'] == null
           ? null
           : PaymentNetwork.fromJson(
               json['paymentNetwork'] as Map<String, dynamic>),
-      status: $enumDecodeNullable(_$InvoiceStatusListEnumMap, json['status']) ??
-          InvoiceStatusList.Unpaid,
+      contentData: json['contentData'] == null
+          ? null
+          : ContentData.fromJson(json['contentData'] as Map<String, dynamic>),
+      signer: json['signer'] == null
+          ? null
+          : TransactionActor.fromJson(json['signer'] as Map<String, dynamic>),
+      id: json['id'] as String?,
+      projectId: json['projectId'] as String?,
+      storageLocation: json['storageLocation'] as String?,
+      channelId: json['channelId'] as String?,
+      signature: json['signature'] as String?,
+      state: $enumDecodeNullable(_$InvoiceStateEnumMap, json['state']) ??
+          InvoiceState.created,
     );
 
 Map<String, dynamic> _$$InvoiceImplToJson(_$InvoiceImpl instance) =>
     <String, dynamic>{
-      'id': instance.id,
-      'projectId': instance.projectId,
-      'timestamp': instance.timestamp,
-      'currency': instance.currency,
-      'payee': instance.payee,
-      'expectedAmount': instance.expectedAmount,
-      'extensionsData': instance.extensionsData,
-      'payer': instance.payer,
-      'paymentRecipient': instance.paymentRecipient,
-      'paymentNetwork': instance.paymentNetwork,
-      'status': _$InvoiceStatusListEnumMap[instance.status]!,
+      if (instance.requestInfo case final value?) 'requestInfo': value,
+      if (instance.paymentNetwork case final value?) 'paymentNetwork': value,
+      if (instance.contentData case final value?) 'contentData': value,
+      if (instance.signer case final value?) 'signer': value,
+      if (instance.id case final value?) 'id': value,
+      if (instance.projectId case final value?) 'projectId': value,
+      if (instance.storageLocation case final value?) 'storageLocation': value,
+      if (instance.channelId case final value?) 'channelId': value,
+      if (instance.signature case final value?) 'signature': value,
+      'state': _$InvoiceStateEnumMap[instance.state]!,
     };
 
-const _$InvoiceStatusListEnumMap = {
-  InvoiceStatusList.Paid: 'Paid',
-  InvoiceStatusList.Unpaid: 'Unpaid',
+const _$InvoiceStateEnumMap = {
+  InvoiceState.pending: 'pending',
+  InvoiceState.created: 'created',
+  InvoiceState.accepted: 'accepted',
+  InvoiceState.canceled: 'canceled',
 };

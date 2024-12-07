@@ -1,11 +1,4 @@
-import 'dart:convert';
 import 'package:timetracker_api/timetracker_api.dart';
-import 'package:timetracker_repository/src/utils/crypto.dart';
-import 'package:timetracker_repository/src/utils/map.dart';
-import 'package:timetracker_api/src/utils/units.dart';
-import 'package:http/http.dart' as http;
-
-typedef SignWithWalletCallBack = Future<String> Function(String data);
 
 /// {@template invoices_repository}
 /// A repository that handles `invoice` related requests.
@@ -13,106 +6,56 @@ typedef SignWithWalletCallBack = Future<String> Function(String data);
 class InvoiceRepository {
   /// {@macro invoice_repository}
   const InvoiceRepository({
-    required InvoiceApi invoiceApi,
-  }) : _invoiceApi = invoiceApi;
+    required INetworkInvoiceApi onlineApi,
+    required ILocalStorageInvoiceApi localApi,
+  })  : _onlineApi = onlineApi,
+        _localApi = localApi;
 
-  final InvoiceApi _invoiceApi;
+  final INetworkInvoiceApi _onlineApi;
+  final ILocalStorageInvoiceApi _localApi;
 
-  Future<InvoiceCreatedResponse?> createInvoiceRequest({
-    required CreateInvoiceRequest request,
-    required SignWithWalletCallBack signer,
-  }) async {
-    final timestamp = DateTime.now().millisecondsSinceEpoch ~/ 1000;
-
-    if (request.requestInfo.timestamp == null) {
-      request = request.copyWith(
-        requestInfo: request.requestInfo.copyWith(
-          timestamp: timestamp,
-        ),
-      );
+  Future<void> add(Invoice request, SignWithWalletCallBack signCallback) async {
+    final invoice = await _onlineApi.create(request, signCallback);
+    if (invoice == null) {
+      throw Exception();
     }
 
-    final unsignedAction = {
-      'name': 'create',
-      'parameters': request.toApiJson(),
-      'version': '2.0.3',
-    };
-
-    final normalizeUnsignedAction = normalizeMap(unsignedAction);
-    final signedUnsignedAction = await signer(normalizeUnsignedAction);
-
-    final action = {
-      'data': unsignedAction,
-      'signature': {
-        'method': 'ecdsa-ethereum',
-        'value': signedUnsignedAction,
-      },
-    };
-    final requestHash = _multiFormatSerialize(action);
-
-    final serializedPayee = request.requestInfo.payee.toJson();
-    final payeeHash = _multiFormatSerialize(serializedPayee);
-
-    final body = {
-      'channelId': requestHash,
-      'topics': [payeeHash, requestHash],
-      'transactionData': {'data': action},
-    };
-
-    try {
-      final rawResponse = await http.post(
-        Uri.parse('https://sepolia.gateway.request.network/persistTransaction'),
-        headers: {
-          'Content-Type': 'application/json',
-          'X-Request-Network-Client-Version': '0.50.0',
-        },
-        body: jsonEncode(body),
-      );
-
-      if (rawResponse.statusCode != 200) {
-        print('Failed to persist transaction: ${rawResponse.statusCode}');
-        return null;
-      }
-
-      final response = InvoiceCreatedResponse.fromJson(
-        jsonDecode(rawResponse.body) as Map<String, dynamic>,
-      );
-
-      return response;
-    } catch (error) {
-      print('Error persisting transaction: $error');
-    }
-
-    return null;
+    await _localApi.add(invoice);
   }
 
-  String _multiFormatSerialize(Map<dynamic, dynamic> data) {
-    // replace '0x' by the prefix
-    // requestNetwork/packages/multi-format/src/hexadecimal-serializable-multi-format.ts
+  Future<void> refreshState(String id) async {
+    final invoices = await _localApi.list(id: id);
+    if (invoices.isEmpty) return;
 
-    const prefix = '01';
-    final keccak256 = keccak256Hash(normalizeMap(data));
-    return '$prefix${keccak256.substring(2).toLowerCase()}';
+    final transaction = await _onlineApi.getTransactionsByChannelId(
+      channelId: invoices.first.channelId!,
+    );
+
+    final state = transaction?.result?.transactions?.firstOrNull?.state;
+    if (state == null) return;
+
+    await _localApi.update(
+      invoices.first.copyWith(
+        state: state,
+        signer: null,
+        requestInfo: null,
+        contentData: null,
+        paymentNetwork: null,
+      ),
+    );
   }
 
-  /// Provides a [Stream] of all invoice.
-  Future<List<Invoice>> fetchInvoiceList() => _invoiceApi.fetchInvoiceList();
+  Future<void> update(Invoice invoice) => _localApi.update(invoice);
+  Future<void> delete(String id) => _localApi.delete(id);
 
-  /// Provides a [Stream] of all invoice.
-  Stream<List<Invoice>> getInvoiceList() => _invoiceApi.getInvoiceList();
+  Future<List<Invoice>> list({
+    String? id,
+    String? projectId,
+  }) =>
+      _localApi.list(
+        id: id,
+        projectId: projectId,
+      );
 
-  /// Saves a new [invoice].
-  Future<void> addInvoice(Invoice invoice) => _invoiceApi.addInvoice(invoice);
-
-  /// Update a [invoice].
-  ///
-  /// If a [invoice] with the same id already exists, it will be replaced.
-  Future<void> updateInvoice(Invoice invoice) =>
-      _invoiceApi.updateInvoice(invoice);
-
-  /// Deletes the `invoice` with the given id.
-  ///
-  /// If no `invoice` with the given id exists, a [InvoiceNotFoundException] error is
-  /// thrown.
-  Future<void> deleteInvoice(String id) => _invoiceApi.deleteInvoice(id);
+  Stream<Invoice> invoiceStream() => _localApi.invoiceStream();
 }

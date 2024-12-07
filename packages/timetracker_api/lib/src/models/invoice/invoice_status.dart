@@ -1,4 +1,0 @@
-enum InvoiceStatusList {
-  Paid,
-  Unpaid,
-}

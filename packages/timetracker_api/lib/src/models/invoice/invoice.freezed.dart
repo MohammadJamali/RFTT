@@ -20,17 +20,16 @@ Invoice _$InvoiceFromJson(Map<String, dynamic> json) {
 
 /// @nodoc
 mixin _$Invoice {
-  String get id => throw _privateConstructorUsedError;
-  String get projectId => throw _privateConstructorUsedError;
-  int get timestamp => throw _privateConstructorUsedError;
-  Currency get currency => throw _privateConstructorUsedError;
-  TransactionActor get payee => throw _privateConstructorUsedError;
-  String get expectedAmount => throw _privateConstructorUsedError;
-  List<ExtensionData> get extensionsData => throw _privateConstructorUsedError;
-  TransactionActor? get payer => throw _privateConstructorUsedError;
-  String? get paymentRecipient => throw _privateConstructorUsedError;
+  RequestInfo? get requestInfo => throw _privateConstructorUsedError;
   PaymentNetwork? get paymentNetwork => throw _privateConstructorUsedError;
-  InvoiceStatusList get status => throw _privateConstructorUsedError;
+  ContentData? get contentData => throw _privateConstructorUsedError;
+  TransactionActor? get signer => throw _privateConstructorUsedError;
+  String? get id => throw _privateConstructorUsedError;
+  String? get projectId => throw _privateConstructorUsedError;
+  String? get storageLocation => throw _privateConstructorUsedError;
+  String? get channelId => throw _privateConstructorUsedError;
+  String? get signature => throw _privateConstructorUsedError;
+  InvoiceState get state => throw _privateConstructorUsedError;
 
   /// Serializes this Invoice to a JSON map.
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
@@ -47,22 +46,21 @@ abstract class $InvoiceCopyWith<$Res> {
       _$InvoiceCopyWithImpl<$Res, Invoice>;
   @useResult
   $Res call(
-      {String id,
-      String projectId,
-      int timestamp,
-      Currency currency,
-      TransactionActor payee,
-      String expectedAmount,
-      List<ExtensionData> extensionsData,
-      TransactionActor? payer,
-      String? paymentRecipient,
+      {RequestInfo? requestInfo,
       PaymentNetwork? paymentNetwork,
-      InvoiceStatusList status});
+      ContentData? contentData,
+      TransactionActor? signer,
+      String? id,
+      String? projectId,
+      String? storageLocation,
+      String? channelId,
+      String? signature,
+      InvoiceState state});
 
-  $CurrencyCopyWith<$Res> get currency;
-  $TransactionActorCopyWith<$Res> get payee;
-  $TransactionActorCopyWith<$Res>? get payer;
+  $RequestInfoCopyWith<$Res>? get requestInfo;
   $PaymentNetworkCopyWith<$Res>? get paymentNetwork;
+  $ContentDataCopyWith<$Res>? get contentData;
+  $TransactionActorCopyWith<$Res>? get signer;
 }
 
 /// @nodoc
@@ -80,63 +78,58 @@ class _$InvoiceCopyWithImpl<$Res, $Val extends Invoice>
   @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? id = null,
-    Object? projectId = null,
-    Object? timestamp = null,
-    Object? currency = null,
-    Object? payee = null,
-    Object? expectedAmount = null,
-    Object? extensionsData = null,
-    Object? payer = freezed,
-    Object? paymentRecipient = freezed,
+    Object? requestInfo = freezed,
     Object? paymentNetwork = freezed,
-    Object? status = null,
+    Object? contentData = freezed,
+    Object? signer = freezed,
+    Object? id = freezed,
+    Object? projectId = freezed,
+    Object? storageLocation = freezed,
+    Object? channelId = freezed,
+    Object? signature = freezed,
+    Object? state = null,
   }) {
     return _then(_value.copyWith(
-      id: null == id
-          ? _value.id
-          : id // ignore: cast_nullable_to_non_nullable
-              as String,
-      projectId: null == projectId
-          ? _value.projectId
-          : projectId // ignore: cast_nullable_to_non_nullable
-              as String,
-      timestamp: null == timestamp
-          ? _value.timestamp
-          : timestamp // ignore: cast_nullable_to_non_nullable
-              as int,
-      currency: null == currency
-          ? _value.currency
-          : currency // ignore: cast_nullable_to_non_nullable
-              as Currency,
-      payee: null == payee
-          ? _value.payee
-          : payee // ignore: cast_nullable_to_non_nullable
-              as TransactionActor,
-      expectedAmount: null == expectedAmount
-          ? _value.expectedAmount
-          : expectedAmount // ignore: cast_nullable_to_non_nullable
-              as String,
-      extensionsData: null == extensionsData
-          ? _value.extensionsData
-          : extensionsData // ignore: cast_nullable_to_non_nullable
-              as List<ExtensionData>,
-      payer: freezed == payer
-          ? _value.payer
-          : payer // ignore: cast_nullable_to_non_nullable
-              as TransactionActor?,
-      paymentRecipient: freezed == paymentRecipient
-          ? _value.paymentRecipient
-          : paymentRecipient // ignore: cast_nullable_to_non_nullable
-              as String?,
+      requestInfo: freezed == requestInfo
+          ? _value.requestInfo
+          : requestInfo // ignore: cast_nullable_to_non_nullable
+              as RequestInfo?,
       paymentNetwork: freezed == paymentNetwork
           ? _value.paymentNetwork
           : paymentNetwork // ignore: cast_nullable_to_non_nullable
               as PaymentNetwork?,
-      status: null == status
-          ? _value.status
-          : status // ignore: cast_nullable_to_non_nullable
-              as InvoiceStatusList,
+      contentData: freezed == contentData
+          ? _value.contentData
+          : contentData // ignore: cast_nullable_to_non_nullable
+              as ContentData?,
+      signer: freezed == signer
+          ? _value.signer
+          : signer // ignore: cast_nullable_to_non_nullable
+              as TransactionActor?,
+      id: freezed == id
+          ? _value.id
+          : id // ignore: cast_nullable_to_non_nullable
+              as String?,
+      projectId: freezed == projectId
+          ? _value.projectId
+          : projectId // ignore: cast_nullable_to_non_nullable
+              as String?,
+      storageLocation: freezed == storageLocation
+          ? _value.storageLocation
+          : storageLocation // ignore: cast_nullable_to_non_nullable
+              as String?,
+      channelId: freezed == channelId
+          ? _value.channelId
+          : channelId // ignore: cast_nullable_to_non_nullable
+              as String?,
+      signature: freezed == signature
+          ? _value.signature
+          : signature // ignore: cast_nullable_to_non_nullable
+              as String?,
+      state: null == state
+          ? _value.state
+          : state // ignore: cast_nullable_to_non_nullable
+              as InvoiceState,
     ) as $Val);
   }
 
@@ -144,33 +137,13 @@ class _$InvoiceCopyWithImpl<$Res, $Val extends Invoice>
   /// with the given fields replaced by the non-null parameter values.
   @override
   @pragma('vm:prefer-inline')
-  $CurrencyCopyWith<$Res> get currency {
-    return $CurrencyCopyWith<$Res>(_value.currency, (value) {
-      return _then(_value.copyWith(currency: value) as $Val);
-    });
-  }
-
-  /// Create a copy of Invoice
-  /// with the given fields replaced by the non-null parameter values.
-  @override
-  @pragma('vm:prefer-inline')
-  $TransactionActorCopyWith<$Res> get payee {
-    return $TransactionActorCopyWith<$Res>(_value.payee, (value) {
-      return _then(_value.copyWith(payee: value) as $Val);
-    });
-  }
-
-  /// Create a copy of Invoice
-  /// with the given fields replaced by the non-null parameter values.
-  @override
-  @pragma('vm:prefer-inline')
-  $TransactionActorCopyWith<$Res>? get payer {
-    if (_value.payer == null) {
+  $RequestInfoCopyWith<$Res>? get requestInfo {
+    if (_value.requestInfo == null) {
       return null;
     }
 
-    return $TransactionActorCopyWith<$Res>(_value.payer!, (value) {
-      return _then(_value.copyWith(payer: value) as $Val);
+    return $RequestInfoCopyWith<$Res>(_value.requestInfo!, (value) {
+      return _then(_value.copyWith(requestInfo: value) as $Val);
     });
   }
 
@@ -187,6 +160,34 @@ class _$InvoiceCopyWithImpl<$Res, $Val extends Invoice>
       return _then(_value.copyWith(paymentNetwork: value) as $Val);
     });
   }
+
+  /// Create a copy of Invoice
+  /// with the given fields replaced by the non-null parameter values.
+  @override
+  @pragma('vm:prefer-inline')
+  $ContentDataCopyWith<$Res>? get contentData {
+    if (_value.contentData == null) {
+      return null;
+    }
+
+    return $ContentDataCopyWith<$Res>(_value.contentData!, (value) {
+      return _then(_value.copyWith(contentData: value) as $Val);
+    });
+  }
+
+  /// Create a copy of Invoice
+  /// with the given fields replaced by the non-null parameter values.
+  @override
+  @pragma('vm:prefer-inline')
+  $TransactionActorCopyWith<$Res>? get signer {
+    if (_value.signer == null) {
+      return null;
+    }
+
+    return $TransactionActorCopyWith<$Res>(_value.signer!, (value) {
+      return _then(_value.copyWith(signer: value) as $Val);
+    });
+  }
 }
 
 /// @nodoc
@@ -197,26 +198,25 @@ abstract class _$$InvoiceImplCopyWith<$Res> implements $InvoiceCopyWith<$Res> {
   @override
   @useResult
   $Res call(
-      {String id,
-      String projectId,
-      int timestamp,
-      Currency currency,
-      TransactionActor payee,
-      String expectedAmount,
-      List<ExtensionData> extensionsData,
-      TransactionActor? payer,
-      String? paymentRecipient,
+      {RequestInfo? requestInfo,
       PaymentNetwork? paymentNetwork,
-      InvoiceStatusList status});
+      ContentData? contentData,
+      TransactionActor? signer,
+      String? id,
+      String? projectId,
+      String? storageLocation,
+      String? channelId,
+      String? signature,
+      InvoiceState state});
 
   @override
-  $CurrencyCopyWith<$Res> get currency;
-  @override
-  $TransactionActorCopyWith<$Res> get payee;
-  @override
-  $TransactionActorCopyWith<$Res>? get payer;
+  $RequestInfoCopyWith<$Res>? get requestInfo;
   @override
   $PaymentNetworkCopyWith<$Res>? get paymentNetwork;
+  @override
+  $ContentDataCopyWith<$Res>? get contentData;
+  @override
+  $TransactionActorCopyWith<$Res>? get signer;
 }
 
 /// @nodoc
@@ -232,120 +232,107 @@ class __$$InvoiceImplCopyWithImpl<$Res>
   @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? id = null,
-    Object? projectId = null,
-    Object? timestamp = null,
-    Object? currency = null,
-    Object? payee = null,
-    Object? expectedAmount = null,
-    Object? extensionsData = null,
-    Object? payer = freezed,
-    Object? paymentRecipient = freezed,
+    Object? requestInfo = freezed,
     Object? paymentNetwork = freezed,
-    Object? status = null,
+    Object? contentData = freezed,
+    Object? signer = freezed,
+    Object? id = freezed,
+    Object? projectId = freezed,
+    Object? storageLocation = freezed,
+    Object? channelId = freezed,
+    Object? signature = freezed,
+    Object? state = null,
   }) {
     return _then(_$InvoiceImpl(
-      id: null == id
-          ? _value.id
-          : id // ignore: cast_nullable_to_non_nullable
-              as String,
-      projectId: null == projectId
-          ? _value.projectId
-          : projectId // ignore: cast_nullable_to_non_nullable
-              as String,
-      timestamp: null == timestamp
-          ? _value.timestamp
-          : timestamp // ignore: cast_nullable_to_non_nullable
-              as int,
-      currency: null == currency
-          ? _value.currency
-          : currency // ignore: cast_nullable_to_non_nullable
-              as Currency,
-      payee: null == payee
-          ? _value.payee
-          : payee // ignore: cast_nullable_to_non_nullable
-              as TransactionActor,
-      expectedAmount: null == expectedAmount
-          ? _value.expectedAmount
-          : expectedAmount // ignore: cast_nullable_to_non_nullable
-              as String,
-      extensionsData: null == extensionsData
-          ? _value._extensionsData
-          : extensionsData // ignore: cast_nullable_to_non_nullable
-              as List<ExtensionData>,
-      payer: freezed == payer
-          ? _value.payer
-          : payer // ignore: cast_nullable_to_non_nullable
-              as TransactionActor?,
-      paymentRecipient: freezed == paymentRecipient
-          ? _value.paymentRecipient
-          : paymentRecipient // ignore: cast_nullable_to_non_nullable
-              as String?,
+      requestInfo: freezed == requestInfo
+          ? _value.requestInfo
+          : requestInfo // ignore: cast_nullable_to_non_nullable
+              as RequestInfo?,
       paymentNetwork: freezed == paymentNetwork
           ? _value.paymentNetwork
           : paymentNetwork // ignore: cast_nullable_to_non_nullable
               as PaymentNetwork?,
-      status: null == status
-          ? _value.status
-          : status // ignore: cast_nullable_to_non_nullable
-              as InvoiceStatusList,
+      contentData: freezed == contentData
+          ? _value.contentData
+          : contentData // ignore: cast_nullable_to_non_nullable
+              as ContentData?,
+      signer: freezed == signer
+          ? _value.signer
+          : signer // ignore: cast_nullable_to_non_nullable
+              as TransactionActor?,
+      id: freezed == id
+          ? _value.id
+          : id // ignore: cast_nullable_to_non_nullable
+              as String?,
+      projectId: freezed == projectId
+          ? _value.projectId
+          : projectId // ignore: cast_nullable_to_non_nullable
+              as String?,
+      storageLocation: freezed == storageLocation
+          ? _value.storageLocation
+          : storageLocation // ignore: cast_nullable_to_non_nullable
+              as String?,
+      channelId: freezed == channelId
+          ? _value.channelId
+          : channelId // ignore: cast_nullable_to_non_nullable
+              as String?,
+      signature: freezed == signature
+          ? _value.signature
+          : signature // ignore: cast_nullable_to_non_nullable
+              as String?,
+      state: null == state
+          ? _value.state
+          : state // ignore: cast_nullable_to_non_nullable
+              as InvoiceState,
     ));
   }
 }
 
 /// @nodoc
-@JsonSerializable()
-class _$InvoiceImpl implements _Invoice {
+
+@JsonSerializable(includeIfNull: false)
+class _$InvoiceImpl extends _Invoice {
   const _$InvoiceImpl(
-      {required this.id,
-      required this.projectId,
-      required this.timestamp,
-      required this.currency,
-      required this.payee,
-      required this.expectedAmount,
-      required final List<ExtensionData> extensionsData,
-      this.payer,
-      this.paymentRecipient,
+      {this.requestInfo,
       this.paymentNetwork,
-      this.status = InvoiceStatusList.Unpaid})
-      : _extensionsData = extensionsData;
+      this.contentData,
+      this.signer,
+      this.id,
+      this.projectId,
+      this.storageLocation,
+      this.channelId,
+      this.signature,
+      this.state = InvoiceState.created})
+      : super._();
 
   factory _$InvoiceImpl.fromJson(Map<String, dynamic> json) =>
       _$$InvoiceImplFromJson(json);
 
   @override
-  final String id;
-  @override
-  final String projectId;
-  @override
-  final int timestamp;
-  @override
-  final Currency currency;
-  @override
-  final TransactionActor payee;
-  @override
-  final String expectedAmount;
-  final List<ExtensionData> _extensionsData;
-  @override
-  List<ExtensionData> get extensionsData {
-    if (_extensionsData is EqualUnmodifiableListView) return _extensionsData;
-    // ignore: implicit_dynamic_type
-    return EqualUnmodifiableListView(_extensionsData);
-  }
-
-  @override
-  final TransactionActor? payer;
-  @override
-  final String? paymentRecipient;
+  final RequestInfo? requestInfo;
   @override
   final PaymentNetwork? paymentNetwork;
   @override
+  final ContentData? contentData;
+  @override
+  final TransactionActor? signer;
+  @override
+  final String? id;
+  @override
+  final String? projectId;
+  @override
+  final String? storageLocation;
+  @override
+  final String? channelId;
+  @override
+  final String? signature;
+  @override
   @JsonKey()
-  final InvoiceStatusList status;
+  final InvoiceState state;
 
   @override
   String toString() {
-    return 'Invoice(id: $id, projectId: $projectId, timestamp: $timestamp, currency: $currency, payee: $payee, expectedAmount: $expectedAmount, extensionsData: $extensionsData, payer: $payer, paymentRecipient: $paymentRecipient, paymentNetwork: $paymentNetwork, status: $status)';
+    return 'Invoice(requestInfo: $requestInfo, paymentNetwork: $paymentNetwork, contentData: $contentData, signer: $signer, id: $id, projectId: $projectId, storageLocation: $storageLocation, channelId: $channelId, signature: $signature, state: $state)';
   }
 
   @override
@@ -353,41 +340,39 @@ class _$InvoiceImpl implements _Invoice {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
             other is _$InvoiceImpl &&
+            (identical(other.requestInfo, requestInfo) ||
+                other.requestInfo == requestInfo) &&
+            (identical(other.paymentNetwork, paymentNetwork) ||
+                other.paymentNetwork == paymentNetwork) &&
+            (identical(other.contentData, contentData) ||
+                other.contentData == contentData) &&
+            (identical(other.signer, signer) || other.signer == signer) &&
             (identical(other.id, id) || other.id == id) &&
             (identical(other.projectId, projectId) ||
                 other.projectId == projectId) &&
-            (identical(other.timestamp, timestamp) ||
-                other.timestamp == timestamp) &&
-            (identical(other.currency, currency) ||
-                other.currency == currency) &&
-            (identical(other.payee, payee) || other.payee == payee) &&
-            (identical(other.expectedAmount, expectedAmount) ||
-                other.expectedAmount == expectedAmount) &&
-            const DeepCollectionEquality()
-                .equals(other._extensionsData, _extensionsData) &&
-            (identical(other.payer, payer) || other.payer == payer) &&
-            (identical(other.paymentRecipient, paymentRecipient) ||
-                other.paymentRecipient == paymentRecipient) &&
-            (identical(other.paymentNetwork, paymentNetwork) ||
-                other.paymentNetwork == paymentNetwork) &&
-            (identical(other.status, status) || other.status == status));
+            (identical(other.storageLocation, storageLocation) ||
+                other.storageLocation == storageLocation) &&
+            (identical(other.channelId, channelId) ||
+                other.channelId == channelId) &&
+            (identical(other.signature, signature) ||
+                other.signature == signature) &&
+            (identical(other.state, state) || other.state == state));
   }
 
   @JsonKey(includeFromJson: false, includeToJson: false)
   @override
   int get hashCode => Object.hash(
       runtimeType,
+      requestInfo,
+      paymentNetwork,
+      contentData,
+      signer,
       id,
       projectId,
-      timestamp,
-      currency,
-      payee,
-      expectedAmount,
-      const DeepCollectionEquality().hash(_extensionsData),
-      payer,
-      paymentRecipient,
-      paymentNetwork,
-      status);
+      storageLocation,
+      channelId,
+      signature,
+      state);
 
   /// Create a copy of Invoice
   /// with the given fields replaced by the non-null parameter values.
@@ -405,44 +390,42 @@ class _$InvoiceImpl implements _Invoice {
   }
 }
 
-abstract class _Invoice implements Invoice {
+abstract class _Invoice extends Invoice {
   const factory _Invoice(
-      {required final String id,
-      required final String projectId,
-      required final int timestamp,
-      required final Currency currency,
-      required final TransactionActor payee,
-      required final String expectedAmount,
-      required final List<ExtensionData> extensionsData,
-      final TransactionActor? payer,
-      final String? paymentRecipient,
+      {final RequestInfo? requestInfo,
       final PaymentNetwork? paymentNetwork,
-      final InvoiceStatusList status}) = _$InvoiceImpl;
+      final ContentData? contentData,
+      final TransactionActor? signer,
+      final String? id,
+      final String? projectId,
+      final String? storageLocation,
+      final String? channelId,
+      final String? signature,
+      final InvoiceState state}) = _$InvoiceImpl;
+  const _Invoice._() : super._();
 
   factory _Invoice.fromJson(Map<String, dynamic> json) = _$InvoiceImpl.fromJson;
 
   @override
-  String get id;
-  @override
-  String get projectId;
-  @override
-  int get timestamp;
-  @override
-  Currency get currency;
-  @override
-  TransactionActor get payee;
-  @override
-  String get expectedAmount;
-  @override
-  List<ExtensionData> get extensionsData;
-  @override
-  TransactionActor? get payer;
-  @override
-  String? get paymentRecipient;
+  RequestInfo? get requestInfo;
   @override
   PaymentNetwork? get paymentNetwork;
   @override
-  InvoiceStatusList get status;
+  ContentData? get contentData;
+  @override
+  TransactionActor? get signer;
+  @override
+  String? get id;
+  @override
+  String? get projectId;
+  @override
+  String? get storageLocation;
+  @override
+  String? get channelId;
+  @override
+  String? get signature;
+  @override
+  InvoiceState get state;
 
   /// Create a copy of Invoice
   /// with the given fields replaced by the non-null parameter values.

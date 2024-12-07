@@ -70,7 +70,7 @@ class _HomeViewState extends State<HomeView> {
                     );
 
                     final response = await repo.createInvoiceRequest(
-                      request: CreateInvoiceRequest(
+                      invoice: Invoice(
                         requestInfo: RequestInfo(
                           currency: currency,
                           expectedAmount: parseUnits(

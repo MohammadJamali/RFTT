@@ -2,6 +2,6 @@
 library;
 
 export 'src/db_helper.dart';
-export 'src/invoice_repository.dart';
-export 'src/project_repository.dart';
-export 'src/task_repository.dart';
+export 'src/sqlite_storage_invoice_api.dart';
+export 'src/sqlite_storage_project_api.dart';
+export 'src/sqlite_storage_task_api.dart';

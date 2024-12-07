@@ -34,7 +34,7 @@ class App extends StatelessWidget {
         providers: [
           RepositoryProvider(
             create: (_) => InvoiceRepository(
-              invoiceApi: LocalStorageInvoiceApi(),
+              localApi: LocalStorageInvoiceApi(),
             ),
           ),
           RepositoryProvider(

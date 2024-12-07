@@ -3,31 +3,20 @@ import 'package:timetracker_api/timetracker_api.dart';
 /// {@template task_api}
 /// The interface for an API that provides access to a list of tasks.
 /// {@endtemplate}
-abstract class TaskApi {
+abstract class ITaskApi {
   /// {@macro task_api}
-  const TaskApi();
+  const ITaskApi();
 
-  /// Featch a list of [Task]
-  Future<List<Task>> fetchTasks();
+  Future<void> add(Task task);
+  Future<void> update(Task task);
+  Future<Task?> delete(String id);
 
-  /// Provides a [Stream] of all tasks.
-  Stream<List<Task>> getTasks();
+  Stream<Task> taskStream();
+  Future<List<Task>> list({String? id, String? projectId});
 
-  /// Create a new [task].
-  Future<void> addTask(Task task);
+  Future<int> count({String? projectId, bool? completed});
+  Future<int> sumOfTaskDurations({String? projectId});
 
-  /// Update a [task].
-  ///
-  /// If a [task] with the same id already exists, it will be replaced.
-  Future<void> updateTask(Task task);
-
-  /// Deletes the `task` with the given id.
-  ///
-  /// If no `task` with the given id exists, a [TaskNotFoundException] error is
-  /// thrown.
-  Future<void> deleteTask(String id);
-
-  /// Closes the client and frees up any resources.
   Future<void> close();
 }
 

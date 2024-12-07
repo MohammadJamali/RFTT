@@ -82,7 +82,7 @@ class _BillingSection extends StatelessWidget {
               Text('Billing'),
               Spacer(),
               InvoiceStatus(
-                status: InvoiceStatusList.Unpaid,
+                state: InvoiceState.pending,
               ),
             ],
           ),
