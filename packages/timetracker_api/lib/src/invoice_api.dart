@@ -33,6 +33,8 @@ abstract class ILocalStorageInvoiceApi implements _IInvoiceApi {
 
   Future<void> add(Invoice invoice);
   Future<List<Invoice>> searchInvoicesByAccountName(String partialName);
+
+  Future<int> count({String? projectId});
 }
 
 /// Error thrown when a [Invoice] with a given id is not found.

@@ -25,8 +25,8 @@ class InvoiceStatus extends StatelessWidget {
         state.name,
         style: theme.textTheme.bodyMedium?.copyWith(
           color: [InvoiceState.pending, InvoiceState.created].contains(state)
-              ? Colors.green
-              : Colors.amber.shade700,
+              ? Colors.amber.shade700
+              : Colors.green,
         ),
       ),
     );

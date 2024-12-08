@@ -45,6 +45,9 @@ class ProjectsList extends StatelessWidget {
                       ),
                     ),
                   );
+
+                  print('objectssss');
+                  context.read<HomeBloc>().add(const HomeEvent.started());
                 },
                 child: ProjectCard(
                   project: project,

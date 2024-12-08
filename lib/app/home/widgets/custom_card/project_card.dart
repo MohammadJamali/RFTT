@@ -86,7 +86,7 @@ class ProjectCard extends CustomCard {
             const SizedBox(height: 18),
             Text(
               project.title,
-              maxLines: 1,
+              maxLines: 2,
               overflow: TextOverflow.fade,
               style: theme.textTheme.titleLarge?.copyWith(
                 color: Colors.white,

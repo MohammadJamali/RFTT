@@ -1,6 +1,7 @@
 import 'package:local_storage_timetracker_api/local_storage_timetracker_api.dart';
 import 'package:local_storage_timetracker_api/src/utils/database.dart';
 import 'package:timetracker_api/timetracker_api.dart';
+import 'package:uuid/uuid.dart';
 
 class SqliteStorageAccountApi extends IAccountApi {
   final _dbHelper = DatabaseHelper();
@@ -60,6 +61,7 @@ class SqliteStorageAccountApi extends IAccountApi {
     final db = await _dbHelper.database;
     await db.insert(DatabaseHelper.tableTransactionsActor, {
       ...actor.toJson(),
+      'id': const Uuid().v4(),
       'accountId': accountId,
     });
   }

@@ -25,7 +25,7 @@ Future<List<Map<String, Object?>>> conditionalQuery(
   Map<String, dynamic> conditions,
 ) async {
   final parameters = buildWhereClause(conditions);
-  return await db.query(
+  return db.query(
     table,
     where: parameters['query'] as String?,
     whereArgs: parameters['whereArgs'] as List<Object?>?,

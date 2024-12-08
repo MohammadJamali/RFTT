@@ -10,7 +10,8 @@ part 'tasks_state.dart';
 part 'tasks_bloc.freezed.dart';
 
 class TasksBloc extends Bloc<TasksEvent, TasksState> {
-  TasksBloc(this.repository) : super(const TasksState.initial()) {
+  TasksBloc(this.repository, this.projectRepository)
+      : super(const TasksState.initial()) {
     on<_FetchTasks>(_onFetchTasks);
     on<_TasksUpdated>(_onTasksUpdated);
     on<_AddTask>(_onAddTask);
@@ -30,6 +31,7 @@ class TasksBloc extends Bloc<TasksEvent, TasksState> {
 
   late StreamSubscription<Task> subscription;
   final TaskRepository repository;
+  final ProjectRepository projectRepository;
 
   Future<void> _onTasksUpdated(
     _TasksUpdated event,
@@ -51,6 +53,12 @@ class TasksBloc extends Bloc<TasksEvent, TasksState> {
     Emitter<TasksState> emit,
   ) async {
     await repository.add(event.task);
+
+    final project =
+        (await projectRepository.list(id: event.task.projectId)).first;
+    await projectRepository
+        .update(project.copyWith(totalTasks: project.totalTasks + 1));
+
     add(const TasksEvent.fetchTasks());
   }
 

@@ -11,10 +11,10 @@ _$CurrencyImpl _$$CurrencyImplFromJson(Map<String, dynamic> json) =>
       network: json['network'] as String,
       type: $enumDecode(_$CurrencyTypeEnumMap, json['type']),
       value: json['value'] as String,
-      name: json['name'] as String,
-      decimals: (json['decimals'] as num).toInt(),
-      chainId: (json['chainId'] as num).toInt(),
-      symbol: $enumDecode(_$CurrencySymbolEnumMap, json['symbol']),
+      name: json['name'] as String?,
+      decimals: (json['decimals'] as num?)?.toInt(),
+      chainId: (json['chainId'] as num?)?.toInt(),
+      symbol: $enumDecodeNullable(_$CurrencySymbolEnumMap, json['symbol']),
     );
 
 Map<String, dynamic> _$$CurrencyImplToJson(_$CurrencyImpl instance) =>

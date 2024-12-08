@@ -4,10 +4,11 @@ import 'package:local_storage_timetracker_api/local_storage_timetracker_api.dart
 import 'package:network_timetracker_api/network_timetracker_api.dart';
 import 'package:timetracker/app/account/account.dart';
 import 'package:timetracker/app/home/view/home_page.dart';
+import 'package:timetracker/app/invoice/details/view/details.dart';
+import 'package:timetracker/app/invoice/list/view/list.dart';
 import 'package:timetracker/app/landing/landing.dart';
 import 'package:timetracker/app/settings/bloc/settings_bloc.dart';
 import 'package:timetracker/app/settings/view/settings.dart';
-import 'package:timetracker/app/tasks/tasks_page.dart';
 import 'package:timetracker/app/timer/view/timer_page.dart';
 import 'package:timetracker/l10n/l10n.dart';
 import 'package:timetracker/theme/theme.dart';
@@ -31,6 +32,8 @@ class App extends StatelessWidget {
         TimerPage.route: (_) => const TimerPage(),
         SettingsPage.route: (_) => const SettingsPage(),
         AccountFormPage.route: (_) => const AccountFormPage(),
+        InvoiceListPage.route: (_) => const InvoiceListPage(),
+        InvoiceDetailsPage.route: (_) => InvoiceDetailsPage(),
       },
       home: MultiRepositoryProvider(
         providers: [

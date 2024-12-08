@@ -1,4 +1,5 @@
 import 'package:timetracker_api/timetracker_api.dart';
+import 'package:uuid/uuid.dart';
 
 /// {@template invoices_repository}
 /// A repository that handles `invoice` related requests.
@@ -14,13 +15,16 @@ class InvoiceRepository {
   final INetworkInvoiceApi _onlineApi;
   final ILocalStorageInvoiceApi _localApi;
 
-  Future<void> add(Invoice request, SignWithWalletCallBack signCallback) async {
+  Future<void> add(Invoice request, String projectId,
+      SignWithWalletCallBack signCallback) async {
     final invoice = await _onlineApi.create(request, signCallback);
     if (invoice == null) {
       throw Exception();
     }
 
-    await _localApi.add(invoice);
+    await _localApi.add(
+      invoice.copyWith(id: const Uuid().v4(), projectId: projectId),
+    );
   }
 
   Future<List<Invoice>> searchInvoicesByAccountName(String partialName) =>
@@ -61,4 +65,7 @@ class InvoiceRepository {
       );
 
   Stream<Invoice> invoiceStream() => _localApi.invoiceStream();
+
+  Future<int> count({String? projectId}) =>
+      _localApi.count(projectId: projectId);
 }

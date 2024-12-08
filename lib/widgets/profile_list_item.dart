@@ -30,15 +30,23 @@ class ProfileListItem extends StatelessWidget {
                 ),
           ),
           const SizedBox(width: 16),
-          Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              Text(title, style: theme.textTheme.titleMedium),
-              Text(description, style: theme.textTheme.bodySmall),
-            ],
+          Expanded(
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Text(
+                  title,
+                  style: theme.textTheme.titleMedium,
+                  maxLines: 1,
+                  overflow: TextOverflow.fade,
+                  softWrap: false,
+                ),
+                Text(description, style: theme.textTheme.bodySmall),
+              ],
+            ),
           ),
-          const Spacer(),
-          if (onPressed != null)
+          if (onPressed != null) ...[
+            const Spacer(),
             IconButton(
               onPressed: onPressed,
               icon: const Icon(
@@ -46,6 +54,7 @@ class ProfileListItem extends StatelessWidget {
                 size: 16,
               ),
             ),
+          ]
         ],
       ),
     );

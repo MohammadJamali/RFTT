@@ -7,8 +7,6 @@ part 'invoice.g.dart';
 
 @freezed
 class Invoice with _$Invoice {
-  @JsonSerializable(includeIfNull: false)
-  const Invoice._();
 
   @JsonSerializable(includeIfNull: false)
   const factory Invoice({
@@ -24,6 +22,11 @@ class Invoice with _$Invoice {
     Account? account,
     @Default(InvoiceState.created) InvoiceState state,
   }) = _Invoice;
+
+  factory Invoice.fromJson(Map<String, Object?> json) =>
+      _$InvoiceFromJson(json);
+  @JsonSerializable(includeIfNull: false)
+  const Invoice._();
 
   Map<String, dynamic> toApiJson() {
     final json = requestInfo!.toJson();
@@ -57,7 +60,4 @@ class Invoice with _$Invoice {
 
     return json;
   }
-
-  factory Invoice.fromJson(Map<String, Object?> json) =>
-      _$InvoiceFromJson(json);
 }

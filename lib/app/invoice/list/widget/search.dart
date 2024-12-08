@@ -14,7 +14,14 @@ class SearchWidget extends StatelessWidget {
       decoration: InputDecoration(
         prefixIcon: const Icon(Icons.search),
         hintText: 'Search Invoice...',
-        border: OutlineInputBorder(borderRadius: BorderRadius.circular(16)),
+        hintStyle: Theme.of(context).textTheme.bodyMedium?.copyWith(
+          color: Colors.grey
+        ),
+        filled: true,
+        border: OutlineInputBorder(
+          borderRadius: BorderRadius.circular(16),
+          borderSide: BorderSide.none,
+        ),
       ),
     );
   }

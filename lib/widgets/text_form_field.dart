@@ -55,7 +55,7 @@ Widget StyledDateSelector(
       ),
     ),
     onTap: () async {
-      final DateTime? selectedDate = await showDatePicker(
+      final selectedDate = await showDatePicker(
         context: context,
         initialDate: initialDate ?? DateTime.now(),
         firstDate: firstDate ?? DateTime(2000),

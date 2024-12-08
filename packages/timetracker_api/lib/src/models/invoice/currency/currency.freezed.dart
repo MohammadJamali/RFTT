@@ -24,13 +24,13 @@ mixin _$Currency {
   CurrencyType get type => throw _privateConstructorUsedError;
   String get value => throw _privateConstructorUsedError;
   @JsonKey(includeToJson: false)
-  String get name => throw _privateConstructorUsedError;
+  String? get name => throw _privateConstructorUsedError;
   @JsonKey(includeToJson: false)
-  int get decimals => throw _privateConstructorUsedError;
+  int? get decimals => throw _privateConstructorUsedError;
   @JsonKey(includeToJson: false)
-  int get chainId => throw _privateConstructorUsedError;
+  int? get chainId => throw _privateConstructorUsedError;
   @JsonKey(includeToJson: false)
-  CurrencySymbol get symbol => throw _privateConstructorUsedError;
+  CurrencySymbol? get symbol => throw _privateConstructorUsedError;
 
   /// Serializes this Currency to a JSON map.
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
@@ -51,10 +51,10 @@ abstract class $CurrencyCopyWith<$Res> {
       {String network,
       CurrencyType type,
       String value,
-      @JsonKey(includeToJson: false) String name,
-      @JsonKey(includeToJson: false) int decimals,
-      @JsonKey(includeToJson: false) int chainId,
-      @JsonKey(includeToJson: false) CurrencySymbol symbol});
+      @JsonKey(includeToJson: false) String? name,
+      @JsonKey(includeToJson: false) int? decimals,
+      @JsonKey(includeToJson: false) int? chainId,
+      @JsonKey(includeToJson: false) CurrencySymbol? symbol});
 }
 
 /// @nodoc
@@ -75,10 +75,10 @@ class _$CurrencyCopyWithImpl<$Res, $Val extends Currency>
     Object? network = null,
     Object? type = null,
     Object? value = null,
-    Object? name = null,
-    Object? decimals = null,
-    Object? chainId = null,
-    Object? symbol = null,
+    Object? name = freezed,
+    Object? decimals = freezed,
+    Object? chainId = freezed,
+    Object? symbol = freezed,
   }) {
     return _then(_value.copyWith(
       network: null == network
@@ -93,22 +93,22 @@ class _$CurrencyCopyWithImpl<$Res, $Val extends Currency>
           ? _value.value
           : value // ignore: cast_nullable_to_non_nullable
               as String,
-      name: null == name
+      name: freezed == name
           ? _value.name
           : name // ignore: cast_nullable_to_non_nullable
-              as String,
-      decimals: null == decimals
+              as String?,
+      decimals: freezed == decimals
           ? _value.decimals
           : decimals // ignore: cast_nullable_to_non_nullable
-              as int,
-      chainId: null == chainId
+              as int?,
+      chainId: freezed == chainId
           ? _value.chainId
           : chainId // ignore: cast_nullable_to_non_nullable
-              as int,
-      symbol: null == symbol
+              as int?,
+      symbol: freezed == symbol
           ? _value.symbol
           : symbol // ignore: cast_nullable_to_non_nullable
-              as CurrencySymbol,
+              as CurrencySymbol?,
     ) as $Val);
   }
 }
@@ -125,10 +125,10 @@ abstract class _$$CurrencyImplCopyWith<$Res>
       {String network,
       CurrencyType type,
       String value,
-      @JsonKey(includeToJson: false) String name,
-      @JsonKey(includeToJson: false) int decimals,
-      @JsonKey(includeToJson: false) int chainId,
-      @JsonKey(includeToJson: false) CurrencySymbol symbol});
+      @JsonKey(includeToJson: false) String? name,
+      @JsonKey(includeToJson: false) int? decimals,
+      @JsonKey(includeToJson: false) int? chainId,
+      @JsonKey(includeToJson: false) CurrencySymbol? symbol});
 }
 
 /// @nodoc
@@ -147,10 +147,10 @@ class __$$CurrencyImplCopyWithImpl<$Res>
     Object? network = null,
     Object? type = null,
     Object? value = null,
-    Object? name = null,
-    Object? decimals = null,
-    Object? chainId = null,
-    Object? symbol = null,
+    Object? name = freezed,
+    Object? decimals = freezed,
+    Object? chainId = freezed,
+    Object? symbol = freezed,
   }) {
     return _then(_$CurrencyImpl(
       network: null == network
@@ -165,22 +165,22 @@ class __$$CurrencyImplCopyWithImpl<$Res>
           ? _value.value
           : value // ignore: cast_nullable_to_non_nullable
               as String,
-      name: null == name
+      name: freezed == name
           ? _value.name
           : name // ignore: cast_nullable_to_non_nullable
-              as String,
-      decimals: null == decimals
+              as String?,
+      decimals: freezed == decimals
           ? _value.decimals
           : decimals // ignore: cast_nullable_to_non_nullable
-              as int,
-      chainId: null == chainId
+              as int?,
+      chainId: freezed == chainId
           ? _value.chainId
           : chainId // ignore: cast_nullable_to_non_nullable
-              as int,
-      symbol: null == symbol
+              as int?,
+      symbol: freezed == symbol
           ? _value.symbol
           : symbol // ignore: cast_nullable_to_non_nullable
-              as CurrencySymbol,
+              as CurrencySymbol?,
     ));
   }
 }
@@ -193,10 +193,10 @@ class _$CurrencyImpl implements _Currency {
       {required this.network,
       required this.type,
       required this.value,
-      @JsonKey(includeToJson: false) required this.name,
-      @JsonKey(includeToJson: false) required this.decimals,
-      @JsonKey(includeToJson: false) required this.chainId,
-      @JsonKey(includeToJson: false) required this.symbol});
+      @JsonKey(includeToJson: false) this.name,
+      @JsonKey(includeToJson: false) this.decimals,
+      @JsonKey(includeToJson: false) this.chainId,
+      @JsonKey(includeToJson: false) this.symbol});
 
   factory _$CurrencyImpl.fromJson(Map<String, dynamic> json) =>
       _$$CurrencyImplFromJson(json);
@@ -209,16 +209,16 @@ class _$CurrencyImpl implements _Currency {
   final String value;
   @override
   @JsonKey(includeToJson: false)
-  final String name;
+  final String? name;
   @override
   @JsonKey(includeToJson: false)
-  final int decimals;
+  final int? decimals;
   @override
   @JsonKey(includeToJson: false)
-  final int chainId;
+  final int? chainId;
   @override
   @JsonKey(includeToJson: false)
-  final CurrencySymbol symbol;
+  final CurrencySymbol? symbol;
 
   @override
   String toString() {
@@ -263,14 +263,14 @@ class _$CurrencyImpl implements _Currency {
 
 abstract class _Currency implements Currency {
   const factory _Currency(
-      {required final String network,
-      required final CurrencyType type,
-      required final String value,
-      @JsonKey(includeToJson: false) required final String name,
-      @JsonKey(includeToJson: false) required final int decimals,
-      @JsonKey(includeToJson: false) required final int chainId,
-      @JsonKey(includeToJson: false)
-      required final CurrencySymbol symbol}) = _$CurrencyImpl;
+          {required final String network,
+          required final CurrencyType type,
+          required final String value,
+          @JsonKey(includeToJson: false) final String? name,
+          @JsonKey(includeToJson: false) final int? decimals,
+          @JsonKey(includeToJson: false) final int? chainId,
+          @JsonKey(includeToJson: false) final CurrencySymbol? symbol}) =
+      _$CurrencyImpl;
 
   factory _Currency.fromJson(Map<String, dynamic> json) =
       _$CurrencyImpl.fromJson;
@@ -283,16 +283,16 @@ abstract class _Currency implements Currency {
   String get value;
   @override
   @JsonKey(includeToJson: false)
-  String get name;
+  String? get name;
   @override
   @JsonKey(includeToJson: false)
-  int get decimals;
+  int? get decimals;
   @override
   @JsonKey(includeToJson: false)
-  int get chainId;
+  int? get chainId;
   @override
   @JsonKey(includeToJson: false)
-  CurrencySymbol get symbol;
+  CurrencySymbol? get symbol;
 
   /// Create a copy of Currency
   /// with the given fields replaced by the non-null parameter values.

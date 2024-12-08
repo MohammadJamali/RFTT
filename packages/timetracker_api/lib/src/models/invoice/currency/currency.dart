@@ -12,10 +12,10 @@ class Currency with _$Currency {
     required String network,
     required CurrencyType type,
     required String value,
-    @JsonKey(includeToJson: false) required String name,
-    @JsonKey(includeToJson: false) required int decimals,
-    @JsonKey(includeToJson: false) required int chainId,
-    @JsonKey(includeToJson: false) required CurrencySymbol symbol,
+    @JsonKey(includeToJson: false) String? name,
+    @JsonKey(includeToJson: false) int? decimals,
+    @JsonKey(includeToJson: false) int? chainId,
+    @JsonKey(includeToJson: false) CurrencySymbol? symbol,
   }) = _Currency;
 
   factory Currency.fromJson(Map<String, Object?> json) =>

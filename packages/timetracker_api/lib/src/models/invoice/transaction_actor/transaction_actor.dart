@@ -7,9 +7,7 @@ part 'transaction_actor.g.dart';
 class TransactionActor with _$TransactionActor {
   @JsonSerializable(includeIfNull: false)
   const factory TransactionActor({
-    @JsonKey(includeToJson: false) String? id,
-    required String type,
-    required String value,
+    required String type, required String value, @JsonKey(includeToJson: false) String? id,
   }) = _TransactionActor;
 
   factory TransactionActor.fromJson(Map<String, Object?> json) =>

@@ -1,5 +1,4 @@
 import 'package:freezed_annotation/freezed_annotation.dart';
-import 'package:timetracker_api/src/models/invoice/transaction_detail/transaction_detail.dart';
 import 'package:timetracker_api/src/models/models.dart';
 
 part 'invoice_transactions.freezed.dart';

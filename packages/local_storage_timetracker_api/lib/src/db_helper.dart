@@ -30,7 +30,7 @@ class DatabaseHelper {
     final dbPath = await getDatabasesPath();
     final path = join(dbPath, 'app_database.db');
 
-    return await openDatabase(
+    return openDatabase(
       path,
       version: 1,
       onCreate: (db, version) async {
@@ -87,6 +87,7 @@ class DatabaseHelper {
             storageLocation TEXT,
             channelId TEXT,
             signature TEXT,
+            invoiceId TEXT,
             state TEXT DEFAULT 'created',
             FOREIGN KEY (projectId) REFERENCES $tableProjects (id) ON DELETE SET NULL,
             FOREIGN KEY (signerId) REFERENCES $tableTransactionsActor (id) ON DELETE SET NULL

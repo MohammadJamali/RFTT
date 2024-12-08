@@ -294,7 +294,7 @@ class _AccountFormViewState extends State<AccountFormView> {
   void addTransactionActor(BuildContext context) => showDialog(
         context: context,
         builder: (_) {
-          TransactionType selectedType = TransactionType.Ethereum;
+          var selectedType = TransactionType.Ethereum;
           final valueController = TextEditingController();
 
           return AlertDialog(
@@ -334,7 +334,7 @@ class _AccountFormViewState extends State<AccountFormView> {
                 StyledTextField(
                   'Wallet Address',
                   controller: valueController,
-                )
+                ),
               ],
             ),
             actions: [

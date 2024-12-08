@@ -20,10 +20,11 @@ class TasksPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final projectRepository = context.read<ProjectRepository>();
     final taskRepository = context.read<TaskRepository>();
 
     return BlocProvider(
-      create: (context) => TasksBloc(taskRepository),
+      create: (context) => TasksBloc(taskRepository, projectRepository),
       child: TasksView(project: project),
     );
   }
@@ -43,7 +44,7 @@ class _TasksViewState extends State<TasksView> {
     TaskRepository taskRepository,
     String projectId,
   ) async {
-    return await context.read<TaskRepository>().list(projectId: projectId);
+    return context.read<TaskRepository>().list(projectId: projectId);
   }
 
   Future<List<Task>>? loadTasksFeature;
@@ -69,6 +70,8 @@ class _TasksViewState extends State<TasksView> {
         onPressed: () => addTask(context),
         tooltip: 'New Task',
         shape: const CircleBorder(),
+        backgroundColor: const Color(0xFFf35026),
+        foregroundColor: Colors.white,
         child: const Icon(Icons.add),
       ),
       body: SafeArea(
@@ -119,7 +122,7 @@ class _TasksViewState extends State<TasksView> {
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 Text(widget.project.title,
-                    style: theme.textTheme.headlineLarge),
+                    style: theme.textTheme.headlineLarge,),
                 const SizedBox(height: 16),
                 RichText(
                   text: TextSpan(
@@ -159,7 +162,8 @@ class _TasksViewState extends State<TasksView> {
                       builder: (context, snapshot) {
                         if (!snapshot.hasData) {
                           return const Center(
-                              child: CupertinoActivityIndicator());
+                            child: CupertinoActivityIndicator(),
+                          );
                         }
 
                         if (snapshot.data?.isEmpty != false) {
@@ -172,7 +176,10 @@ class _TasksViewState extends State<TasksView> {
                         return Column(
                           children: snapshot.data!
                               .map(
-                                (e) => TaskCard(task: e),
+                                (e) => TaskCard(
+                                  task: e,
+                                  project: widget.project,
+                                ),
                               )
                               .toList(),
                         );
@@ -195,7 +202,7 @@ class _TasksViewState extends State<TasksView> {
           final descriptionController = TextEditingController();
           final deadlineController = TextEditingController();
           DateTime? selectedDeadline;
-          List<String> selectedTags = [];
+          final selectedTags = <String>[];
 
           return StatefulBuilder(
             builder: (_, setState) {
@@ -216,7 +223,7 @@ class _TasksViewState extends State<TasksView> {
                       ),
                       const SizedBox(height: 16),
                       StyledDateSelector(
-                        'Select Date',
+                        'Deadline',
                         context: context,
                         controller: deadlineController,
                         initialDate: DateTime.now(),
@@ -295,10 +302,12 @@ class _TasksViewState extends State<TasksView> {
 
 class TaskCard extends StatelessWidget {
   const TaskCard({
+    required this.project,
     required this.task,
     super.key,
   });
 
+  final Project project;
   final Task task;
 
   @override
@@ -338,7 +347,7 @@ class TaskCard extends StatelessWidget {
             ),
             const SizedBox(height: 4),
             Text('Duration: ${secondToMinutes(task.duration)}',
-                style: theme.textTheme.titleSmall),
+                style: theme.textTheme.titleSmall,),
             const SizedBox(height: 16),
             Text(
               task.description ?? '-',
@@ -375,8 +384,21 @@ class TaskCard extends StatelessWidget {
                       ),
                     ),
                   ),
-                  onPressed: () {
-                    Navigator.pushNamed(context, TimerPage.route);
+                  onPressed: () async {
+                    final elapsedSeconds = await Navigator.pushNamed(
+                            context, TimerPage.route,
+                            arguments: {
+                              'task': task.toJson(),
+                            },) as int? ??
+                        0;
+
+                    print(elapsedSeconds);
+                    await context.read<TaskRepository>().update(task.copyWith(
+                        duration: task.duration + elapsedSeconds,),);
+                    await context.read<ProjectRepository>().update(project
+                        .copyWith(duration: project.duration + elapsedSeconds),);
+
+                    print('elapsedSeconds: $elapsedSeconds');
                   },
                   child: const Text(
                     'Track',

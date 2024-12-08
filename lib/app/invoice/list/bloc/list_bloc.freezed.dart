@@ -18,19 +18,19 @@ final _privateConstructorUsedError = UnsupportedError(
 mixin _$InvoiceListEvent {
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
-    required TResult Function() fetchInvoiceList,
+    required TResult Function(String? accountId) fetchInvoiceList,
     required TResult Function(String query) search,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
-    TResult? Function()? fetchInvoiceList,
+    TResult? Function(String? accountId)? fetchInvoiceList,
     TResult? Function(String query)? search,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
-    TResult Function()? fetchInvoiceList,
+    TResult Function(String? accountId)? fetchInvoiceList,
     TResult Function(String query)? search,
     required TResult orElse(),
   }) =>
@@ -82,6 +82,8 @@ abstract class _$$FetchInvoicesImplCopyWith<$Res> {
   factory _$$FetchInvoicesImplCopyWith(
           _$FetchInvoicesImpl value, $Res Function(_$FetchInvoicesImpl) then) =
       __$$FetchInvoicesImplCopyWithImpl<$Res>;
+  @useResult
+  $Res call({String? accountId});
 }
 
 /// @nodoc
@@ -94,54 +96,80 @@ class __$$FetchInvoicesImplCopyWithImpl<$Res>
 
   /// Create a copy of InvoiceListEvent
   /// with the given fields replaced by the non-null parameter values.
+  @pragma('vm:prefer-inline')
+  @override
+  $Res call({
+    Object? accountId = freezed,
+  }) {
+    return _then(_$FetchInvoicesImpl(
+      accountId: freezed == accountId
+          ? _value.accountId
+          : accountId // ignore: cast_nullable_to_non_nullable
+              as String?,
+    ));
+  }
 }
 
 /// @nodoc
 
 class _$FetchInvoicesImpl implements _FetchInvoices {
-  const _$FetchInvoicesImpl();
+  const _$FetchInvoicesImpl({this.accountId});
+
+  @override
+  final String? accountId;
 
   @override
   String toString() {
-    return 'InvoiceListEvent.fetchInvoiceList()';
+    return 'InvoiceListEvent.fetchInvoiceList(accountId: $accountId)';
   }
 
   @override
   bool operator ==(Object other) {
     return identical(this, other) ||
-        (other.runtimeType == runtimeType && other is _$FetchInvoicesImpl);
+        (other.runtimeType == runtimeType &&
+            other is _$FetchInvoicesImpl &&
+            (identical(other.accountId, accountId) ||
+                other.accountId == accountId));
   }
 
   @override
-  int get hashCode => runtimeType.hashCode;
+  int get hashCode => Object.hash(runtimeType, accountId);
+
+  /// Create a copy of InvoiceListEvent
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
+  @override
+  @pragma('vm:prefer-inline')
+  _$$FetchInvoicesImplCopyWith<_$FetchInvoicesImpl> get copyWith =>
+      __$$FetchInvoicesImplCopyWithImpl<_$FetchInvoicesImpl>(this, _$identity);
 
   @override
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
-    required TResult Function() fetchInvoiceList,
+    required TResult Function(String? accountId) fetchInvoiceList,
     required TResult Function(String query) search,
   }) {
-    return fetchInvoiceList();
+    return fetchInvoiceList(accountId);
   }
 
   @override
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
-    TResult? Function()? fetchInvoiceList,
+    TResult? Function(String? accountId)? fetchInvoiceList,
     TResult? Function(String query)? search,
   }) {
-    return fetchInvoiceList?.call();
+    return fetchInvoiceList?.call(accountId);
   }
 
   @override
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
-    TResult Function()? fetchInvoiceList,
+    TResult Function(String? accountId)? fetchInvoiceList,
     TResult Function(String query)? search,
     required TResult orElse(),
   }) {
     if (fetchInvoiceList != null) {
-      return fetchInvoiceList();
+      return fetchInvoiceList(accountId);
     }
     return orElse();
   }
@@ -179,7 +207,15 @@ class _$FetchInvoicesImpl implements _FetchInvoices {
 }
 
 abstract class _FetchInvoices implements InvoiceListEvent {
-  const factory _FetchInvoices() = _$FetchInvoicesImpl;
+  const factory _FetchInvoices({final String? accountId}) = _$FetchInvoicesImpl;
+
+  String? get accountId;
+
+  /// Create a copy of InvoiceListEvent
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
+  _$$FetchInvoicesImplCopyWith<_$FetchInvoicesImpl> get copyWith =>
+      throw _privateConstructorUsedError;
 }
 
 /// @nodoc
@@ -250,7 +286,7 @@ class _$InvoiceSearchImpl implements _InvoiceSearch {
   @override
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
-    required TResult Function() fetchInvoiceList,
+    required TResult Function(String? accountId) fetchInvoiceList,
     required TResult Function(String query) search,
   }) {
     return search(query);
@@ -259,7 +295,7 @@ class _$InvoiceSearchImpl implements _InvoiceSearch {
   @override
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
-    TResult? Function()? fetchInvoiceList,
+    TResult? Function(String? accountId)? fetchInvoiceList,
     TResult? Function(String query)? search,
   }) {
     return search?.call(query);
@@ -268,7 +304,7 @@ class _$InvoiceSearchImpl implements _InvoiceSearch {
   @override
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
-    TResult Function()? fetchInvoiceList,
+    TResult Function(String? accountId)? fetchInvoiceList,
     TResult Function(String query)? search,
     required TResult orElse(),
   }) {
@@ -348,23 +384,23 @@ mixin _$InvoiceListState {
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult map<TResult extends Object?>({
-    required TResult Function(_InvoiceListInitial value) initial,
-    required TResult Function(_InvoiceListLoaded value) loaded,
-    required TResult Function(_InvoiceListError value) error,
+    required TResult Function(InvoiceListInitial value) initial,
+    required TResult Function(InvoiceListLoaded value) loaded,
+    required TResult Function(InvoiceListError value) error,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
-    TResult? Function(_InvoiceListInitial value)? initial,
-    TResult? Function(_InvoiceListLoaded value)? loaded,
-    TResult? Function(_InvoiceListError value)? error,
+    TResult? Function(InvoiceListInitial value)? initial,
+    TResult? Function(InvoiceListLoaded value)? loaded,
+    TResult? Function(InvoiceListError value)? error,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
-    TResult Function(_InvoiceListInitial value)? initial,
-    TResult Function(_InvoiceListLoaded value)? loaded,
-    TResult Function(_InvoiceListError value)? error,
+    TResult Function(InvoiceListInitial value)? initial,
+    TResult Function(InvoiceListLoaded value)? loaded,
+    TResult Function(InvoiceListError value)? error,
     required TResult orElse(),
   }) =>
       throw _privateConstructorUsedError;
@@ -412,7 +448,7 @@ class __$$InvoiceListInitialImplCopyWithImpl<$Res>
 
 /// @nodoc
 
-class _$InvoiceListInitialImpl implements _InvoiceListInitial {
+class _$InvoiceListInitialImpl implements InvoiceListInitial {
   const _$InvoiceListInitialImpl();
 
   @override
@@ -466,9 +502,9 @@ class _$InvoiceListInitialImpl implements _InvoiceListInitial {
   @override
   @optionalTypeArgs
   TResult map<TResult extends Object?>({
-    required TResult Function(_InvoiceListInitial value) initial,
-    required TResult Function(_InvoiceListLoaded value) loaded,
-    required TResult Function(_InvoiceListError value) error,
+    required TResult Function(InvoiceListInitial value) initial,
+    required TResult Function(InvoiceListLoaded value) loaded,
+    required TResult Function(InvoiceListError value) error,
   }) {
     return initial(this);
   }
@@ -476,9 +512,9 @@ class _$InvoiceListInitialImpl implements _InvoiceListInitial {
   @override
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
-    TResult? Function(_InvoiceListInitial value)? initial,
-    TResult? Function(_InvoiceListLoaded value)? loaded,
-    TResult? Function(_InvoiceListError value)? error,
+    TResult? Function(InvoiceListInitial value)? initial,
+    TResult? Function(InvoiceListLoaded value)? loaded,
+    TResult? Function(InvoiceListError value)? error,
   }) {
     return initial?.call(this);
   }
@@ -486,9 +522,9 @@ class _$InvoiceListInitialImpl implements _InvoiceListInitial {
   @override
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
-    TResult Function(_InvoiceListInitial value)? initial,
-    TResult Function(_InvoiceListLoaded value)? loaded,
-    TResult Function(_InvoiceListError value)? error,
+    TResult Function(InvoiceListInitial value)? initial,
+    TResult Function(InvoiceListLoaded value)? loaded,
+    TResult Function(InvoiceListError value)? error,
     required TResult orElse(),
   }) {
     if (initial != null) {
@@ -498,8 +534,8 @@ class _$InvoiceListInitialImpl implements _InvoiceListInitial {
   }
 }
 
-abstract class _InvoiceListInitial implements InvoiceListState {
-  const factory _InvoiceListInitial() = _$InvoiceListInitialImpl;
+abstract class InvoiceListInitial implements InvoiceListState {
+  const factory InvoiceListInitial() = _$InvoiceListInitialImpl;
 }
 
 /// @nodoc
@@ -537,7 +573,7 @@ class __$$InvoiceListLoadedImplCopyWithImpl<$Res>
 
 /// @nodoc
 
-class _$InvoiceListLoadedImpl implements _InvoiceListLoaded {
+class _$InvoiceListLoadedImpl implements InvoiceListLoaded {
   const _$InvoiceListLoadedImpl(final List<Invoice> invoices)
       : _invoices = invoices;
 
@@ -612,9 +648,9 @@ class _$InvoiceListLoadedImpl implements _InvoiceListLoaded {
   @override
   @optionalTypeArgs
   TResult map<TResult extends Object?>({
-    required TResult Function(_InvoiceListInitial value) initial,
-    required TResult Function(_InvoiceListLoaded value) loaded,
-    required TResult Function(_InvoiceListError value) error,
+    required TResult Function(InvoiceListInitial value) initial,
+    required TResult Function(InvoiceListLoaded value) loaded,
+    required TResult Function(InvoiceListError value) error,
   }) {
     return loaded(this);
   }
@@ -622,9 +658,9 @@ class _$InvoiceListLoadedImpl implements _InvoiceListLoaded {
   @override
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
-    TResult? Function(_InvoiceListInitial value)? initial,
-    TResult? Function(_InvoiceListLoaded value)? loaded,
-    TResult? Function(_InvoiceListError value)? error,
+    TResult? Function(InvoiceListInitial value)? initial,
+    TResult? Function(InvoiceListLoaded value)? loaded,
+    TResult? Function(InvoiceListError value)? error,
   }) {
     return loaded?.call(this);
   }
@@ -632,9 +668,9 @@ class _$InvoiceListLoadedImpl implements _InvoiceListLoaded {
   @override
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
-    TResult Function(_InvoiceListInitial value)? initial,
-    TResult Function(_InvoiceListLoaded value)? loaded,
-    TResult Function(_InvoiceListError value)? error,
+    TResult Function(InvoiceListInitial value)? initial,
+    TResult Function(InvoiceListLoaded value)? loaded,
+    TResult Function(InvoiceListError value)? error,
     required TResult orElse(),
   }) {
     if (loaded != null) {
@@ -644,8 +680,8 @@ class _$InvoiceListLoadedImpl implements _InvoiceListLoaded {
   }
 }
 
-abstract class _InvoiceListLoaded implements InvoiceListState {
-  const factory _InvoiceListLoaded(final List<Invoice> invoices) =
+abstract class InvoiceListLoaded implements InvoiceListState {
+  const factory InvoiceListLoaded(final List<Invoice> invoices) =
       _$InvoiceListLoadedImpl;
 
   List<Invoice> get invoices;
@@ -692,7 +728,7 @@ class __$$InvoiceListErrorImplCopyWithImpl<$Res>
 
 /// @nodoc
 
-class _$InvoiceListErrorImpl implements _InvoiceListError {
+class _$InvoiceListErrorImpl implements InvoiceListError {
   const _$InvoiceListErrorImpl(this.message);
 
   @override
@@ -760,9 +796,9 @@ class _$InvoiceListErrorImpl implements _InvoiceListError {
   @override
   @optionalTypeArgs
   TResult map<TResult extends Object?>({
-    required TResult Function(_InvoiceListInitial value) initial,
-    required TResult Function(_InvoiceListLoaded value) loaded,
-    required TResult Function(_InvoiceListError value) error,
+    required TResult Function(InvoiceListInitial value) initial,
+    required TResult Function(InvoiceListLoaded value) loaded,
+    required TResult Function(InvoiceListError value) error,
   }) {
     return error(this);
   }
@@ -770,9 +806,9 @@ class _$InvoiceListErrorImpl implements _InvoiceListError {
   @override
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
-    TResult? Function(_InvoiceListInitial value)? initial,
-    TResult? Function(_InvoiceListLoaded value)? loaded,
-    TResult? Function(_InvoiceListError value)? error,
+    TResult? Function(InvoiceListInitial value)? initial,
+    TResult? Function(InvoiceListLoaded value)? loaded,
+    TResult? Function(InvoiceListError value)? error,
   }) {
     return error?.call(this);
   }
@@ -780,9 +816,9 @@ class _$InvoiceListErrorImpl implements _InvoiceListError {
   @override
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
-    TResult Function(_InvoiceListInitial value)? initial,
-    TResult Function(_InvoiceListLoaded value)? loaded,
-    TResult Function(_InvoiceListError value)? error,
+    TResult Function(InvoiceListInitial value)? initial,
+    TResult Function(InvoiceListLoaded value)? loaded,
+    TResult Function(InvoiceListError value)? error,
     required TResult orElse(),
   }) {
     if (error != null) {
@@ -792,9 +828,8 @@ class _$InvoiceListErrorImpl implements _InvoiceListError {
   }
 }
 
-abstract class _InvoiceListError implements InvoiceListState {
-  const factory _InvoiceListError(final String message) =
-      _$InvoiceListErrorImpl;
+abstract class InvoiceListError implements InvoiceListState {
+  const factory InvoiceListError(final String message) = _$InvoiceListErrorImpl;
 
   String get message;
 

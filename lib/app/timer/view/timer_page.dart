@@ -7,6 +7,7 @@ import 'package:timetracker/app/timer/timer.dart';
 import 'package:timetracker/app/timer/widgets/motivational_text.dart';
 import 'package:timetracker/app/timer/widgets/ticker.dart';
 import 'package:timetracker/utils/time.dart';
+import 'package:timetracker_api/timetracker_api.dart';
 
 class TimerPage extends StatelessWidget {
   const TimerPage({
@@ -32,13 +33,21 @@ class _TimerView extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return const Scaffold(
+    final task = Task.fromJson(
+      (ModalRoute.of(
+        context,
+      )!
+          .settings
+          .arguments! as Map<String, dynamic>)['task']! as Map<String, dynamic>,
+    );
+
+    return Scaffold(
       body: SafeArea(
         child: Column(
           children: [
-            _Header(title: 'title'),
-            TimerDisplay(),
-            MotivationalText(),
+            _Header(title: task.title),
+            const TimerDisplay(),
+            const MotivationalText(),
           ],
         ),
       ),
@@ -57,18 +66,24 @@ class _Header extends StatelessWidget {
         color: const Color.fromRGBO(244, 245, 254, 1),
         borderRadius: BorderRadius.circular(32),
       ),
+      margin: const EdgeInsets.all(24),
       padding: const EdgeInsets.all(8),
       child: Row(
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: [
-          Padding(
-            padding: const EdgeInsetsDirectional.only(start: 16),
-            child: Text(
-              title,
-              style: Theme.of(context)
-                  .textTheme
-                  .titleMedium
-                  ?.copyWith(fontWeight: FontWeight.bold),
+          Expanded(
+            child: Padding(
+              padding: const EdgeInsetsDirectional.only(start: 16),
+              child: Text(
+                title,
+                overflow: TextOverflow.ellipsis,
+                maxLines: 1,
+                
+                style: Theme.of(context)
+                    .textTheme
+                    .titleMedium
+                    ?.copyWith(fontWeight: FontWeight.bold),
+              ),
             ),
           ),
           RawMaterialButton(
@@ -86,7 +101,7 @@ class _Header extends StatelessWidget {
 
   void _showExitDialog(BuildContext context) => showDialog<bool>(
         context: context,
-        builder: (context) {
+        builder: (_) {
           return BackdropFilter(
             filter: ImageFilter.blur(sigmaX: 5, sigmaY: 5),
             child: AlertDialog(
@@ -99,8 +114,12 @@ class _Header extends StatelessWidget {
                 ),
                 TextButton(
                   onPressed: () {
+                    final timerBloc = BlocProvider.of<TimerBloc>(context);
+                    final elapsedSeconds = timerBloc.state is TimerRunning
+                        ? (timerBloc.state as TimerRunning).secondsElapsed
+                        : 0;
                     Navigator.of(context).pop();
-                    Navigator.of(context).pop();
+                    Navigator.of(context).pop(elapsedSeconds);
                   },
                   child: const Text('Yes'),
                 ),

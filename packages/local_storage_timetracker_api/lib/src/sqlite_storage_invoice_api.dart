@@ -8,6 +8,7 @@ class SqliteStorageInvoiceApi extends ILocalStorageInvoiceApi {
   final _dbHelper = DatabaseHelper();
   final _invoiceStream = BehaviorSubject<Invoice>();
 
+  @override
   Future<List<Invoice>> searchInvoicesByAccountName(String partialName) async {
     final db = await _dbHelper.database;
 
@@ -63,6 +64,33 @@ class SqliteStorageInvoiceApi extends ILocalStorageInvoiceApi {
     return result;
   }
 
+  Map<String, dynamic> encodeRequestInfo(RequestInfo requestInfo) {
+    final map = requestInfo.toJson();
+
+    map['currency'] = map['currency'].name;
+    map['payee'] = map['payee'].type + ' ' + map['payee'].value;
+
+    return map;
+  }
+
+  RequestInfo dencodeRequestInfo(Map<String, dynamic> requestMap) {
+    final c = requestMap['currency'];
+    requestMap['currency'] = currencies.values
+        .firstWhere((e) => e.name == requestMap['currency'])
+        .toJson();
+    requestMap['payee'] = (requestMap['payee']! as String).split(' ');
+    requestMap['payee'] = TransactionActor(
+            type: requestMap['payee'][0]! as String,
+            value: requestMap['payee'][1]! as String)
+        .toJson();
+
+    final map = RequestInfo.fromJson(requestMap).copyWith(
+        currency: currencies.values
+            .firstWhere((e) => e.name == c));
+
+    return map;
+  }
+
   @override
   Future<void> add(Invoice invoice) async {
     final db = await _dbHelper.database;
@@ -79,8 +107,9 @@ class SqliteStorageInvoiceApi extends ILocalStorageInvoiceApi {
         ..._encodePureInvoice(invoice),
         'signerId': signerId,
       });
+
       await txn.insert(DatabaseHelper.tableRequestsInfo, {
-        ...invoice.requestInfo!.toJson(),
+        ...encodeRequestInfo(invoice.requestInfo!),
         'invoiceId': invoiceId,
       });
       await txn.insert(DatabaseHelper.tablePaymentsNetwork, {
@@ -148,7 +177,7 @@ class SqliteStorageInvoiceApi extends ILocalStorageInvoiceApi {
       if (invoice.requestInfo != null) {
         await txn.update(
           DatabaseHelper.tableRequestsInfo,
-          invoice.requestInfo!.toJson(),
+          encodeRequestInfo(invoice.requestInfo!),
           where: 'invoiceId = ?',
           whereArgs: [invoice.id],
         );
@@ -198,8 +227,8 @@ class SqliteStorageInvoiceApi extends ILocalStorageInvoiceApi {
       );
       if (requestInfo.isNotEmpty) {
         invoice = invoice.copyWith(
-          requestInfo: RequestInfo.fromJson(
-            requestInfo.first,
+          requestInfo: dencodeRequestInfo(
+            Map.from(requestInfo.first),
           ),
         );
       }
@@ -277,4 +306,21 @@ class SqliteStorageInvoiceApi extends ILocalStorageInvoiceApi {
 
   @override
   Future<void> dispose() => _invoiceStream.close();
+
+  @override
+  Future<int> count({String? projectId}) async {
+    final db = await _dbHelper.database;
+
+    final parameters = buildWhereClause({'projectId': projectId});
+
+    var whereClause = parameters['query'];
+    whereClause = whereClause != null ? 'WHERE $whereClause' : null;
+
+    final result = await db.rawQuery(
+      'SELECT COUNT(*) FROM ${DatabaseHelper.tableInvoices} $whereClause',
+      parameters['whereArgs'] as List<Object?>?,
+    );
+
+    return Sqflite.firstIntValue(result) ?? 0;
+  }
 }

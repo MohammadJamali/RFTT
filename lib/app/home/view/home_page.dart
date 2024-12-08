@@ -3,10 +3,10 @@ import 'dart:convert';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:timetracker/app/account/account.dart';
-import 'package:timetracker/app/account/bloc/account_bloc.dart';
 import 'package:timetracker/app/home/bloc/home_bloc.dart';
 import 'package:timetracker/app/home/widgets/add_edit_project_dialog.dart';
 import 'package:timetracker/app/home/widgets/projects_list.dart';
+import 'package:timetracker/app/invoice/list/view/list.dart';
 import 'package:timetracker/app/settings/settings.dart';
 import 'package:timetracker/l10n/l10n.dart';
 import 'package:timetracker_api/timetracker_api.dart';
@@ -46,7 +46,10 @@ class _HomeViewState extends State<HomeView> {
         builder: (_) {
           return RepositoryProvider.value(
             value: accountRepository,
-            child: const AccountFormPage(),
+            child: BlocProvider.value(
+              value: context.read<SettingsBloc>(),
+              child: const AccountFormPage(),
+            ),
           );
         },
         settings: RouteSettings(
@@ -60,7 +63,7 @@ class _HomeViewState extends State<HomeView> {
     final actor = await accountRepository.getTransactionActorByAccount(
       state.account!.id,
     );
-    
+
     if (!context.mounted) return;
     context.read<SettingsBloc>().add(SettingsEvent.login(actor.first));
 
@@ -168,11 +171,19 @@ class _HomeViewState extends State<HomeView> {
                         spacing: 16,
                         children: [
                           RawMaterialButton(
-                            onPressed: () => openAccountFormPage(
-                              context,
-                              accountRepository,
-                              state,
-                            ),
+                            onPressed: () async {
+                              await Navigator.push(
+                                context,
+                                MaterialPageRoute(
+                                  builder: (_) {
+                                    return RepositoryProvider.value(
+                                      value: accountRepository,
+                                      child: const AccountFormPage(),
+                                    );
+                                  },
+                                ),
+                              );
+                            },
                             elevation: 0,
                             fillColor: Colors.white,
                             shape: const CircleBorder(),
@@ -189,22 +200,98 @@ class _HomeViewState extends State<HomeView> {
                                 children: snapshot.data!
                                     .where((e) => e.id != state.account!.id)
                                     .map(
-                                      (e) => Padding(
-                                        padding:
-                                            const EdgeInsets.only(right: 16),
-                                        child: ClipOval(
-                                          child: SizedBox(
-                                            width: 56,
-                                            height: 56,
-                                            child: e.profilePicture == null
-                                                ? Image.asset(
-                                                    'assets/images/profile-picture.png',
-                                                  )
-                                                : Image.memory(
-                                                    base64Decode(
-                                                      e.profilePicture!,
+                                      (e) => GestureDetector(
+                                        onLongPress: () async {
+                                          await Navigator.push(
+                                            context,
+                                            MaterialPageRoute(
+                                              builder: (_) {
+                                                return RepositoryProvider.value(
+                                                  value: accountRepository,
+                                                  child:
+                                                      const AccountFormPage(),
+                                                );
+                                              },
+                                              settings: RouteSettings(
+                                                arguments: {
+                                                  'accountId': e.id,
+                                                },
+                                              ),
+                                            ),
+                                          );
+                                        },
+                                        onTap: () async {
+                                          await Navigator.push(
+                                            context,
+                                            MaterialPageRoute(
+                                              builder: (_) {
+                                                return RepositoryProvider.value(
+                                                  value: context.read<
+                                                      InvoiceRepository>(),
+                                                  child: RepositoryProvider.value(
+                                                  value: context.read<
+                                                      ProjectRepository>(),
+                                                  child:RepositoryProvider.value(
+                                                  value: context.read<
+                                                      TaskRepository>(),
+                                                  child: BlocProvider.value(
+                                                    value: context
+                                                        .read<SettingsBloc>(),
+                                                    child:
+                                                        const InvoiceListPage(),
+                                                  ),),),
+                                                );
+                                              },
+                                              settings: RouteSettings(
+                                                arguments: e.toJson(),
+                                              ),
+                                            ),
+                                          );
+                                        },
+                                        child: Padding(
+                                          padding:
+                                              const EdgeInsets.only(right: 16),
+                                          child: Stack(
+                                            children: [
+                                              ClipOval(
+                                                child: Center(
+                                                  child: SizedBox(
+                                                    width: 56,
+                                                    height: 56,
+                                                    child:
+                                                        e.profilePicture == null
+                                                            ? Image.asset(
+                                                                'assets/images/profile-picture.png',
+                                                              )
+                                                            : Image.memory(
+                                                                base64Decode(
+                                                                  e.profilePicture!,
+                                                                ),
+                                                              ),
+                                                  ),
+                                                ),
+                                              ),
+                                              if (e.invoices?.isNotEmpty ??
+                                                  false)
+                                                ClipOval(
+                                                  child: Container(
+                                                    width: 18,
+                                                    height: 18,
+                                                    color: Colors.red,
+                                                    alignment: Alignment.center,
+                                                    child: Text(
+                                                      '${e.invoices!.length}',
+                                                      style: theme
+                                                          .textTheme.labelSmall
+                                                          ?.copyWith(
+                                                        color: Colors.white,
+                                                        fontWeight:
+                                                            FontWeight.bold,
+                                                      ),
                                                     ),
                                                   ),
+                                                ),
+                                            ],
                                           ),
                                         ),
                                       ),

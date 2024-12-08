@@ -1,8 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:timetracker/app/invoice/list/widget/statistic_counter.dart';
+import 'package:timetracker_api/src/models/invoice/invoice.dart';
 
 class InvoiceStatistics extends StatelessWidget {
-  const InvoiceStatistics({super.key});
+  const InvoiceStatistics({super.key, required this.invoices});
+
+  final List<Invoice> invoices;
 
   @override
   Widget build(BuildContext context) {
@@ -14,15 +17,15 @@ class InvoiceStatistics extends StatelessWidget {
         borderRadius: BorderRadius.circular(16),
         color: const Color(0xFFf35026),
       ),
-      child: const Center(
+      child: Center(
         child: Row(
           mainAxisAlignment: MainAxisAlignment.center,
           mainAxisSize: MainAxisSize.min,
           children: [
-            StatisticCounter(label: 'Paid', count: 12),
-            StatisticCounter(label: 'Unpaid', count: 5),
-            StatisticCounter(label: 'Over Due', count: 2),
-            StatisticCounter(label: 'Draft', count: 3),
+            const StatisticCounter(label: 'Paid', count: 0),
+            StatisticCounter(label: 'Unpaid', count: invoices.length),
+            const StatisticCounter(label: 'Over Due', count: 0),
+            const StatisticCounter(label: 'Draft', count: 0),
           ],
         ),
       ),
