@@ -1,3 +1,5 @@
+import 'dart:convert';
+
 import 'package:local_storage_timetracker_api/local_storage_timetracker_api.dart';
 import 'package:local_storage_timetracker_api/src/utils/database.dart';
 import 'package:rxdart/subjects.dart';
@@ -11,7 +13,11 @@ class SqliteStorageTaskApi extends ITaskApi {
   @override
   Future<void> add(Task task) async {
     final db = await _dbHelper.database;
-    await db.insert(DatabaseHelper.tableTasks, task.toJson());
+
+    final jsonTask = task.toJson();
+    jsonTask['tags'] = jsonEncode(jsonTask['tags']);
+
+    await db.insert(DatabaseHelper.tableTasks, jsonTask);
 
     _taskStream.add(task);
   }
@@ -35,9 +41,13 @@ class SqliteStorageTaskApi extends ITaskApi {
   @override
   Future<void> update(Task task) async {
     final db = await _dbHelper.database;
+
+    final jsonTask = task.toJson();
+    jsonTask['tags'] = jsonEncode(jsonTask['tags']);
+
     await db.update(
       DatabaseHelper.tableTasks,
-      task.toJson(),
+      jsonTask,
       where: 'id = ?',
       whereArgs: [task.id],
     );
@@ -49,12 +59,21 @@ class SqliteStorageTaskApi extends ITaskApi {
   Future<List<Task>> list({String? id, String? projectId}) async {
     final db = await _dbHelper.database;
 
-    final tasks = await conditionalQuery(db, DatabaseHelper.tableTasks, {
+    final tasksQuery = await conditionalQuery(db, DatabaseHelper.tableTasks, {
       'id': id,
       'projectId': projectId,
     });
 
-    return tasks.map(Task.fromJson).toList();
+    final tasks = <Task>[];
+    for (final row in tasksQuery) {
+      final task = Map<String, dynamic>.from(row);
+      if (task.containsKey('tags') && (task['tags']! as String).isNotEmpty) {
+        task['tags'] = jsonDecode(task['tags']! as String);
+      }
+      tasks.add(Task.fromJson(task));
+    }
+
+    return tasks;
   }
 
   @override

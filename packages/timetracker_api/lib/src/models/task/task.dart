@@ -6,11 +6,14 @@ part 'task.g.dart';
 @freezed
 @immutable
 class Task with _$Task {
+
+  @JsonSerializable(includeIfNull: false)
   const factory Task({
     required String id,
     required String projectId,
     required String title,
     required DateTime created,
+    String? invoiceId,
     @Default(0) int duration,
     String? description,
     DateTime? deadline,

@@ -60,6 +60,8 @@ class _HomeViewState extends State<HomeView> {
     final actor = await accountRepository.getTransactionActorByAccount(
       state.account!.id,
     );
+    
+    if (!context.mounted) return;
     context.read<SettingsBloc>().add(SettingsEvent.login(actor.first));
 
     accountsFuture = accountRepository.list();
@@ -78,142 +80,146 @@ class _HomeViewState extends State<HomeView> {
       body: SafeArea(
         child: BlocBuilder<SettingsBloc, SettingsState>(
           builder: (context, state) {
-            return Column(children: [
-              Expanded(
-                child: SafeArea(
-                  minimum: const EdgeInsets.all(24),
-                  child: Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      Row(
-                        children: [
-                          Image.asset(
-                            'assets/images/icon.png',
-                            width: 48,
-                            height: 24,
-                          ),
-                          const SizedBox(width: 8),
-                          Text(
-                            l10n.appTitle,
-                            style: theme.textTheme.titleMedium
-                                ?.copyWith(fontWeight: FontWeight.bold),
-                          ),
-                          const Spacer(),
-                          GestureDetector(
-                            onTap: () => openAccountFormPage(
-                              context,
-                              accountRepository,
-                              state,
-                            ),
-                            child: CircleAvatar(
-                              backgroundImage:
-                                  state.account?.profilePicture == null
-                                      ? const AssetImage(
-                                          'assets/images/profile-picture.png',
-                                        )
-                                      : MemoryImage(
-                                          base64Decode(
-                                            state.account!.profilePicture!,
-                                          ),
-                                        ),
-                            ),
-                          ),
-                        ],
-                      ),
-                      const SizedBox(height: 24),
-                      Row(
-                        children: [
-                          Text(
-                            'Choose Projects',
-                            style: theme.textTheme.headlineLarge,
-                          ),
-                          const Spacer(),
-                          TextButton(
-                            onPressed: () => showDialog<void>(
-                              context: context,
-                              builder: (_) =>
-                                  AddEditProjectDialog(context: context),
-                            ),
-                            child: const Text("+Add"),
-                          )
-                        ],
-                      ),
-                      Expanded(
-                        child: Center(
-                          child: Container(
-                            width: 300,
-                            alignment: Alignment.center,
-                            child: const ProjectsList(),
-                          ),
-                        ),
-                      ),
-                    ],
-                  ),
-                ),
-              ),
-              Container(
-                alignment: AlignmentDirectional.centerStart,
-                color: const Color(0xFFf4f5fe),
-                padding: const EdgeInsets.symmetric(vertical: 24),
-                child: SingleChildScrollView(
-                  scrollDirection: Axis.horizontal,
-                  primary: false,
-                  clipBehavior: Clip.none,
-                  child: Padding(
-                    padding: const EdgeInsets.symmetric(horizontal: 24),
-                    child: Wrap(
-                      spacing: 16,
+            return Column(
+              children: [
+                Expanded(
+                  child: SafeArea(
+                    minimum: const EdgeInsets.all(24),
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
-                        RawMaterialButton(
-                          onPressed: () => openAccountFormPage(
-                            context,
-                            accountRepository,
-                            state,
-                          ),
-                          elevation: 0,
-                          fillColor: Colors.white,
-                          shape: const CircleBorder(),
-                          constraints: BoxConstraints.tight(const Size(56, 56)),
-                          child: const Icon(Icons.add, size: 18),
+                        Row(
+                          children: [
+                            Image.asset(
+                              'assets/images/icon.png',
+                              width: 48,
+                              height: 24,
+                            ),
+                            const SizedBox(width: 8),
+                            Text(
+                              l10n.appTitle,
+                              style: theme.textTheme.titleMedium
+                                  ?.copyWith(fontWeight: FontWeight.bold),
+                            ),
+                            const Spacer(),
+                            GestureDetector(
+                              onTap: () => openAccountFormPage(
+                                context,
+                                accountRepository,
+                                state,
+                              ),
+                              child: CircleAvatar(
+                                backgroundImage:
+                                    state.account?.profilePicture == null
+                                        ? const AssetImage(
+                                            'assets/images/profile-picture.png',
+                                          )
+                                        : MemoryImage(
+                                            base64Decode(
+                                              state.account!.profilePicture!,
+                                            ),
+                                          ),
+                              ),
+                            ),
+                          ],
                         ),
-                        FutureBuilder(
-                          future: accountsFuture,
-                          builder: (context, snapshot) {
-                            if (!snapshot.hasData) return Container();
-
-                            return Row(
-                              children: snapshot.data!
-                                  .where((e) => e.id != state.account!.id)
-                                  .map(
-                                    (e) => Padding(
-                                      padding: const EdgeInsets.only(right: 16),
-                                      child: ClipOval(
-                                        child: SizedBox(
-                                          width: 56,
-                                          height: 56,
-                                          child: e.profilePicture == null
-                                              ? Image.asset(
-                                                  'assets/images/profile-picture.png',
-                                                )
-                                              : Image.memory(
-                                                  base64Decode(
-                                                    e.profilePicture!,
-                                                  ),
-                                                ),
-                                        ),
-                                      ),
-                                    ),
-                                  )
-                                  .toList(),
-                            );
-                          },
-                        )
+                        const SizedBox(height: 24),
+                        Row(
+                          children: [
+                            Text(
+                              'Choose Projects',
+                              style: theme.textTheme.headlineLarge,
+                            ),
+                            const Spacer(),
+                            TextButton(
+                              onPressed: () => showDialog<void>(
+                                context: context,
+                                builder: (_) =>
+                                    AddEditProjectDialog(context: context),
+                              ),
+                              child: const Text('+Add'),
+                            ),
+                          ],
+                        ),
+                        Expanded(
+                          child: Center(
+                            child: Container(
+                              width: 300,
+                              alignment: Alignment.center,
+                              child: const ProjectsList(),
+                            ),
+                          ),
+                        ),
                       ],
                     ),
                   ),
                 ),
-              ),
-            ]);
+                Container(
+                  alignment: AlignmentDirectional.centerStart,
+                  color: const Color(0xFFf4f5fe),
+                  padding: const EdgeInsets.symmetric(vertical: 24),
+                  child: SingleChildScrollView(
+                    scrollDirection: Axis.horizontal,
+                    primary: false,
+                    clipBehavior: Clip.none,
+                    child: Padding(
+                      padding: const EdgeInsets.symmetric(horizontal: 24),
+                      child: Wrap(
+                        spacing: 16,
+                        children: [
+                          RawMaterialButton(
+                            onPressed: () => openAccountFormPage(
+                              context,
+                              accountRepository,
+                              state,
+                            ),
+                            elevation: 0,
+                            fillColor: Colors.white,
+                            shape: const CircleBorder(),
+                            constraints:
+                                BoxConstraints.tight(const Size(56, 56)),
+                            child: const Icon(Icons.add, size: 18),
+                          ),
+                          FutureBuilder(
+                            future: accountsFuture,
+                            builder: (context, snapshot) {
+                              if (!snapshot.hasData) return Container();
+
+                              return Row(
+                                children: snapshot.data!
+                                    .where((e) => e.id != state.account!.id)
+                                    .map(
+                                      (e) => Padding(
+                                        padding:
+                                            const EdgeInsets.only(right: 16),
+                                        child: ClipOval(
+                                          child: SizedBox(
+                                            width: 56,
+                                            height: 56,
+                                            child: e.profilePicture == null
+                                                ? Image.asset(
+                                                    'assets/images/profile-picture.png',
+                                                  )
+                                                : Image.memory(
+                                                    base64Decode(
+                                                      e.profilePicture!,
+                                                    ),
+                                                  ),
+                                          ),
+                                        ),
+                                      ),
+                                    )
+                                    .toList(),
+                              );
+                            },
+                          ),
+                        ],
+                      ),
+                    ),
+                  ),
+                ),
+              ],
+            );
           },
         ),
       ),

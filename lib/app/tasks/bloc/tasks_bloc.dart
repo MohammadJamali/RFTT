@@ -58,7 +58,7 @@ class TasksBloc extends Bloc<TasksEvent, TasksState> {
     _UpdateTask event,
     Emitter<TasksState> emit,
   ) async {
-    await repository.add(event.task);
+    await repository.update(event.task);
     add(const TasksEvent.fetchTasks());
   }
 

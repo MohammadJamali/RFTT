@@ -24,6 +24,7 @@ mixin _$Task {
   String get projectId => throw _privateConstructorUsedError;
   String get title => throw _privateConstructorUsedError;
   DateTime get created => throw _privateConstructorUsedError;
+  String? get invoiceId => throw _privateConstructorUsedError;
   int get duration => throw _privateConstructorUsedError;
   String? get description => throw _privateConstructorUsedError;
   DateTime? get deadline => throw _privateConstructorUsedError;
@@ -48,6 +49,7 @@ abstract class $TaskCopyWith<$Res> {
       String projectId,
       String title,
       DateTime created,
+      String? invoiceId,
       int duration,
       String? description,
       DateTime? deadline,
@@ -73,6 +75,7 @@ class _$TaskCopyWithImpl<$Res, $Val extends Task>
     Object? projectId = null,
     Object? title = null,
     Object? created = null,
+    Object? invoiceId = freezed,
     Object? duration = null,
     Object? description = freezed,
     Object? deadline = freezed,
@@ -95,6 +98,10 @@ class _$TaskCopyWithImpl<$Res, $Val extends Task>
           ? _value.created
           : created // ignore: cast_nullable_to_non_nullable
               as DateTime,
+      invoiceId: freezed == invoiceId
+          ? _value.invoiceId
+          : invoiceId // ignore: cast_nullable_to_non_nullable
+              as String?,
       duration: null == duration
           ? _value.duration
           : duration // ignore: cast_nullable_to_non_nullable
@@ -127,6 +134,7 @@ abstract class _$$TaskImplCopyWith<$Res> implements $TaskCopyWith<$Res> {
       String projectId,
       String title,
       DateTime created,
+      String? invoiceId,
       int duration,
       String? description,
       DateTime? deadline,
@@ -149,6 +157,7 @@ class __$$TaskImplCopyWithImpl<$Res>
     Object? projectId = null,
     Object? title = null,
     Object? created = null,
+    Object? invoiceId = freezed,
     Object? duration = null,
     Object? description = freezed,
     Object? deadline = freezed,
@@ -171,6 +180,10 @@ class __$$TaskImplCopyWithImpl<$Res>
           ? _value.created
           : created // ignore: cast_nullable_to_non_nullable
               as DateTime,
+      invoiceId: freezed == invoiceId
+          ? _value.invoiceId
+          : invoiceId // ignore: cast_nullable_to_non_nullable
+              as String?,
       duration: null == duration
           ? _value.duration
           : duration // ignore: cast_nullable_to_non_nullable
@@ -192,13 +205,15 @@ class __$$TaskImplCopyWithImpl<$Res>
 }
 
 /// @nodoc
-@JsonSerializable()
+
+@JsonSerializable(includeIfNull: false)
 class _$TaskImpl implements _Task {
   const _$TaskImpl(
       {required this.id,
       required this.projectId,
       required this.title,
       required this.created,
+      this.invoiceId,
       this.duration = 0,
       this.description,
       this.deadline,
@@ -217,6 +232,8 @@ class _$TaskImpl implements _Task {
   @override
   final DateTime created;
   @override
+  final String? invoiceId;
+  @override
   @JsonKey()
   final int duration;
   @override
@@ -234,7 +251,7 @@ class _$TaskImpl implements _Task {
 
   @override
   String toString() {
-    return 'Task(id: $id, projectId: $projectId, title: $title, created: $created, duration: $duration, description: $description, deadline: $deadline, tags: $tags)';
+    return 'Task(id: $id, projectId: $projectId, title: $title, created: $created, invoiceId: $invoiceId, duration: $duration, description: $description, deadline: $deadline, tags: $tags)';
   }
 
   @override
@@ -247,6 +264,8 @@ class _$TaskImpl implements _Task {
                 other.projectId == projectId) &&
             (identical(other.title, title) || other.title == title) &&
             (identical(other.created, created) || other.created == created) &&
+            (identical(other.invoiceId, invoiceId) ||
+                other.invoiceId == invoiceId) &&
             (identical(other.duration, duration) ||
                 other.duration == duration) &&
             (identical(other.description, description) ||
@@ -264,6 +283,7 @@ class _$TaskImpl implements _Task {
       projectId,
       title,
       created,
+      invoiceId,
       duration,
       description,
       deadline,
@@ -291,6 +311,7 @@ abstract class _Task implements Task {
       required final String projectId,
       required final String title,
       required final DateTime created,
+      final String? invoiceId,
       final int duration,
       final String? description,
       final DateTime? deadline,
@@ -306,6 +327,8 @@ abstract class _Task implements Task {
   String get title;
   @override
   DateTime get created;
+  @override
+  String? get invoiceId;
   @override
   int get duration;
   @override

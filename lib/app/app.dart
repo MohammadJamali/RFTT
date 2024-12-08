@@ -27,7 +27,7 @@ class App extends StatelessWidget {
       routes: {
         LandingPage.route: (_) => const LandingPage(),
         HomePage.route: (_) => const HomePage(),
-        TasksPage.route: (_) => const TasksPage(),
+        // TasksPage.route: (_) => const TasksPage(),
         TimerPage.route: (_) => const TimerPage(),
         SettingsPage.route: (_) => const SettingsPage(),
         AccountFormPage.route: (_) => const AccountFormPage(),

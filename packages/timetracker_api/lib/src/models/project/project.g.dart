@@ -25,9 +25,10 @@ Map<String, dynamic> _$$ProjectImplToJson(_$ProjectImpl instance) =>
       'id': instance.id,
       'title': instance.title,
       'created': instance.created.toIso8601String(),
-      'description': instance.description,
+      if (instance.description case final value?) 'description': value,
       'duration': instance.duration,
       'finishedTasks': instance.finishedTasks,
       'totalTasks': instance.totalTasks,
-      'deadline': instance.deadline?.toIso8601String(),
+      if (instance.deadline?.toIso8601String() case final value?)
+        'deadline': value,
     };

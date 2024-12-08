@@ -193,7 +193,8 @@ class __$$ProjectImplCopyWithImpl<$Res>
 }
 
 /// @nodoc
-@JsonSerializable()
+
+@JsonSerializable(includeIfNull: false)
 class _$ProjectImpl implements _Project {
   const _$ProjectImpl(
       {required this.id,
