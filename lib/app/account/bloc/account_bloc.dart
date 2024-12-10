@@ -4,8 +4,12 @@ import 'package:timetracker_api/timetracker_api.dart';
 class AccountFormBloc extends Cubit<Account> {
   AccountFormBloc({Account state = const Account(id: '')}) : super(state);
 
-  void updateAccountDetails({String? email, String? name}) {
-    emit(state.copyWith(email: email, name: name));
+  void updateName({String? name}) {
+    emit(state.copyWith(name: name));
+  }
+
+  void updateEmail({String? email}) {
+    emit(state.copyWith(email: email));
   }
 
   void updateProfilePicture(String? base64) {

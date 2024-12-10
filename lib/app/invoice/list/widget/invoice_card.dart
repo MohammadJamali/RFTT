@@ -1,7 +1,9 @@
 import 'dart:convert';
 
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:intl/intl.dart';
+import 'package:share_plus/share_plus.dart';
 import 'package:timetracker/app/invoice/widgets/invoice_status.dart';
 import 'package:timetracker/widgets/label.dart';
 import 'package:timetracker/widgets/profile_list_item.dart';
@@ -113,7 +115,9 @@ class InvoiceCard extends StatelessWidget {
                         ),
                       ),
                     ),
-                    onPressed: () async {},
+                    onPressed: () async {
+                      await Clipboard.setData(ClipboardData(text: 'https://sepolia.gateway.request.network/getTransactionsByChannelId?channelId=${invoice.channelId}'));
+                    },
                     child: const Text(
                       'Share',
                       style: TextStyle(fontSize: 14),

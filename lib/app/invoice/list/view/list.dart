@@ -84,50 +84,54 @@ class InvoiceListView extends StatelessWidget {
               ),
             ),
             const SizedBox(height: 24),
-            BlocBuilder<InvoiceListBloc, InvoiceListState>(
-              builder: (context, state) {
-                if (state is InvoiceListInitial) {
-                  return const Center(child: CupertinoActivityIndicator());
-                } else if (state is InvoiceListError) {
-                  return Text(state.message);
-                } else if (state is! InvoiceListLoaded) {
-                  return Text('');
-                }
-                return Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    const SizedBox(height: 24),
-                    InvoiceStatistics(invoices: state.invoices),
-                    const Padding(
-                      padding: EdgeInsets.only(top: 16),
-                      child: SearchWidget(),
-                    ),
-                    const SizedBox(height: 24),
-                    Text(
-                      'Invoices',
-                      style: theme.textTheme.titleMedium?.copyWith(
-                        fontWeight: FontWeight.bold,
-                      ),
-                    ),
-                    if (state.invoices.isEmpty)
-                      Padding(
-                        padding: const EdgeInsets.only(top: 24),
-                        child: Text(
-                          'There is nothing to display ...',
-                          style: theme.textTheme.bodyMedium?.copyWith(
-                            color: Colors.grey,
+            Expanded(
+              child: SingleChildScrollView(
+                child: BlocBuilder<InvoiceListBloc, InvoiceListState>(
+                  builder: (context, state) {
+                    if (state is InvoiceListInitial) {
+                      return const Center(child: CupertinoActivityIndicator());
+                    } else if (state is InvoiceListError) {
+                      return Text(state.message);
+                    } else if (state is! InvoiceListLoaded) {
+                      return Text('');
+                    }
+                    return Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        const SizedBox(height: 24),
+                        InvoiceStatistics(invoices: state.invoices),
+                        const Padding(
+                          padding: EdgeInsets.only(top: 16),
+                          child: SearchWidget(),
+                        ),
+                        const SizedBox(height: 24),
+                        Text(
+                          'Invoices',
+                          style: theme.textTheme.titleMedium?.copyWith(
+                            fontWeight: FontWeight.bold,
                           ),
                         ),
-                      ),
-                    ...state.invoices.map(
-                      (e) => InvoiceCard(
-                        invoice: e,
-                        account: account,
-                      ),
-                    ),
-                  ],
-                );
-              },
+                        if (state.invoices.isEmpty)
+                          Padding(
+                            padding: const EdgeInsets.only(top: 24),
+                            child: Text(
+                              'There is nothing to display ...',
+                              style: theme.textTheme.bodyMedium?.copyWith(
+                                color: Colors.grey,
+                              ),
+                            ),
+                          ),
+                        ...state.invoices.map(
+                          (e) => InvoiceCard(
+                            invoice: e,
+                            account: account,
+                          ),
+                        ),
+                      ],
+                    );
+                  },
+                ),
+              ),
             ),
           ],
         ),
@@ -161,5 +165,8 @@ class InvoiceListView extends StatelessWidget {
         ),
       ),
     );
+
+    final invoiceListBloc = context.read<InvoiceListBloc>();
+    invoiceListBloc.add(InvoiceListEvent.fetchInvoiceList(accountId: account.id));
   }
 }

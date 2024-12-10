@@ -3,6 +3,7 @@ import 'package:local_storage_timetracker_api/src/utils/database.dart';
 import 'package:rxdart/subjects.dart';
 import 'package:sqflite/sqflite.dart';
 import 'package:timetracker_api/timetracker_api.dart';
+import 'package:uuid/uuid.dart';
 
 class SqliteStorageInvoiceApi extends ILocalStorageInvoiceApi {
   final _dbHelper = DatabaseHelper();
@@ -115,6 +116,7 @@ class SqliteStorageInvoiceApi extends ILocalStorageInvoiceApi {
       await txn.insert(DatabaseHelper.tablePaymentsNetwork, {
         ...invoice.paymentNetwork!.toJson(),
         'invoiceId': invoiceId,
+        'id': Uuid().v4(),
       });
       await txn.insert(DatabaseHelper.tableInvoiceContentData, {
         ...invoice.contentData!.toJson(),

@@ -112,7 +112,6 @@ class _AccountFormViewState extends State<AccountFormView> {
     return account;
   }
 
-
   Future<Account>? loadAccountFeature;
 
   @override
@@ -179,111 +178,111 @@ class _AccountFormViewState extends State<AccountFormView> {
               ),
             ),
             const SizedBox(height: 24),
-            FutureBuilder(
-              future: loadAccountFeature,
-              builder: (context, snapshot) {
-                if (!snapshot.hasData) {
-                  return const Center(child: CupertinoActivityIndicator());
-                }
-                return BlocBuilder<AccountFormBloc, Account>(
-                  builder: (context, state) {
-                    return Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        GestureDetector(
-                          onTap: () => _selectProfilePic(
-                            context.read<AccountFormBloc>(),
-                          ),
-                          child: Center(
-                            child: ClipOval(
-                              child: Container(
-                                width: 128,
-                                height: 128,
-                                decoration: const BoxDecoration(
-                                  color: Color(0xffe4e7e8),
-                                  shape: BoxShape.circle,
+            Expanded(
+              child: SingleChildScrollView(
+                child: FutureBuilder(
+                  future: loadAccountFeature,
+                  builder: (context, snapshot) {
+                    if (!snapshot.hasData) {
+                      return const Center(child: CupertinoActivityIndicator());
+                    }
+                    return BlocBuilder<AccountFormBloc, Account>(
+                      builder: (context, state) {
+                        return Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            GestureDetector(
+                              onTap: () => _selectProfilePic(
+                                context.read<AccountFormBloc>(),
+                              ),
+                              child: Center(
+                                child: ClipOval(
+                                  child: Container(
+                                    width: 128,
+                                    height: 128,
+                                    decoration: const BoxDecoration(
+                                      color: Color(0xffe4e7e8),
+                                      shape: BoxShape.circle,
+                                    ),
+                                    child: state.profilePicture == null
+                                        ? Padding(
+                                            padding: const EdgeInsets.all(16),
+                                            child: Image.asset(
+                                              'assets/images/profile-picture.png',
+                                            ),
+                                          )
+                                        : Image.memory(
+                                            base64Decode(
+                                              state.profilePicture!,
+                                            ),
+                                          ),
+                                  ),
                                 ),
-                                child: state.profilePicture == null
-                                    ? Padding(
-                                        padding: const EdgeInsets.all(16),
-                                        child: Image.asset(
-                                          'assets/images/profile-picture.png',
-                                        ),
-                                      )
-                                    : Image.memory(
-                                        base64Decode(
-                                          state.profilePicture!,
-                                        ),
-                                      ),
                               ),
                             ),
-                          ),
-                        ),
-                        const SizedBox(height: 24),
-                        StyledTextField(
-                          'Name',
-                          defaultValue: state.name,
-                          onChanged: (value) => context
-                              .read<AccountFormBloc>()
-                              .updateAccountDetails(
-                                name: value,
+                            const SizedBox(height: 24),
+                            StyledTextField(
+                              'Name',
+                              defaultValue: state.name,
+                              onChanged: (value) => context
+                                  .read<AccountFormBloc>()
+                                  .updateName(name: value),
+                            ),
+                            const SizedBox(height: 16),
+                            StyledTextField(
+                              'Email',
+                              defaultValue: state.email,
+                              onChanged: (value) => context
+                                  .read<AccountFormBloc>()
+                                  .updateEmail(email: value),
+                            ),
+                            Padding(
+                              padding: const EdgeInsets.only(top: 24),
+                              child: Row(
+                                children: [
+                                  Text(
+                                    'Wallets',
+                                    style: theme.textTheme.titleLarge,
+                                  ),
+                                  const Spacer(),
+                                  TextButton(
+                                    onPressed: () => addTransactionActor(context),
+                                    child: const Text('+Add'),
+                                  ),
+                                ],
                               ),
-                        ),
-                        const SizedBox(height: 16),
-                        StyledTextField(
-                          'Email',
-                          defaultValue: state.email,
-                          onChanged: (value) => context
-                              .read<AccountFormBloc>()
-                              .updateAccountDetails(
-                                email: value,
-                              ),
-                        ),
-                        Padding(
-                          padding: const EdgeInsets.only(top: 24),
-                          child: Row(
-                            children: [
-                              Text(
-                                'Wallets',
-                                style: theme.textTheme.titleLarge,
-                              ),
-                              const Spacer(),
-                              TextButton(
-                                onPressed: () => addTransactionActor(context),
-                                child: const Text('+Add'),
-                              ),
-                            ],
-                          ),
-                        ),
-                        ListView.builder(
-                          itemCount: state.transactionActors?.length ?? 0,
-                          shrinkWrap: true,
-                          itemBuilder: (context, index) {
-                            final actor = state.transactionActors![index];
-                            return ListTile(
-                              contentPadding: EdgeInsets.zero,
-                              leading: Image.asset(
-                                'assets/images/tokens/eth.png',
-                                width: 24,
-                              ),
-                              title: Text(actor.value),
-                              trailing: IconButton(
-                                icon: Icon(
-                                  Icons.delete,
-                                  color: Colors.red.shade300,
-                                ),
-                                onPressed: () => context
-                                    .read<AccountFormBloc>()
-                                    .removeTransactionActor(index),
-                              ),
-                            );
-                          },
-                        ),
-                      ],
+                            ),
+                            ListView.builder(
+                              itemCount: state.transactionActors?.length ?? 0,
+                              shrinkWrap: true,
+                              itemBuilder: (context, index) {
+                                final actor = state.transactionActors![index];
+                                return ListTile(
+                                  contentPadding: EdgeInsets.zero,
+                                  leading: Image.asset(
+                                    'assets/images/tokens/eth.png',
+                                    width: 24,
+                                  ),
+                                  title: Text(actor.value),
+                                  trailing: IconButton(
+                                    icon: Icon(
+                                      Icons.delete,
+                                      color: Colors.red.shade300,
+                                    ),
+                                    onPressed: () => context
+                                        .read<AccountFormBloc>()
+                                        .removeTransactionActor(index),
+                                  ),
+                                );
+                              },
+                            ),
+                          ],
+                        );
+                      },
                     );
                   },
-                );
-              },
+                ),
+              ),
             ),
           ],
         ),

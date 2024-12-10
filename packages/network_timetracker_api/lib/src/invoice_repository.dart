@@ -67,30 +67,26 @@ class NetworkInvoiceApi extends INetworkInvoiceApi {
     };
 
     try {
-      // final rawResponse = await http.post(
-      //   Uri.parse('https://sepolia.gateway.request.network/persistTransaction'),
-      //   headers: {
-      //     'Content-Type': 'application/json',
-      //     'X-Request-Network-Client-Version': '0.50.0',
-      //   },
-      //   body: jsonEncode(body),
-      // );
+      final rawResponse = await http.post(
+        Uri.parse('https://sepolia.gateway.request.network/persistTransaction'),
+        headers: {
+          'Content-Type': 'application/json',
+          'X-Request-Network-Client-Version': '0.50.0',
+        },
+        body: jsonEncode(body),
+      );
 
-      // if (rawResponse.statusCode != 200) {
-      //   print('Failed to persist transaction: ${rawResponse.statusCode}');
-      //   return null;
-      // }
-
-      // final response = jsonDecode(rawResponse.body) as Map<String, dynamic>;
-      
-      // final transactions = InvoiceTransactions.fromJson(response);
-      
+      if (rawResponse.statusCode != 200) {
+        print('Failed to persist transaction: ${rawResponse.statusCode}');
+        return null;
+      }
 
       return invoice.copyWith(
         channelId: requestHash,
         signature: signedUnsignedAction,
-        storageLocation: 'QmcEJTyhxYiF4z27LPCZyiCnM14NJQDNe6kvySivWSQWsc',
-            // response['meta']!['transactionStorageLocation'] as String,
+        storageLocation:
+            jsonDecode(rawResponse.body)['meta']!['transactionStorageLocation']
+                as String,
         state: InvoiceState.pending,
       );
     } catch (error) {
@@ -136,7 +132,8 @@ class NetworkInvoiceApi extends INetworkInvoiceApi {
   }) async {
     try {
       final rawResponse = await http.get(
-        Uri.parse('getTransactionsByChannelId?channelId=$channelId'),
+        Uri.parse(
+            'https://sepolia.gateway.request.network/getTransactionsByChannelId?channelId=$channelId'),
         headers: {
           'X-Request-Network-Client-Version': '0.50.0',
         },

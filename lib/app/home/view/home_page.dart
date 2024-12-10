@@ -183,6 +183,10 @@ class _HomeViewState extends State<HomeView> {
                                   },
                                 ),
                               );
+
+                              setState(() {
+                                accountsFuture = accountRepository.list();
+                              });
                             },
                             elevation: 0,
                             fillColor: Colors.white,
@@ -228,18 +232,22 @@ class _HomeViewState extends State<HomeView> {
                                                 return RepositoryProvider.value(
                                                   value: context.read<
                                                       InvoiceRepository>(),
-                                                  child: RepositoryProvider.value(
-                                                  value: context.read<
-                                                      ProjectRepository>(),
-                                                  child:RepositoryProvider.value(
-                                                  value: context.read<
-                                                      TaskRepository>(),
-                                                  child: BlocProvider.value(
-                                                    value: context
-                                                        .read<SettingsBloc>(),
-                                                    child:
-                                                        const InvoiceListPage(),
-                                                  ),),),
+                                                  child:
+                                                      RepositoryProvider.value(
+                                                    value: context.read<
+                                                        ProjectRepository>(),
+                                                    child: RepositoryProvider
+                                                        .value(
+                                                      value: context.read<
+                                                          TaskRepository>(),
+                                                      child: BlocProvider.value(
+                                                        value: context.read<
+                                                            SettingsBloc>(),
+                                                        child:
+                                                            const InvoiceListPage(),
+                                                      ),
+                                                    ),
+                                                  ),
                                                 );
                                               },
                                               settings: RouteSettings(

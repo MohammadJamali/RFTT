@@ -13,6 +13,7 @@ import 'package:timetracker/widgets/label.dart';
 import 'package:timetracker/widgets/profile_list_item.dart';
 import 'package:timetracker_api/timetracker_api.dart';
 import 'package:timetracker_repository/timetracker_repository.dart';
+import 'package:uuid/uuid.dart';
 
 class InvoiceDetailsPage extends StatefulWidget {
   InvoiceDetailsPage({super.key});
@@ -231,6 +232,7 @@ class _InvoiceDetailsPageState extends State<InvoiceDetailsPage> {
                               await createInvoice(
                                 context,
                                 Invoice(
+                                  id: const Uuid().v4(),
                                   requestInfo: RequestInfo(
                                     currency: currency,
                                     expectedAmount: parseUnits(
@@ -316,7 +318,7 @@ class _BillingSection extends StatelessWidget {
             padding: const EdgeInsets.all(16),
             child: Label.row({
               'Issued': DateFormat.yMMMd().format(DateTime.now()),
-              'Due': '04 Dec 2021',
+              'Due': 'Dec 25, 2024',
             }),
           ),
         ],
