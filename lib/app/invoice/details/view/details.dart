@@ -257,7 +257,7 @@ class _InvoiceDetailsPageState extends State<InvoiceDetailsPage> {
                             style: ElevatedButton.styleFrom(
                               minimumSize: const Size.fromHeight(48),
                             ),
-                            child: const Text('Issue Invoice'),
+                            child: const Text('Create Invoice'),
                           ),
                         ],
                       );
